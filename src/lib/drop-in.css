@@ -990,7 +990,9 @@
 
     &.dark {
       --button-color: light-dark(#222, #fff);
-      --button-text: light-dark(var(--white), var(--black));
+      /* Always white text — .dark means a dark surface in both color schemes,
+         so the label needs to stay light no matter what. */
+      --button-text: var(--white);
 
       /* Dark surface in both schemes. light-dark resolves --button-color to a
          near-black or near-white anchor; we mix it heavily toward black either

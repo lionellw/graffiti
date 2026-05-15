@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.24.14
+
+### Patch Changes
+
+- Fix `.dark` button label color in dark mode. The previous tuning used `--button-text: light-dark(var(--white), var(--black))`, which flipped the label to black in dark mode and made the text unreadable on the dark surface. The `.dark` variant intentionally keeps a dark surface in both color schemes, so the label needs to stay white in both.
+
 ## 4.24.13
 
 ### Patch Changes
