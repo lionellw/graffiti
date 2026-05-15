@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.24.5
+
+### Patch Changes
+
+- Refactor button color system to use `color-mix()` instead of `oklch(from ... l c h)` lightness manipulation. Avoids gamut clipping on saturated tokens like `--primary`. `.dark` / `.light` / `.contrast` variants now reassign `--button-color` semantically instead of hardcoding `oklch(...)` literals. Visual character (two-stop gradient, inset gloss, hover lift, active depress) preserved.
+
 ## 4.24.4
 
 ### Patch Changes

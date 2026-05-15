@@ -683,23 +683,26 @@
   button,
   .button {
     --button-color: var(--gray-5);
+    --button-text: var(--fg);
+
+    /* Two-stop gradient via color-mix(). Avoids oklch(from ... l c h)
+       gamut clipping on saturated tokens like --primary. */
     --button-bg-top: light-dark(
-      oklch(from var(--button-color) 0.94 calc(c * 0.15) h / 1),
-      oklch(from var(--button-color) calc(l - 0.16) calc(c * 0.55) h / 0.88)
+      color-mix(in oklab, var(--button-color) 18%, white),
+      color-mix(in oklab, var(--button-color) 35%, black)
     );
     --button-bg-bottom: light-dark(
-      oklch(from var(--button-color) 0.88 calc(c * 0.22) h / 1),
-      oklch(from var(--button-color) calc(l - 0.12) calc(c * 0.62) h / 0.92)
+      color-mix(in oklab, var(--button-color) 28%, white),
+      color-mix(in oklab, var(--button-color) 45%, black)
     );
     --button-border: light-dark(
-      oklch(from var(--button-color) 0.68 calc(c * 0.35) h / 0.65),
-      oklch(from var(--button-color) calc(l + 0.08) calc(c * 0.55) h / 0.58)
+      color-mix(in oklab, var(--button-color) 60%, transparent),
+      color-mix(in oklab, var(--button-color) 50%, transparent)
     );
     --button-shadow: light-dark(
-      oklch(from var(--button-color) calc(l - 0.25) calc(c * 0.2) h / 0.12),
-      oklch(from var(--button-color) calc(l - 0.35) calc(c * 0.2) h / 0.25)
+      color-mix(in oklab, var(--button-color) 18%, transparent),
+      color-mix(in oklab, var(--button-color) 35%, black)
     );
-    --button-text: var(--fg);
 
     appearance: none;
     margin: 0;
@@ -732,16 +735,16 @@
 
     &:hover {
       --button-bg-top: light-dark(
-        oklch(from var(--button-color) 0.97 calc(c * 0.12) h / 1),
-        oklch(from var(--button-color) calc(l - 0.06) calc(c * 0.68) h / 0.96)
+        color-mix(in oklab, var(--button-color) 12%, white),
+        color-mix(in oklab, var(--button-color) 42%, black)
       );
       --button-bg-bottom: light-dark(
-        oklch(from var(--button-color) 0.92 calc(c * 0.18) h / 1),
-        oklch(from var(--button-color) calc(l - 0.02) calc(c * 0.75) h / 0.98)
+        color-mix(in oklab, var(--button-color) 22%, white),
+        color-mix(in oklab, var(--button-color) 52%, black)
       );
       border-color: light-dark(
-        oklch(from var(--button-color) 0.6 calc(c * 0.42) h / 0.7),
-        oklch(from var(--button-color) calc(l + 0.14) calc(c * 0.65) h / 0.72)
+        color-mix(in oklab, var(--button-color) 70%, transparent),
+        color-mix(in oklab, var(--button-color) 60%, transparent)
       );
       box-shadow:
         inset 0 1px 0 light-dark(var(--white-6), var(--white-2)),
@@ -751,12 +754,12 @@
 
     &:active {
       --button-bg-top: light-dark(
-        oklch(from var(--button-color) 0.7 calc(c * 0.5) h / 1),
-        oklch(from var(--button-color) calc(l - 0.14) calc(c * 0.58) h / 0.9)
+        color-mix(in oklab, var(--button-color) 45%, white),
+        color-mix(in oklab, var(--button-color) 30%, black)
       );
       --button-bg-bottom: light-dark(
-        oklch(from var(--button-color) 0.64 calc(c * 0.55) h / 1),
-        oklch(from var(--button-color) calc(l - 0.1) calc(c * 0.65) h / 0.94)
+        color-mix(in oklab, var(--button-color) 55%, white),
+        color-mix(in oklab, var(--button-color) 38%, black)
       );
       box-shadow:
         inset 0 1px 0 light-dark(var(--white-2), var(--white-1)),
@@ -785,165 +788,40 @@
     &.primary {
       --button-color: var(--primary);
       --button-text: var(--white);
-      --button-bg-top: light-dark(
-        oklch(from var(--button-color) calc(l + 0.08) c h),
-        oklch(from var(--button-color) calc(l - 0.08) calc(c * 0.85) h)
-      );
-      --button-bg-bottom: light-dark(
-        oklch(from var(--button-color) calc(l - 0.02) c h),
-        oklch(from var(--button-color) calc(l - 0.04) calc(c * 0.9) h)
-      );
-      --button-border: light-dark(
-        oklch(from var(--button-color) calc(l - 0.12) calc(c * 1.1) h / 0.7),
-        oklch(from var(--button-color) calc(l + 0.15) calc(c * 0.7) h / 0.6)
-      );
-
-      &:hover {
-        --button-bg-top: light-dark(
-          oklch(from var(--button-color) calc(l + 0.14) c h),
-          oklch(from var(--button-color) calc(l - 0.04) calc(c * 0.88) h)
-        );
-        --button-bg-bottom: light-dark(
-          oklch(from var(--button-color) calc(l + 0.04) c h),
-          oklch(from var(--button-color) l calc(c * 0.92) h)
-        );
-      }
     }
 
     &.error {
       --button-color: var(--error);
       --button-text: var(--white);
-      --button-bg-top: light-dark(
-        oklch(from var(--button-color) calc(l + 0.08) c h),
-        oklch(from var(--button-color) calc(l - 0.08) calc(c * 0.85) h)
-      );
-      --button-bg-bottom: light-dark(
-        oklch(from var(--button-color) calc(l - 0.02) c h),
-        oklch(from var(--button-color) calc(l - 0.04) calc(c * 0.9) h)
-      );
-      --button-border: light-dark(
-        oklch(from var(--button-color) calc(l - 0.12) calc(c * 1.1) h / 0.7),
-        oklch(from var(--button-color) calc(l + 0.15) calc(c * 0.7) h / 0.6)
-      );
-
-      &:hover {
-        --button-bg-top: light-dark(
-          oklch(from var(--button-color) calc(l + 0.14) c h),
-          oklch(from var(--button-color) calc(l - 0.04) calc(c * 0.88) h)
-        );
-        --button-bg-bottom: light-dark(
-          oklch(from var(--button-color) calc(l + 0.04) c h),
-          oklch(from var(--button-color) l calc(c * 0.92) h)
-        );
-      }
     }
 
     &.warning {
       --button-color: var(--warning);
       --button-text: var(--black);
-      --button-bg-top: light-dark(
-        oklch(from var(--button-color) calc(l + 0.06) c h),
-        oklch(from var(--button-color) calc(l - 0.06) calc(c * 0.88) h)
-      );
-      --button-bg-bottom: light-dark(
-        oklch(from var(--button-color) l c h),
-        oklch(from var(--button-color) calc(l - 0.02) calc(c * 0.92) h)
-      );
-      --button-border: light-dark(
-        oklch(from var(--button-color) calc(l - 0.15) calc(c * 1.1) h / 0.7),
-        oklch(from var(--button-color) calc(l + 0.12) calc(c * 0.7) h / 0.6)
-      );
-
-      &:hover {
-        --button-bg-top: light-dark(
-          oklch(from var(--button-color) calc(l + 0.1) c h),
-          oklch(from var(--button-color) calc(l - 0.02) calc(c * 0.9) h)
-        );
-        --button-bg-bottom: light-dark(
-          oklch(from var(--button-color) calc(l + 0.04) c h),
-          oklch(from var(--button-color) calc(l + 0.02) calc(c * 0.94) h)
-        );
-        color: var(--black);
-      }
     }
 
     &.success {
       --button-color: var(--success);
       --button-text: var(--white);
-      --button-bg-top: light-dark(
-        oklch(from var(--button-color) calc(l + 0.08) c h),
-        oklch(from var(--button-color) calc(l - 0.08) calc(c * 0.85) h)
-      );
-      --button-bg-bottom: light-dark(
-        oklch(from var(--button-color) calc(l - 0.02) c h),
-        oklch(from var(--button-color) calc(l - 0.04) calc(c * 0.9) h)
-      );
-      --button-border: light-dark(
-        oklch(from var(--button-color) calc(l - 0.12) calc(c * 1.1) h / 0.7),
-        oklch(from var(--button-color) calc(l + 0.15) calc(c * 0.7) h / 0.6)
-      );
-
-      &:hover {
-        --button-bg-top: light-dark(
-          oklch(from var(--button-color) calc(l + 0.14) c h),
-          oklch(from var(--button-color) calc(l - 0.04) calc(c * 0.88) h)
-        );
-        --button-bg-bottom: light-dark(
-          oklch(from var(--button-color) calc(l + 0.04) c h),
-          oklch(from var(--button-color) l calc(c * 0.92) h)
-        );
-      }
     }
 
     &.dark {
-      --button-text: var(--white);
-      background: oklch(0.18 0 0);
-      border-color: light-dark(oklch(0.1 0 0), oklch(0.28 0 0));
-      box-shadow: 0 1px 2px var(--black-3);
-
-      &:hover {
-        background: oklch(0.24 0 0);
-        box-shadow: 0 2px 4px var(--black-3);
-      }
-
-      &:active {
-        background: oklch(0.12 0 0);
-        box-shadow: 0 1px 2px var(--black-3);
-      }
+      --button-color: light-dark(#222, #fff);
+      --button-text: light-dark(var(--white), var(--black));
     }
 
     &.light {
+      --button-color: light-dark(#fff, #fafafa);
       --button-text: var(--black);
-      background: var(--white);
-      border-color: var(--gray-3);
-      box-shadow: 0 1px 2px var(--black-1);
-
-      &:hover {
-        background: oklch(0.97 0 0);
-        box-shadow: 0 2px 4px var(--black-1);
-      }
-
-      &:active {
-        background: oklch(0.94 0 0);
-        box-shadow: 0 1px 2px var(--black-1);
-      }
+      --button-border: light-dark(
+        color-mix(in oklab, var(--button-color) 40%, var(--fg)),
+        color-mix(in oklab, var(--button-color) 40%, var(--fg))
+      );
     }
 
     &.contrast {
-      --button-text: light-dark(var(--white), var(--black));
-      background: light-dark(oklch(0.18 0 0), var(--white));
-      border-color: light-dark(oklch(0.1 0 0), var(--gray-3));
-      box-shadow: 0 1px 2px light-dark(var(--black-3), var(--black-1));
-
-      &:hover {
-        background: light-dark(oklch(0.24 0 0), oklch(0.97 0 0));
-        box-shadow: 0 2px 4px light-dark(var(--black-3), var(--black-1));
-      }
-
-      &:active {
-        background: light-dark(oklch(0.12 0 0), oklch(0.94 0 0));
-        box-shadow: 0 1px 2px light-dark(var(--black-3), var(--black-1));
-      }
+      --button-color: var(--fg);
+      --button-text: var(--bg);
     }
 
     &.ghost {
