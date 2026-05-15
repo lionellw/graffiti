@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.24.12
+
+### Patch Changes
+
+- Refactor print styles: move `color` to `body` only (uses `CanvasText` so forced-colors users print correctly), drop `!important` from shadow/image/no-print rules, swap `max-width` to logical `max-inline-size`. The `*` selector for background/shadow stripping is kept since it's the entire point of the print reset.
+
 ## 4.24.11
 
 ### Patch Changes
