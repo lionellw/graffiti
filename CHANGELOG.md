@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.24.13
+
+### Patch Changes
+
+- Logical-property pass on inline-flow sizing: swap `width` / `max-width` / `min-width` to `inline-size` / `max-inline-size` / `min-inline-size` and `scroll-padding-top` to `scroll-padding-block-start`. Vertical sizing (`height`, `min-height`, `max-height`) intentionally kept physical since vertical doesn't flip in RTL. Helps in-context translation tooling and RTL consumers without changing default LTR rendering.
+
 ## 4.24.12
 
 ### Patch Changes

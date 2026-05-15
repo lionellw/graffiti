@@ -507,7 +507,7 @@
 
   html {
     box-sizing: border-box;
-    scroll-padding-top: 60px;
+    scroll-padding-block-start: 60px;
     min-height: 100dvh;
     margin: 0;
   }
@@ -526,7 +526,7 @@
   header,
   main,
   footer {
-    width: 100%;
+    inline-size: 100%;
   }
 
   *,
@@ -692,7 +692,7 @@
   canvas,
   svg {
     display: block;
-    max-width: 100%;
+    max-inline-size: 100%;
   }
 
   hr {
@@ -1123,7 +1123,7 @@
   .close {
     --size: 2rem;
 
-    width: var(--size);
+    inline-size: var(--size);
     height: var(--size);
     padding: 0;
     border: none;
@@ -1183,13 +1183,13 @@
   /* UTILITIES */
 
   .readable {
-    max-width: 900px;
-    width: 100%;
+    max-inline-size: 900px;
+    inline-size: 100%;
   }
 
   .narrow {
-    max-width: var(--narrow-width, 50ch);
-    width: 100%;
+    max-inline-size: var(--narrow-width, 50ch);
+    inline-size: 100%;
 
     &.center {
       margin-inline: auto;
@@ -1242,7 +1242,7 @@
     overflow: hidden;
     clip: rect(0px, 0px, 0px, 0px);
     height: 1px;
-    width: 1px;
+    inline-size: 1px;
     margin: -1px;
     padding: 0px;
     border: 0px;
@@ -1317,7 +1317,7 @@
   }
 
   .full {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .reset {
@@ -1348,7 +1348,7 @@
     --size: 40px;
     border-radius: var(--size);
     padding: 0;
-    width: var(--size);
+    inline-size: var(--size);
     height: var(--size);
   }
 
@@ -1738,8 +1738,8 @@
 
   /* Readable Layout - Max-width for optimal readability */
   .layout-readable {
-    width: 100%;
-    max-width: var(--layout-max-width, var(--max-width, 1200px));
+    inline-size: 100%;
+    max-inline-size: var(--layout-max-width, var(--max-width, 1200px));
     padding-inline: var(--layout-padding, var(--padding, 2rem));
     margin: 0 auto;
   }
@@ -1766,7 +1766,7 @@
 
   /* Full Bleed - Break out of readable container */
   .layout-readable .full-bleed {
-    width: 100vi;
+    inline-size: 100vi;
     margin-inline: calc(50% - 50vi);
   }
 
@@ -1840,7 +1840,7 @@
     scrollbar-width: none;
 
     > :nth-child(2) {
-      width: 100cqw;
+      inline-size: 100cqw;
       scroll-snap-align: center;
       padding: var(--pad-l) var(--vs-base);
     }
@@ -1849,7 +1849,7 @@
       border-radius: 0;
       box-shadow: 1px 1px 4px rgb(0 0 0 / 0.5) inset;
       border: none;
-      width: 200px;
+      inline-size: 200px;
     }
 
     &.stop {
@@ -1996,7 +1996,7 @@
 
   .card > :is(img, picture, figure) {
     display: block;
-    width: 100%;
+    inline-size: 100%;
     margin: 0;
   }
 
@@ -2063,7 +2063,7 @@
     > .icon {
       font-size: 1.5rem;
       line-height: var(--lh-xs);
-      width: var(--icon-size, 48px);
+      inline-size: var(--icon-size, 48px);
       height: var(--icon-size, 48px);
       display: grid;
       place-items: center;
@@ -2184,7 +2184,7 @@
       background: var(--bg);
     }
     &.readable {
-      max-width: 1400px;
+      max-inline-size: 1400px;
       margin: 0 auto;
       padding-inline: var(--layout-padding, var(--padding, 2rem));
     }
@@ -2252,7 +2252,7 @@
   }
 
   table {
-    width: 100%;
+    inline-size: 100%;
     border-collapse: collapse;
   }
 
@@ -2291,7 +2291,7 @@
     border: var(--border-1);
     border-radius: var(--br-m);
     padding-inline: var(--pad-m);
-    width: 100%;
+    inline-size: 100%;
     &:has(+ small) {
       margin-block-end: var(--vs-xs);
     }
@@ -2342,7 +2342,7 @@
 
   input[type="checkbox"],
   input[type="radio"] {
-    width: auto;
+    inline-size: auto;
     height: auto;
     inline-size: 1em;
     block-size: 1em;
@@ -2769,7 +2769,7 @@
 
       /* Icon sizing */
       & svg {
-        width: 1.125rem;
+        inline-size: 1.125rem;
         height: 1.125rem;
       }
     }
@@ -3013,7 +3013,7 @@
     --sn-row-bg-bottom: transparent;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    inline-size: 100%;
     min-block-size: 0;
     gap: 2px;
     overflow-x: hidden;
@@ -3022,7 +3022,7 @@
 
     > :is(a, details, .sidebar-nav-heading),
     > details > :is(a, summary, .sidebar-nav-heading) {
-      width: 100%;
+      inline-size: 100%;
       margin: 0;
       flex: 0 0 auto;
       min-inline-size: 0;
@@ -3181,7 +3181,7 @@
 
     .sidebar-nav-heading {
       display: block;
-      width: 100%;
+      inline-size: 100%;
       padding: var(--pad-s) var(--pad-m) var(--pad-xs);
       color: var(--fg-5);
       font-weight: 620;
@@ -3204,7 +3204,7 @@
       grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
       gap: var(--pad-s);
-      width: 100%;
+      inline-size: 100%;
       padding: var(--sidebar-nav-row-pad-block)
         var(--sidebar-nav-row-pad-inline);
       margin: 0;
@@ -3235,7 +3235,7 @@
         translate 0.15s var(--ease-smooth);
 
       > svg {
-        width: var(--sidebar-nav-icon-size);
+        inline-size: var(--sidebar-nav-icon-size);
         height: var(--sidebar-nav-icon-size);
         flex-shrink: 0;
         color: var(--fg-4);
@@ -3293,7 +3293,7 @@
 
     > details {
       margin: 0;
-      width: 100%;
+      inline-size: 100%;
       min-inline-size: 0;
       max-inline-size: 100%;
       overflow-x: hidden;
@@ -3414,7 +3414,7 @@
     padding: 0;
 
     /* Styling */
-    min-width: 12rem;
+    min-inline-size: 12rem;
     background: var(--bg);
     border: var(--border-1);
     border-radius: var(--br-m);
@@ -3434,7 +3434,7 @@
     a,
     button {
       display: block;
-      width: 100%;
+      inline-size: 100%;
       padding: var(--pad-s) var(--pad-m);
       color: var(--fg-7);
       text-decoration: none;
@@ -3520,8 +3520,8 @@
     margin-block-end: var(--vs-xs);
 
     padding: var(--pad-xs) var(--pad-s);
-    width: max-content;
-    max-width: 30ch;
+    inline-size: max-content;
+    max-inline-size: 30ch;
     background: var(--bg);
     border: var(--border-1);
     border-radius: var(--br-s);
@@ -3565,7 +3565,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--avatar-size);
+    inline-size: var(--avatar-size);
     height: var(--avatar-size);
     border-radius: 50%;
     overflow: hidden;
@@ -3577,7 +3577,7 @@
 
     /* Images fill the circle */
     img {
-      width: 100%;
+      inline-size: 100%;
       height: 100%;
       object-fit: cover;
     }
@@ -3631,7 +3631,7 @@
 
     appearance: none;
     position: relative;
-    width: var(--toggle-width);
+    inline-size: var(--toggle-width);
     height: var(--toggle-height);
     border-radius: var(--toggle-height);
     background: var(--fg-1);
@@ -3652,7 +3652,7 @@
       position: absolute;
       inset-block-start: var(--toggle-knob-offset);
       inset-inline-start: var(--toggle-knob-offset);
-      width: var(--toggle-knob-size);
+      inline-size: var(--toggle-knob-size);
       height: var(--toggle-knob-size);
       border-radius: 50%;
       background: linear-gradient(
@@ -3734,7 +3734,7 @@
     /* Input takes available space */
     > input {
       flex: 1;
-      min-width: 0;
+      min-inline-size: 0;
       border-start-end-radius: 0;
       border-end-end-radius: 0;
       margin: 0;
@@ -3850,8 +3850,8 @@
   /* Dialog */
 
   dialog {
-    max-width: 40ch;
-    width: calc(100% - var(--pad-xxl) * 2);
+    max-inline-size: 40ch;
+    inline-size: calc(100% - var(--pad-xxl) * 2);
     padding: var(--pad-xl);
     border: none;
     border-radius: var(--br-xxl);
@@ -3984,7 +3984,7 @@
 
     /* Icon sizing */
     > svg {
-      width: 1em;
+      inline-size: 1em;
       height: 1em;
       flex-shrink: 0;
     }
@@ -4084,7 +4084,7 @@
 
     /* Icon sizing */
     > svg {
-      width: 1em;
+      inline-size: 1em;
       height: 1em;
       flex-shrink: 0;
       stroke-width: 2;
@@ -4215,7 +4215,7 @@
 
       /* Reset button styles */
       &:is(button) {
-        width: 100%;
+        inline-size: 100%;
         border: none;
         font: inherit;
         text-align: start;
@@ -4223,7 +4223,7 @@
 
       /* Icon */
       > svg {
-        width: 1.25em;
+        inline-size: 1.25em;
         height: 1.25em;
         color: var(--fg-5);
       }
@@ -4606,7 +4606,7 @@
   }
 
   .bottom-nav :is(a, button) svg {
-    width: 24px;
+    inline-size: 24px;
     height: 24px;
   }
 
@@ -4653,7 +4653,7 @@
   .bottom-sheet::before {
     content: "";
     display: block;
-    width: 36px;
+    inline-size: 36px;
     height: 4px;
     background: var(--fg-2);
     border-radius: 2px;
