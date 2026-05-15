@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.24.4
+
+### Patch Changes
+
+- Flip cascade layer order to `base, components, utilities, layouts` so layout primitives win over utility classes applied to their children. Removes the two `display: none !important` workarounds in `.layout-sidebar` mobile rules that the previous order required. See `docs/adr/0002-cascade-layer-order.md`.
+
 ## 4.24.3
 
 ### Patch Changes

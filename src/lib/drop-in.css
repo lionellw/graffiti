@@ -1,5 +1,5 @@
 /* Cascade Layers - Ordered from lowest to highest priority */
-@layer base, components, layouts, utilities;
+@layer base, components, utilities, layouts;
 
 @layer base {
   /* Non-inheriting custom properties */
@@ -1493,15 +1493,9 @@
       grid-template-columns: 1fr;
     }
 
-    /* Hide sidebar on mobile - sidebar is always :first-child in DOM.
-       Drawers (.drawer) are excluded — they use the popover API and have
-       their own mobile toggle logic via .drawer-toggle.
-       !important is intentional: with CSS @layer ordering (layouts < utilities),
-       utility classes like .split set display:flex which would override this.
-       In layered CSS, !important in a LOWER layer beats normal declarations
-       in HIGHER layers, making this the correct pattern. */
+    /* Hide sidebar on mobile; .drawer keeps its popover toggle. */
     .layout-sidebar > :first-child:not(.drawer) {
-      display: none !important;
+      display: none;
     }
 
     .layout-sidebar.invert > :first-child,
@@ -1522,9 +1516,9 @@
       grid-template-columns: 1fr;
     }
 
-    /* Hide sidebar on mobile - see container query block for rationale */
+    /* Hide sidebar on mobile; .drawer keeps its popover toggle. */
     .layout-sidebar > :first-child:not(.drawer) {
-      display: none !important;
+      display: none;
     }
 
     /* Reset grid placement for invert on mobile */
