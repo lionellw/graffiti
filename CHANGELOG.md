@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.24.3
+
+### Patch Changes
+
+- Replace global `* { animation-duration: 0.01ms }` reduced-motion override with the `@property --animation-reduced` opt-in pattern. Components can now declare a reduced-motion variant per-keyframe-name instead of having all looping animations snap to their end frame. See `docs/adr/0001-reduced-motion-animation-property.md`.
+
 ## 4.24.2
 
 ### Patch Changes

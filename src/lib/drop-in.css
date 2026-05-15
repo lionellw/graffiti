@@ -9,6 +9,15 @@
     initial-value: 1rem;
   }
 
+  /* Reduced-motion opt-in: components set this to a reduced-variant
+     animation; default `none` disables the animation entirely under
+     `prefers-reduced-motion: reduce`. See docs/adr/0001. */
+  @property --animation-reduced {
+    syntax: "*";
+    inherits: false;
+    initial-value: none;
+  }
+
   /* Typography */
   :root {
     /* =====================================================================
@@ -1720,6 +1729,9 @@
       > * {
         &:first-of-type {
           animation: snap_start_hack 0.001s forwards;
+          /* Already imperceptible (0.001s); keep identical under reduced motion
+             so the scroll-snap-align side effect still applies. */
+          --animation-reduced: snap_start_hack 0.001s forwards;
         }
         &:last-of-type {
           scroll-snap-align: end;
@@ -4541,13 +4553,18 @@
 
 /* ACCESSIBILITY & PRINT (unlayered for highest priority) */
 
-/* Reduced Motion - Respect user preference for reduced motion */
+/* Reduced Motion - Respect user preference for reduced motion.
+   Animations are killed via the `--animation-reduced` opt-in (default `none`).
+   Components can declare `--animation-reduced: <name> <duration> ...` to
+   provide a reduced-motion variant instead of stopping. Transitions are
+   short-circuited via duration; `transition: display ... allow-discrete` and
+   `@starting-style` rules still fire (same outcome as the previous global
+   `transition-duration: 0.01ms` override). See docs/adr/0001. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: var(--animation-reduced) !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
