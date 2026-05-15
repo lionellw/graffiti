@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.24.9
+
+### Patch Changes
+
+- Fix forced-colors token overrides: the `@media (forced-colors: active)` block inside `:root` had a nested `:root { ... }` rule that resolved to the descendant selector `:root :root` and never matched. Removed the nested selector so the overrides apply to `:root` directly.
+
 ## 4.24.8
 
 ### Patch Changes

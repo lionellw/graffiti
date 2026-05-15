@@ -482,28 +482,26 @@
     color-scheme: light dark;
 
     @media (forced-colors: active) {
-      :root {
-        --fg: CanvasText;
-        --bg: Canvas;
-        --primary: LinkText;
-        --accent: LinkText;
-        --error: Mark;
-        --warning: Mark;
-        --success: LinkText;
-        --focus-ring: 2px solid CanvasText;
-        --border-1: solid 1px CanvasText;
-        --border-2: solid 2px CanvasText;
-        --border-05: solid 1px GrayText;
-        /* Shadows can't survive forced-colors anyway (background-image stripped),
-           so override to none so components don't rely on them */
-        --shadow-1: none;
-        --shadow-2: none;
-        --shadow-3: none;
-        --shadow-4: none;
-        --shadow-5: none;
-        --shadow-6: none;
-        --box: none;
-      }
+      --fg: CanvasText;
+      --bg: Canvas;
+      --primary: LinkText;
+      --accent: LinkText;
+      --error: Mark;
+      --warning: Mark;
+      --success: LinkText;
+      --focus-ring: 2px solid CanvasText;
+      --border-1: solid 1px CanvasText;
+      --border-2: solid 2px CanvasText;
+      --border-05: solid 1px GrayText;
+      /* Shadows can't survive forced-colors anyway (background-image stripped),
+         so override to none so components don't rely on them */
+      --shadow-1: none;
+      --shadow-2: none;
+      --shadow-3: none;
+      --shadow-4: none;
+      --shadow-5: none;
+      --shadow-6: none;
+      --box: none;
     }
   }
 
