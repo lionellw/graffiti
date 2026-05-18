@@ -505,6 +505,46 @@
     }
   }
 
+  /* Re-derive alpha scales for theme-scoped containers (ADR-0006).
+     `oklch(from var(--X) ...)` resolves where it is declared; without
+     restating the derivations here, overriding `--primary` (etc.) on a
+     descendant would inherit the stale `:root` scale. Matching `theme-*` as
+     a class fragment makes every preset (current or future) implicitly a
+     theme scope without an allowlist to keep in sync.
+     `:where()` keeps specificity at 0 so consumer overrides still win. */
+  :where([class*="theme-"]) {
+    --fg: light-dark(var(--fg-light), var(--fg-dark));
+    --fg-1: oklch(from var(--fg) l c h / 0.1);
+    --fg-2: oklch(from var(--fg) l c h / 0.2);
+    --fg-3: oklch(from var(--fg) l c h / 0.3);
+    --fg-4: oklch(from var(--fg) l c h / 0.4);
+    --fg-5: oklch(from var(--fg) l c h / 0.5);
+    --fg-6: oklch(from var(--fg) l c h / 0.6);
+    --fg-7: oklch(from var(--fg) l c h / 0.75);
+    --fg-8: oklch(from var(--fg) l c h / 0.9);
+    --fg-9: var(--fg);
+
+    --primary-1: oklch(from var(--primary) l c h / 0.1);
+    --primary-2: oklch(from var(--primary) l c h / 0.2);
+    --primary-3: oklch(from var(--primary) l c h / 0.3);
+    --primary-4: oklch(from var(--primary) l c h / 0.4);
+    --primary-5: oklch(from var(--primary) l c h / 0.5);
+    --primary-6: oklch(from var(--primary) l c h / 0.6);
+    --primary-7: oklch(from var(--primary) l c h / 0.75);
+    --primary-8: oklch(from var(--primary) l c h / 0.9);
+    --primary-9: var(--primary);
+
+    --error-1: oklch(from var(--error) l c h / 0.1);
+    --error-2: oklch(from var(--error) l c h / 0.2);
+    --error-3: oklch(from var(--error) l c h / 0.3);
+    --error-4: oklch(from var(--error) l c h / 0.4);
+    --error-5: oklch(from var(--error) l c h / 0.5);
+    --error-6: oklch(from var(--error) l c h / 0.6);
+    --error-7: oklch(from var(--error) l c h / 0.75);
+    --error-8: oklch(from var(--error) l c h / 0.9);
+    --error-9: var(--error);
+  }
+
   html {
     box-sizing: border-box;
     scroll-padding-block-start: 60px;
