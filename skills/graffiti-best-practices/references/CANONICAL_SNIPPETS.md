@@ -41,6 +41,11 @@ Source:
 </a>
 ```
 
+Intent boundary:
+
+- Use for record-like preview units where the whole card is one link destination.
+- Do not use as a generic page/section wrapper.
+
 ## 3) Chat Thread + Bubble Rows
 
 Source:

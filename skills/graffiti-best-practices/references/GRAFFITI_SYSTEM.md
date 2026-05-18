@@ -77,6 +77,26 @@ If Graffiti already has a primitive, use it directly rather than recreating it.
 
 Rebuilding these with custom wrappers + bespoke CSS/JS counts as duplicate-system behavior.
 
+## Component Intent Boundaries (Role, Not Decoration)
+
+Use `references/COMPONENT_INTENT_MATRIX.md` as the authority for when each component class is allowed.
+
+Required checks before committing to a component class:
+
+1. Intent fit: class role matches user request.
+2. Semantic fit: host element semantics match documented usage.
+3. Shape fit: content shape matches primitive expectations.
+
+Critical reminders:
+
+- `.card` and `.card.featured` are for repeating record-like content units, not generic wrappers.
+- `.card.linked` is for full-card link previews only.
+- `.stat-card` is KPI/metric-specific.
+- `.feature-card` is feature-list specific.
+- For neutral wrappers, use layout primitives and neutral surfaces (`layout-*`, `stack`, `cluster`, `split`, `box`, `surface`).
+
+Component intent mismatch is a hard failure even when class names are otherwise valid.
+
 ## Component Pattern Grounding
 
 Before writing markup:
@@ -104,6 +124,7 @@ Every requested component or interaction must have a mapped primitive or an expl
 - Prefer semantic variants before custom token overrides (example: `.tag.success` before `--tag-color`).
 - Prefer built-in form patterns (`.row`, `.form-option-row`, `.form-actions`) over ad-hoc wrappers.
 - Prefer built-in card/link patterns (`.card`, `.card.featured`, `.card.linked`) over manual recreation.
+- Validate component role fit with `COMPONENT_INTENT_MATRIX.md`; do not choose components for visual styling alone.
 - Use canonical snippets for critical patterns from `references/CANONICAL_SNIPPETS.md`.
 
 ## Known Canonical Templates

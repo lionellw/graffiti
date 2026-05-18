@@ -1,3 +1,16 @@
+# What this library is
+
+The standards-first, full-featured CSS library for the modern web.
+Utilities, elements, blocks, and templates. Highly configurable. Endlessly themeable. Zero JavaScript. Works with your favorite framework or straight-up HTML.
+
+## Key Concepts
+
+- Encapsulation of styles in single classes or directly on elements, this is not a utility first css library like tailwind
+- Composability - Classes can be used together to compose layouts, full designs and custom systems
+- Customization - The entire system is intended to be a base layer that can be completely transformed with a handful of CSS vars defined at the :root level or component level.
+- Hyper Modern Standards - Using the latest features in CSS and HTML to replace JavaScript functionality
+
+
 ## Browser Testing
 
 When using chrome-devtools MCP or any browser automation, **always use the port defined in `vite.config.ts`** (currently `6124`). Do NOT assume default ports like `5173`.

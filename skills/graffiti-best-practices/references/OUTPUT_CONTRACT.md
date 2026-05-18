@@ -1,6 +1,6 @@
 # Output Contract
 
-Version: 1.5
+Version: 1.6
 
 This contract defines the mandatory output structure and quality gates for Graffiti best-practices generation.
 
@@ -25,33 +25,41 @@ Every response must include these sections in this order:
    - Format: `<requested piece> -> <primitive> -> <source path>`.
    - If no direct primitive exists, include fallback mapping and limitation note.
 
-5. **Recipe Selection**
+5. **Component Intent Fit**
+   - Validate each role-specific component choice against `references/COMPONENT_INTENT_MATRIX.md`.
+   - Format: `<component class> -> <intended role> -> <fit result>`.
+   - If any component fails intent fit, show remap to neutral/correct primitive before final markup.
+   - Must explicitly confirm `.card*` classes are not being used as generic wrappers.
+
+6. **Recipe Selection**
    - State which canonical pattern(s) are being used.
    - State baseline template URL used from `https://graffiti-ui.com/templates/*`.
    - If no baseline template match exists, explicitly state "No baseline template match found".
    - If no exact recipe exists, state closest fallback and why.
 
-6. **Markup Output**
+7. **Markup Output**
    - Provide one final code block (`html` or `svelte`) that is ready to use.
    - No pseudo-code.
 
-7. **Verification Checklist**
+8. **Verification Checklist**
    - Report pass/fail for each quality gate in section 6.
    - Include inline style declaration count and budget result.
    - Include unknown class count and unknown variable count.
 
-8. **Post-Edit Compliance Report**
+9. **Post-Edit Compliance Report**
    - Explicitly prove no duplicate styling system was introduced.
    - Must include token, utility, and component duplication checks.
 
-9. **Known Limitations and Adaptation Path**
-   - If any requirement could not be met with current classes, list limitation + fallback used.
+10. **Known Limitations and Adaptation Path**
+    - If any requirement could not be met with current classes, list limitation + fallback used.
 
 ## 2) Markup Rules
 
 - Use only classes that exist in current Graffiti CSS.
 - Use only CSS custom properties that exist in Graffiti token/component contracts.
 - Reuse built-in Graffiti primitives instead of recreating them with bespoke wrappers/CSS/JS.
+- Use role-specific components only when their intent fits; never pick components for visual chrome alone.
+- Validate role fit using `references/COMPONENT_INTENT_MATRIX.md`.
 - For critical patterns (dialog/modal, card/link, bubble/chat, form actions/options, input-group, callout), start from `references/CANONICAL_SNIPPETS.md` baselines.
 - Use semantic HTML structure appropriate to the requested intent.
 - Keep class usage compositional and readable (avoid unnecessary wrappers).
@@ -116,10 +124,11 @@ Must satisfy all of the following:
 Total score: 100
 
 - Valid class usage (all classes exist): 30
+- Component intent fit (role usage correctness): 10
 - Inline style policy and budget compliance: 20
 - Accessibility and semantics: 20
 - Responsive composition quality: 15
-- Fidelity to canonical Graffiti patterns: 15
+- Fidelity to canonical Graffiti patterns: 5
 
 Minimum pass score: 85
 
@@ -135,6 +144,7 @@ Any hard fail means overall fail regardless of score:
 6. Missing required accessibility baseline (labels/landmarks/table semantics)
 7. Missing one or more mandatory response sections from section 1
 8. Fails to use a matching hosted template baseline when one exists (unless user explicitly requested a fresh build)
+9. Uses role-specific component classes outside intent boundaries from `COMPONENT_INTENT_MATRIX.md`
 
 ## 7) Verification Checklist Template
 
@@ -149,6 +159,7 @@ Use this exact checklist format in responses:
 - Accessibility semantics: PASS/FAIL (landmarks, headings, labels, states, table semantics)
 - Responsive composition: PASS/FAIL (mobile + desktop layout behavior)
 - Graffiti fidelity: PASS/FAIL (matches canonical composition patterns)
+- Component intent fit: PASS/FAIL (role mismatches: N)
 - Overall score: N/100 (PASS >= 85)
 
 ## 8) Post-Edit Compliance Report Template
@@ -165,8 +176,9 @@ Use this format:
 If output fails any gate:
 
 1. Remove or replace non-canonical classes.
-2. Replace disallowed inline styles with class-based alternatives.
-3. Add missing semantic/accessibility structure.
-4. Recalculate score and re-run checklist.
+2. Remap role-mismatched components using `COMPONENT_INTENT_MATRIX.md`.
+3. Replace disallowed inline styles with class-based alternatives.
+4. Add missing semantic/accessibility structure.
+5. Recalculate score and re-run checklist.
 
 If failure is due to an unsupported pattern, keep class-first fallback and document the limitation plus an optional adaptation path (for example a reusable custom class in project styles).

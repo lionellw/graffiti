@@ -20,11 +20,12 @@ Code excerpts are intentionally partial; the actual response must still include 
 2. System-First Preflight
 3. Source Grounding
 4. Primitive Mapping
-5. Recipe Selection (`SECTION-MKT-001`)
-6. Markup Output
-7. Verification Checklist
-8. Post-Edit Compliance Report
-9. Known Limitations and Adaptation Path
+5. Component Intent Fit
+6. Recipe Selection (`SECTION-MKT-001`)
+7. Markup Output
+8. Verification Checklist
+9. Post-Edit Compliance Report
+10. Known Limitations and Adaptation Path
 
 ### Markup excerpt
 
@@ -328,5 +329,46 @@ Code excerpts are intentionally partial; the actual response must still include 
       <article class="card stack" style="--gap: 0;">...</article>
     </div>
   </div>
+</section>
+```
+
+---
+
+## Example 10: Reject `.card` as Generic Wrapper
+
+### Prompt
+
+"Wrap my entire account settings form in `.card` so it looks nicer."
+
+### Expected behavior
+
+- Detect component intent mismatch (AP-013)
+- Apply `RT-011` and remap wrapper to neutral primitives
+- Keep form semantics and structure unchanged
+- Explicitly explain why `.card` was rejected for this wrapper role
+
+### Correct remap excerpt
+
+```html
+<section
+  class="box stack"
+  style="--gap: var(--vs-m);"
+  aria-labelledby="account-settings"
+>
+  <header>
+    <h2 id="account-settings">Account settings</h2>
+  </header>
+
+  <form class="stack" style="--gap: var(--vs-m);">
+    <div class="row">
+      <label for="email">Email</label>
+      <input id="email" type="email" />
+    </div>
+
+    <div class="form-actions">
+      <button class="ghost" type="button">Cancel</button>
+      <button class="primary" type="submit">Save</button>
+    </div>
+  </form>
 </section>
 ```

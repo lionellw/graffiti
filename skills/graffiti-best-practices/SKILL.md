@@ -2,7 +2,7 @@
 name: graffiti-best-practices
 description: Use when generating or refactoring Graffiti UI markup so output is class-first, semantic, accessible, responsive, and aligned with current Graffiti capabilities.
 metadata:
-  version: 1.6.0
+  version: 1.7.0
 ---
 
 # Graffiti Best Practices
@@ -24,6 +24,7 @@ Audience: developers using Graffiti in real applications and websites.
 - `SKILL.md` - activation rules, boundaries, and execution workflow
 - `references/OUTPUT_CONTRACT.md` - required response structure and scoring gates
 - `references/GRAFFITI_SYSTEM.md` - Graffiti identity, token/variable model, and source-of-truth lookup rules
+- `references/COMPONENT_INTENT_MATRIX.md` - role boundaries for core components (use-when, do-not-use, fallback)
 - `references/CANONICAL_SNIPPETS.md` - critical pattern snippets that must be used as first-choice baselines
 - `references/RECIPES_LAYOUTS.md` - page shell and layout recipes
 - `references/RECIPES_SECTIONS.md` - section-level recipes by intent
@@ -87,6 +88,24 @@ Before writing or editing markup, run this preflight in order:
 
 If any category cannot be mapped, choose a documented fallback and record it before writing final markup.
 
+## Component Intent Steering (Required)
+
+Classes are role-bearing primitives, not generic visual wrappers.
+
+Before selecting any component class, verify three fits against `references/COMPONENT_INTENT_MATRIX.md`:
+
+1. **Intent fit**: component role matches the requested job.
+2. **Semantic fit**: host element semantics match the pattern.
+3. **Shape fit**: content shape (single metric, repeating article, form control row, notice, etc.) matches the primitive.
+
+Hard boundaries:
+
+- `.card` and `.card.featured` are for repeating content units (article/product/plan-like records), not generic section/page wrappers.
+- `.card.linked` is for card-as-link preview units, not nav containers or generic anchor wrappers.
+- `.stat-card` is for KPI/metric values, not long-form copy or feature marketing blurbs.
+- `.feature-card` is for feature-list entries, not arbitrary content blocks.
+- If a neutral wrapper is needed, use layout/utilities/neutral surfaces (`layout-*`, `stack`, `cluster`, `split`, `box`, `surface`) instead of role-specific components.
+
 ## Variable System Rules
 
 When using inline custom properties or token references:
@@ -102,7 +121,7 @@ When using inline custom properties or token references:
 Follow this sequence every time.
 
 1. **Classify intent**
-   - Map request to one or more intents: layout shell, nav, form, card surface, table/data, chat, utility/text.
+   - Map request to one or more intents: layout shell, neutral container, nav, form, repeating content unit, table/data, chat, utility/text.
 
 2. **Resolve hosted template baseline first**
    - Check `https://graffiti-ui.com/templates/*` for the closest intent match.
@@ -122,44 +141,51 @@ Follow this sequence every time.
    - For each requested component/interaction, map user intent to an existing Graffiti primitive and cite source file.
    - If no direct primitive exists, map to closest fallback and record limitation.
 
-6. **Resolve canonical snippets for critical patterns**
+6. **Run component intent fit check**
+   - Validate each selected component class against `references/COMPONENT_INTENT_MATRIX.md` before writing markup.
+   - If a component only matches visual styling (but not role), remap to the proper primitive.
+   - Treat role mismatch as a blocking error, not a stylistic preference.
+
+7. **Resolve canonical snippets for critical patterns**
    - For dialog/modal, card/link, bubble/chat, form actions/options, input-group, and callouts, start from `references/CANONICAL_SNIPPETS.md` baselines.
 
-7. **Select canonical recipe path**
+8. **Select canonical recipe path**
    - Choose the closest reference pattern from:
      - `references/OUTPUT_CONTRACT.md`
      - `references/RECIPES_LAYOUTS.md`, `references/RECIPES_SECTIONS.md`, `references/RECIPES_COMPONENTS.md`, `references/CANONICAL_SNIPPETS.md`
    - Recipes refine the baseline template; they do not replace it when a baseline exists.
 
-8. **Build a class plan before writing markup**
+9. **Build a class plan before writing markup**
    - Identify layout classes, component classes, utility classes, semantic wrappers, and ARIA/state attributes.
+   - Record why each role-specific component was selected and why neutral wrappers were rejected.
    - Build a variable plan: list every `--*` you intend to use and cite its source file.
 
-9. **Apply class-first decision tree**
-   - If a class exists, use it.
-   - Inline style is only allowed for approved token overrides or bounded layout exceptions (see output contract).
-   - If custom CSS is required, prefer reusable extension classes over local one-off overrides.
+10. **Apply class-first decision tree**
+    - If a class exists, use it.
+    - Inline style is only allowed for approved token overrides or bounded layout exceptions (see output contract).
+    - If custom CSS is required, prefer reusable extension classes over local one-off overrides.
 
-10. **Write semantic structure first, then style with classes**
+11. **Write semantic structure first, then style with classes**
     - Use landmarks and semantic tags (`header`, `nav`, `main`, `section`, `article`, `aside`, `footer`, lists, tables, labels).
 
-11. **Run accessibility minimum checks**
+12. **Run accessibility minimum checks**
     - Labels, heading order, keyboard-relevant semantics, `aria-current`/state attributes, table semantics, media alt text.
 
-12. **Run responsiveness checks**
+13. **Run responsiveness checks**
     - Ensure composition degrades correctly at mobile widths using existing layout primitives.
 
-13. **Run class and variable validation checks**
+14. **Run class and variable validation checks**
     - Every class in output must be traceable to hosted docs markdown, hosted templates, or installed Graffiti CSS.
     - Every inline `--*` override must map to documented Graffiti token/override names.
+    - Every role-specific component must pass intent-fit validation from `references/COMPONENT_INTENT_MATRIX.md`.
     - Confirm no built-in primitives were re-implemented with custom wrappers/CSS/JS.
     - Confirm no duplicate utility/component/token system was introduced.
 
-14. **Emit output using required contract**
+15. **Emit output using required contract**
     - Response must follow `references/OUTPUT_CONTRACT.md` section order.
     - Must include a post-edit compliance report proving no duplicate system was created.
 
-15. **Handle ambiguity with deterministic defaults**
+16. **Handle ambiguity with deterministic defaults**
     - Apply troubleshooting defaults from `references/TROUBLESHOOTING.md`.
     - Prefer safe class-first fallback plus explicit limitation note over invented classes.
 
@@ -221,6 +247,7 @@ Treat output as failed if any hard fail occurs:
 - Unknown class names
 - Unknown custom property names
 - Re-implementation of built-in Graffiti primitives
+- Role-specific component used outside its intended role boundary (for example `.card` as generic wrapper)
 - Duplicate styling system introduced instead of Graffiti composition
 - Disallowed inline styles
 - Missing required semantic/accessibility structure
@@ -233,6 +260,7 @@ Treat output as pass only if all sections in `references/OUTPUT_CONTRACT.md` pas
 
 - `references/OUTPUT_CONTRACT.md`
 - `references/GRAFFITI_SYSTEM.md`
+- `references/COMPONENT_INTENT_MATRIX.md`
 - `references/CANONICAL_SNIPPETS.md`
 - `references/RECIPES_LAYOUTS.md`
 - `references/RECIPES_SECTIONS.md`

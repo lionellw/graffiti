@@ -348,3 +348,37 @@ Disallowed even as exceptions:
 - Start from the matching hosted template as baseline
 - Preserve canonical section/component skeleton unless user requests a full replacement
 - Apply customization as focused edits to baseline structure
+
+---
+
+## AP-013: Component Intent Drift (Role/Class Mismatch)
+
+### Detection heuristics
+
+- `.card` used as a generic wrapper for whole sections, forms, or app shells
+- `.feature-card`, `.stat-card`, and `.card` swapped based on visual preference instead of content role
+- `.form-actions` used outside a form submit/cancel context
+- `.input-group` used as a generic horizontal layout row
+- Role-specific classes selected without intent-fit evidence
+
+### Why this is problematic
+
+- Component semantics no longer match content intent
+- Accessibility and structural meaning become less predictable
+- Outputs drift into class-by-appearance behavior instead of canonical composition
+- Reinforces incorrect class usage patterns in downstream generations
+
+### Typical bad pattern
+
+```html
+<section class="card">
+  <h2>Settings</h2>
+  <form>...</form>
+</section>
+```
+
+### Preferred direction
+
+- Validate every role-specific class with `COMPONENT_INTENT_MATRIX.md`
+- Use neutral wrappers (`box`, `surface`, `layout-*`, `stack`, `cluster`, `split`) for generic containers
+- Keep `.card*` for record-like content units, `.stat-card` for metrics, `.feature-card` for feature-list items

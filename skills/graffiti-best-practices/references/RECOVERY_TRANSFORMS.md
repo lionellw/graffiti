@@ -356,6 +356,44 @@ Each transform includes:
 
 ---
 
+## RT-011: Role-Mismatched Component to Correct/Neutral Primitive
+
+### Trigger
+
+- A role-specific component class is used for visual styling only and fails intent fit (`COMPONENT_INTENT_MATRIX.md`)
+
+### Rewrite steps
+
+1. Identify the real job (record card, metric tile, generic wrapper, form row, notice, etc.).
+2. Select class from `COMPONENT_INTENT_MATRIX.md` that matches the real job.
+3. If no role-specific component fits, switch to neutral wrappers (`box`, `surface`, `layout-*`, `stack`, `cluster`, `split`).
+4. Preserve content order and semantic landmarks while changing class mapping.
+
+### Before
+
+```html
+<section class="card">
+  <h2>Account settings</h2>
+  <form>...</form>
+</section>
+```
+
+### After
+
+```html
+<section class="box stack" style="--gap: var(--vs-m);">
+  <h2>Account settings</h2>
+  <form>...</form>
+</section>
+```
+
+### Verification
+
+- Component intent-fit check reports zero role mismatches
+- `.card*` classes are used only for record-like content units
+
+---
+
 ## Transform Application Order
 
 Apply transforms in this order for deterministic cleanup:
@@ -366,8 +404,9 @@ Apply transforms in this order for deterministic cleanup:
 4. RT-002 spacing cleanup
 5. RT-003 semantic colors
 6. RT-006 canonical component substitution
-7. RT-008 shell viewport fix
-8. RT-009 token dump reduction
-9. RT-010 native interaction replacement
+7. RT-011 component intent remap
+8. RT-008 shell viewport fix
+9. RT-009 token dump reduction
+10. RT-010 native interaction replacement
 
 Then run the full verification checklist from `OUTPUT_CONTRACT.md`.

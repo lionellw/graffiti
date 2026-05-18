@@ -227,6 +227,26 @@ Use this guide when prompts are ambiguous, conflicting, or impossible to satisfy
 
 ---
 
+## T15: Component Requested as Generic Visual Wrapper
+
+### Symptom
+
+- Prompt language treats role-specific components as generic containers (for example "wrap this section in `.card`").
+- Candidate output uses `.card`/`.stat-card`/`.feature-card` for styling only, without role fit.
+
+### Default action
+
+1. Validate intended usage against `references/COMPONENT_INTENT_MATRIX.md`.
+2. Keep role-specific components only where content shape and semantics fit.
+3. Remap generic containers to neutral wrappers (`box`, `surface`, `layout-*`, `stack`, `cluster`, `split`).
+4. Document assumption in "Intent and Constraints" when remapping was needed.
+
+### What to avoid
+
+- Do not keep mismatched components just because they produce a preferred border/padding style.
+
+---
+
 ## Quick Triage Sequence
 
 When in doubt, run this order:
@@ -235,9 +255,10 @@ When in doubt, run this order:
 2. Resolve baseline template match (if any)
 3. Run system-first preflight (variables, theme, layout, utilities, components)
 4. Build primitive mapping for requested components/interactions
-5. Validate classes and custom properties (unknown first)
-6. Restore semantics and landmarks
-7. Normalize layout primitives
-8. Reduce inline styles to budget
-9. Verify accessibility and responsive behavior
-10. Record unresolved gaps explicitly
+5. Run component intent-fit checks (`COMPONENT_INTENT_MATRIX.md`)
+6. Validate classes and custom properties (unknown first)
+7. Restore semantics and landmarks
+8. Normalize layout primitives
+9. Reduce inline styles to budget
+10. Verify accessibility and responsive behavior
+11. Record unresolved gaps explicitly

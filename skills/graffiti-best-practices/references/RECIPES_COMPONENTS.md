@@ -67,6 +67,7 @@ Use case: feature lists on landing/product pages.
 ```
 
 - Accessibility: icon is decorative unless it carries meaning
+- Intent boundary: use for feature-list entries with concise value messaging
 - Anti-pattern: avoid manually rebuilding this pattern with `box`
 
 ---
@@ -85,12 +86,13 @@ Use case: KPI metrics in dashboard headers.
 
 - Recommended: use in `layout-card`
 - Status mapping: use `.tag.success`, `.tag.warning`, `.tag.error`, `.tag.info` before token overrides
+- Intent boundary: use only for KPI/metric summaries, not long-form copy blocks
 
 ---
 
 ## COMP-005: Content Card with Header and Footer
 
-Use case: reusable container for pricing, related posts, summaries.
+Use case: repeating record-like content units (pricing tiers, related posts, product/article summaries).
 
 ```html
 <article class="card">
@@ -108,6 +110,8 @@ Use case: reusable container for pricing, related posts, summaries.
 ```
 
 - Variants: `.card.featured` for emphasized card
+- Semantic host: prefer `<article class="card">` for content-record semantics
+- Intent boundary: do not use `.card` as a generic page/section wrapper or neutral spacing container
 - Anti-pattern: avoid duplicated manual separators that `card` already provides
 
 ---
@@ -339,6 +343,7 @@ Use case: clickable article/product cards using the canonical card-as-link varia
 ```
 
 - Use `.card.linked` instead of inline `text-decoration`/`color` resets on anchors.
+- Intent boundary: use only when the entire card is one navigable destination (preview card behavior).
 
 ---
 
