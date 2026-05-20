@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.24.15
+
+### Patch Changes
+
+- Add semantic motion-duration and z-index stacking-tier token scales at `:root`, and refactor every transition and `z-index` declaration in `drop-in.css` to consume them. New tokens: `--d-instant`/`--d-fast`/`--d-base`/`--d-slow`/`--d-emphatic` (0.1 / 0.15 / 0.2 / 0.3 / 0.4 s) and `--z-base`/`--z-raised`/`--z-overlay`/`--z-sticky`/`--z-modal`/`--z-toast` (0 / 1 / 10 / 100 / 200 / 300). The values codify the literals already scattered through the framework so consumers — and future motion presets — share one vocabulary. Hardcoded duration and z-index numbers in component overrides should switch to `var(--d-*)` and `var(--z-*)`. See ADR-0008.
+
 ## 4.24.14
 
 ### Patch Changes

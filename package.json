@@ -31,16 +31,16 @@
     "test:visual:update": "playwright test --config playwright.config.ts --update-snapshots",
     "test:ci": "npm run build && npm run test:contracts && playwright test --config playwright.config.ts --project=desktop-chromium tests/visual/docs.spec.ts tests/visual/templates.spec.ts",
     "test:ci:full": "npm run build && npm run test:contracts && npm run test:visual",
-    "build": "vite build && node build-modules.js",
-    "build:modules": "node build-modules.js",
+    "build": "node scripts/derive-mirror.mjs && vite build && node build-modules.js",
+    "build:modules": "node scripts/derive-mirror.mjs && node build-modules.js",
     "check:docs-content": "node scripts/check-docs-content.mjs",
     "check:agent-docs": "node scripts/check-agent-docs.mjs",
     "report:agent-docs": "node scripts/report-agent-docs-coverage.mjs",
     "generate:agent-docs": "node scripts/generate-agent-docs.mjs",
-    "package": "svelte-kit sync && svelte-package && node build-modules.js"
+    "package": "node scripts/derive-mirror.mjs && svelte-kit sync && svelte-package && node build-modules.js"
   },
   "type": "module",
-  "version": "4.24.0",
+  "version": "4.24.15",
   "publishConfig": {
     "access": "public",
     "directory": "."
