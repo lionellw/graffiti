@@ -1,14 +1,17 @@
 # Theme scope: re-derive color scales on preset and opt-in containers
 
-Graffiti's derived color scales — `--primary-1..9`, `--error-1..9`, `--fg-1..9` — are declared on `:root` as `oklch(from var(--primary) l c h / N)` expressions. The browser computes those expressions at `:root` and inherits the resolved colors. Overriding `--primary` on a descendant element therefore does **not** re-shade `--primary-1..9` on that descendant; the descendant inherits the original `:root`-computed scale. This is well-formed CSS, but it directly limits the "apply on any container" promise made by [ADR-0003](./0003-aesthetic-preset-architecture.md): a preset class on a `<section>` can change `--primary` but leaves every tinted derivative stale.
+Graffiti's derived color scales — `--{base}-1..9` for every derived semantic base (`fg`, `bg`, `primary`, `error`, `warning`, `success`) — are declared on `:root` as `oklch(from var(--{base}) l c h / N)` expressions. The relative color syntax resolves its `<color>` argument at computed-value time, so the browser substitutes `var(--{base})` at `:root` and inherits the resolved colors downstream. Overriding `--primary` (or any other base) on a descendant element therefore does **not** re-shade that base's alpha scale on the descendant; the descendant inherits the original `:root`-computed scale. This is well-formed CSS, but it directly limits the "apply on any container" promise made by [ADR-0003](./0003-aesthetic-preset-architecture.md): a preset class on a `<section>` can change `--primary` but leaves every tinted derivative stale.
 
-To close this hole, `drop-in.css` declares a single re-derivation block keyed on the `theme-` class-name fragment, plus a direct re-declaration of `--fg` so `--fg-light`/`--fg-dark` overrides on a scope propagate through `light-dark()`:
+To close this hole, `drop-in.css` declares a single re-derivation block keyed on the `theme-` class-name fragment. The block re-declares the alpha scale for every derived semantic base, plus `--fg` and `--bg` themselves so `--fg-light`/`--fg-dark` / `--bg-light`/`--bg-dark` overrides on a scope propagate through `light-dark()`:
 
 ```css
 :where([class*="theme-"]) {
   --fg: light-dark(var(--fg-light), var(--fg-dark));
+  --bg: light-dark(var(--bg-light), var(--bg-dark));
+  --fg-05: oklch(from var(--fg) l c h / 0.05);
   --fg-1: oklch(from var(--fg) l c h / 0.1);
-  /* … --fg-2..9, --primary-1..9, --error-1..9 */
+  /* … --fg-2..9, --bg-05/1..9, --primary-1..9,
+        --error-1..9, --warning-1..9, --success-1..9 */
 }
 ```
 
@@ -36,6 +39,7 @@ The `:where()` zero-specificity wrapper keeps the rule from outranking consumer 
 - The re-derivation selector is open-ended: any class containing the `theme-` fragment qualifies. Catalog growth (new presets, consumer-authored scopes) requires no change to `drop-in.css`. The naming convention itself is the contract.
 - Trade-off: a non-Graffiti class that happens to contain `theme-` (for example `.my-theme-toggle` on a UI control) also receives the re-declared block. The cost is the extra computed custom properties on those elements; since none of the underlying tokens are typically overridden there, the resolved values are identical to what the element would inherit from `:root`, and nothing renders differently. The naming overlap is judged rare enough — and the failure mode benign enough — to keep the open selector.
 - Residual limitation, accepted by design: re-derivation fires once on the scope element. A descendant that further overrides `--primary` inside a theme scope still inherits the scope's derived scale; its own `--primary` change does not re-shade. The realistic frequency of nested overrides is near zero, and the alternative (`:where(*)`) was rejected. If a real use case surfaces, the consumer applies a nested `.theme-scope` on the inner element.
-- `--fg` is re-declared inside the block alongside `--fg-1..9`. Without re-declaring `--fg` itself, a scope that overrides only `--fg-light`/`--fg-dark` would still inherit the `:root`-substituted `--fg` and the alpha scale would stay stale; re-declaring `--fg` here as `light-dark(var(--fg-light), var(--fg-dark))` makes both the base token and its alpha derivatives react to either form of override on the scope. The dominant light/dark case continues to work via `color-scheme` and `light-dark()` resolution semantics, unchanged.
+- `--fg` and `--bg` are re-declared inside the block alongside their alpha scales. Without re-declaring the base token itself, a scope that overrides only `--fg-light`/`--fg-dark` (or `--bg-light`/`--bg-dark`) would still inherit the `:root`-substituted `--fg`/`--bg` and the alpha scale would stay stale; re-declaring each as `light-dark(var(--{base}-light), var(--{base}-dark))` makes both the base token and its alpha derivatives react to either form of override on the scope. The dominant light/dark case continues to work via `color-scheme` and `light-dark()` resolution semantics, unchanged.
+- The alpha re-derivation is symmetric across all six derived semantic bases (`fg`, `bg`, `primary`, `error`, `warning`, `success`). The initial revision of this ADR enumerated only `fg`, `primary`, `error`; that was an oversight — overriding `--warning` or `--success` on a scope would have left the corresponding tinted scale stale. The completed block covers every base with a derived alpha scale at `:root`.
 - When the opaque color scale ships ([ADR-0007](./0007-opaque-color-scale.md)), `--{base}-opaque-1..9` joins this re-derivation block alongside the alpha scale. The block stays a single rule with the same selector; only the property count grows.
 - The `graffiti-best-practices` skill gains a one-line rule: "to recolor a subtree, apply `.theme-scope` (or any `theme-*` class) on the container — not just an inline `--primary` override."

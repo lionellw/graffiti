@@ -108,6 +108,17 @@
     --yellow-8: oklch(from var(--yellow) l c h / 0.9);
     --yellow-9: var(--yellow);
 
+    /* Yellow opaque scale */
+    --yellow-opaque-1: color-mix(in oklab, var(--yellow), var(--bg) 90%);
+    --yellow-opaque-2: color-mix(in oklab, var(--yellow), var(--bg) 80%);
+    --yellow-opaque-3: color-mix(in oklab, var(--yellow), var(--bg) 65%);
+    --yellow-opaque-4: color-mix(in oklab, var(--yellow), var(--bg) 40%);
+    --yellow-opaque-5: var(--yellow);
+    --yellow-opaque-6: color-mix(in oklab, var(--yellow), var(--fg) 30%);
+    --yellow-opaque-7: color-mix(in oklab, var(--yellow), var(--fg) 50%);
+    --yellow-opaque-8: color-mix(in oklab, var(--yellow), var(--fg) 70%);
+    --yellow-opaque-9: color-mix(in oklab, var(--yellow), var(--fg) 90%);
+
     /* Amber scale */
     --amber-1: oklch(from var(--amber) l c h / 0.1);
     --amber-2: oklch(from var(--amber) l c h / 0.2);
@@ -118,6 +129,17 @@
     --amber-7: oklch(from var(--amber) l c h / 0.75);
     --amber-8: oklch(from var(--amber) l c h / 0.9);
     --amber-9: var(--amber);
+
+    /* Amber opaque scale */
+    --amber-opaque-1: color-mix(in oklab, var(--amber), var(--bg) 90%);
+    --amber-opaque-2: color-mix(in oklab, var(--amber), var(--bg) 80%);
+    --amber-opaque-3: color-mix(in oklab, var(--amber), var(--bg) 65%);
+    --amber-opaque-4: color-mix(in oklab, var(--amber), var(--bg) 40%);
+    --amber-opaque-5: var(--amber);
+    --amber-opaque-6: color-mix(in oklab, var(--amber), var(--fg) 30%);
+    --amber-opaque-7: color-mix(in oklab, var(--amber), var(--fg) 50%);
+    --amber-opaque-8: color-mix(in oklab, var(--amber), var(--fg) 70%);
+    --amber-opaque-9: color-mix(in oklab, var(--amber), var(--fg) 90%);
 
     /* Orange scale */
     --orange-1: oklch(from var(--orange) l c h / 0.1);
@@ -130,6 +152,17 @@
     --orange-8: oklch(from var(--orange) l c h / 0.9);
     --orange-9: var(--orange);
 
+    /* Orange opaque scale */
+    --orange-opaque-1: color-mix(in oklab, var(--orange), var(--bg) 90%);
+    --orange-opaque-2: color-mix(in oklab, var(--orange), var(--bg) 80%);
+    --orange-opaque-3: color-mix(in oklab, var(--orange), var(--bg) 65%);
+    --orange-opaque-4: color-mix(in oklab, var(--orange), var(--bg) 40%);
+    --orange-opaque-5: var(--orange);
+    --orange-opaque-6: color-mix(in oklab, var(--orange), var(--fg) 30%);
+    --orange-opaque-7: color-mix(in oklab, var(--orange), var(--fg) 50%);
+    --orange-opaque-8: color-mix(in oklab, var(--orange), var(--fg) 70%);
+    --orange-opaque-9: color-mix(in oklab, var(--orange), var(--fg) 90%);
+
     /* Red scale */
     --red-1: oklch(from var(--red) l c h / 0.1);
     --red-2: oklch(from var(--red) l c h / 0.2);
@@ -140,6 +173,17 @@
     --red-7: oklch(from var(--red) l c h / 0.75);
     --red-8: oklch(from var(--red) l c h / 0.9);
     --red-9: var(--red);
+
+    /* Red opaque scale */
+    --red-opaque-1: color-mix(in oklab, var(--red), var(--bg) 90%);
+    --red-opaque-2: color-mix(in oklab, var(--red), var(--bg) 80%);
+    --red-opaque-3: color-mix(in oklab, var(--red), var(--bg) 65%);
+    --red-opaque-4: color-mix(in oklab, var(--red), var(--bg) 40%);
+    --red-opaque-5: var(--red);
+    --red-opaque-6: color-mix(in oklab, var(--red), var(--fg) 30%);
+    --red-opaque-7: color-mix(in oklab, var(--red), var(--fg) 50%);
+    --red-opaque-8: color-mix(in oklab, var(--red), var(--fg) 70%);
+    --red-opaque-9: color-mix(in oklab, var(--red), var(--fg) 90%);
 
     /* Pink scale */
     --pink-1: oklch(from var(--pink) l c h / 0.1);
@@ -152,6 +196,17 @@
     --pink-8: oklch(from var(--pink) l c h / 0.9);
     --pink-9: var(--pink);
 
+    /* Pink opaque scale */
+    --pink-opaque-1: color-mix(in oklab, var(--pink), var(--bg) 90%);
+    --pink-opaque-2: color-mix(in oklab, var(--pink), var(--bg) 80%);
+    --pink-opaque-3: color-mix(in oklab, var(--pink), var(--bg) 65%);
+    --pink-opaque-4: color-mix(in oklab, var(--pink), var(--bg) 40%);
+    --pink-opaque-5: var(--pink);
+    --pink-opaque-6: color-mix(in oklab, var(--pink), var(--fg) 30%);
+    --pink-opaque-7: color-mix(in oklab, var(--pink), var(--fg) 50%);
+    --pink-opaque-8: color-mix(in oklab, var(--pink), var(--fg) 70%);
+    --pink-opaque-9: color-mix(in oklab, var(--pink), var(--fg) 90%);
+
     /* Purple scale */
     --purple-1: oklch(from var(--purple) l c h / 0.1);
     --purple-2: oklch(from var(--purple) l c h / 0.2);
@@ -162,6 +217,17 @@
     --purple-7: oklch(from var(--purple) l c h / 0.75);
     --purple-8: oklch(from var(--purple) l c h / 0.9);
     --purple-9: var(--purple);
+
+    /* Purple opaque scale */
+    --purple-opaque-1: color-mix(in oklab, var(--purple), var(--bg) 90%);
+    --purple-opaque-2: color-mix(in oklab, var(--purple), var(--bg) 80%);
+    --purple-opaque-3: color-mix(in oklab, var(--purple), var(--bg) 65%);
+    --purple-opaque-4: color-mix(in oklab, var(--purple), var(--bg) 40%);
+    --purple-opaque-5: var(--purple);
+    --purple-opaque-6: color-mix(in oklab, var(--purple), var(--fg) 30%);
+    --purple-opaque-7: color-mix(in oklab, var(--purple), var(--fg) 50%);
+    --purple-opaque-8: color-mix(in oklab, var(--purple), var(--fg) 70%);
+    --purple-opaque-9: color-mix(in oklab, var(--purple), var(--fg) 90%);
 
     /* Purple deep scale */
     --purple-deep: #1b1525;
@@ -175,6 +241,17 @@
     --purple-deep-8: oklch(from var(--purple-deep) l c h / 0.9);
     --purple-deep-9: var(--purple-deep);
 
+    /* Purple Deep opaque scale */
+    --purple-deep-opaque-1: color-mix(in oklab, var(--purple-deep), var(--bg) 90%);
+    --purple-deep-opaque-2: color-mix(in oklab, var(--purple-deep), var(--bg) 80%);
+    --purple-deep-opaque-3: color-mix(in oklab, var(--purple-deep), var(--bg) 65%);
+    --purple-deep-opaque-4: color-mix(in oklab, var(--purple-deep), var(--bg) 40%);
+    --purple-deep-opaque-5: var(--purple-deep);
+    --purple-deep-opaque-6: color-mix(in oklab, var(--purple-deep), var(--fg) 30%);
+    --purple-deep-opaque-7: color-mix(in oklab, var(--purple-deep), var(--fg) 50%);
+    --purple-deep-opaque-8: color-mix(in oklab, var(--purple-deep), var(--fg) 70%);
+    --purple-deep-opaque-9: color-mix(in oklab, var(--purple-deep), var(--fg) 90%);
+
     /* Indigo scale */
     --indigo-1: oklch(from var(--indigo) l c h / 0.1);
     --indigo-2: oklch(from var(--indigo) l c h / 0.2);
@@ -185,6 +262,17 @@
     --indigo-7: oklch(from var(--indigo) l c h / 0.75);
     --indigo-8: oklch(from var(--indigo) l c h / 0.9);
     --indigo-9: var(--indigo);
+
+    /* Indigo opaque scale */
+    --indigo-opaque-1: color-mix(in oklab, var(--indigo), var(--bg) 90%);
+    --indigo-opaque-2: color-mix(in oklab, var(--indigo), var(--bg) 80%);
+    --indigo-opaque-3: color-mix(in oklab, var(--indigo), var(--bg) 65%);
+    --indigo-opaque-4: color-mix(in oklab, var(--indigo), var(--bg) 40%);
+    --indigo-opaque-5: var(--indigo);
+    --indigo-opaque-6: color-mix(in oklab, var(--indigo), var(--fg) 30%);
+    --indigo-opaque-7: color-mix(in oklab, var(--indigo), var(--fg) 50%);
+    --indigo-opaque-8: color-mix(in oklab, var(--indigo), var(--fg) 70%);
+    --indigo-opaque-9: color-mix(in oklab, var(--indigo), var(--fg) 90%);
 
     /* Green scale */
     --green-1: oklch(from var(--green) l c h / 0.1);
@@ -197,6 +285,17 @@
     --green-8: oklch(from var(--green) l c h / 0.9);
     --green-9: var(--green);
 
+    /* Green opaque scale */
+    --green-opaque-1: color-mix(in oklab, var(--green), var(--bg) 90%);
+    --green-opaque-2: color-mix(in oklab, var(--green), var(--bg) 80%);
+    --green-opaque-3: color-mix(in oklab, var(--green), var(--bg) 65%);
+    --green-opaque-4: color-mix(in oklab, var(--green), var(--bg) 40%);
+    --green-opaque-5: var(--green);
+    --green-opaque-6: color-mix(in oklab, var(--green), var(--fg) 30%);
+    --green-opaque-7: color-mix(in oklab, var(--green), var(--fg) 50%);
+    --green-opaque-8: color-mix(in oklab, var(--green), var(--fg) 70%);
+    --green-opaque-9: color-mix(in oklab, var(--green), var(--fg) 90%);
+
     /* Lime scale */
     --lime-1: oklch(from var(--lime) l c h / 0.1);
     --lime-2: oklch(from var(--lime) l c h / 0.2);
@@ -207,6 +306,17 @@
     --lime-7: oklch(from var(--lime) l c h / 0.75);
     --lime-8: oklch(from var(--lime) l c h / 0.9);
     --lime-9: var(--lime);
+
+    /* Lime opaque scale */
+    --lime-opaque-1: color-mix(in oklab, var(--lime), var(--bg) 90%);
+    --lime-opaque-2: color-mix(in oklab, var(--lime), var(--bg) 80%);
+    --lime-opaque-3: color-mix(in oklab, var(--lime), var(--bg) 65%);
+    --lime-opaque-4: color-mix(in oklab, var(--lime), var(--bg) 40%);
+    --lime-opaque-5: var(--lime);
+    --lime-opaque-6: color-mix(in oklab, var(--lime), var(--fg) 30%);
+    --lime-opaque-7: color-mix(in oklab, var(--lime), var(--fg) 50%);
+    --lime-opaque-8: color-mix(in oklab, var(--lime), var(--fg) 70%);
+    --lime-opaque-9: color-mix(in oklab, var(--lime), var(--fg) 90%);
 
     /* Highlighter scale */
     --highlighter-1: oklch(from var(--highlighter) l c h / 0.1);
@@ -219,6 +329,17 @@
     --highlighter-8: oklch(from var(--highlighter) l c h / 0.9);
     --highlighter-9: var(--highlighter);
 
+    /* Highlighter opaque scale */
+    --highlighter-opaque-1: color-mix(in oklab, var(--highlighter), var(--bg) 90%);
+    --highlighter-opaque-2: color-mix(in oklab, var(--highlighter), var(--bg) 80%);
+    --highlighter-opaque-3: color-mix(in oklab, var(--highlighter), var(--bg) 65%);
+    --highlighter-opaque-4: color-mix(in oklab, var(--highlighter), var(--bg) 40%);
+    --highlighter-opaque-5: var(--highlighter);
+    --highlighter-opaque-6: color-mix(in oklab, var(--highlighter), var(--fg) 30%);
+    --highlighter-opaque-7: color-mix(in oklab, var(--highlighter), var(--fg) 50%);
+    --highlighter-opaque-8: color-mix(in oklab, var(--highlighter), var(--fg) 70%);
+    --highlighter-opaque-9: color-mix(in oklab, var(--highlighter), var(--fg) 90%);
+
     /* Brown scale */
     --brown-1: oklch(from var(--brown) l c h / 0.1);
     --brown-2: oklch(from var(--brown) l c h / 0.2);
@@ -229,6 +350,17 @@
     --brown-7: oklch(from var(--brown) l c h / 0.75);
     --brown-8: oklch(from var(--brown) l c h / 0.9);
     --brown-9: var(--brown);
+
+    /* Brown opaque scale */
+    --brown-opaque-1: color-mix(in oklab, var(--brown), var(--bg) 90%);
+    --brown-opaque-2: color-mix(in oklab, var(--brown), var(--bg) 80%);
+    --brown-opaque-3: color-mix(in oklab, var(--brown), var(--bg) 65%);
+    --brown-opaque-4: color-mix(in oklab, var(--brown), var(--bg) 40%);
+    --brown-opaque-5: var(--brown);
+    --brown-opaque-6: color-mix(in oklab, var(--brown), var(--fg) 30%);
+    --brown-opaque-7: color-mix(in oklab, var(--brown), var(--fg) 50%);
+    --brown-opaque-8: color-mix(in oklab, var(--brown), var(--fg) 70%);
+    --brown-opaque-9: color-mix(in oklab, var(--brown), var(--fg) 90%);
 
     /* Teal scale */
     --teal-1: oklch(from var(--teal) l c h / 0.1);
@@ -241,6 +373,17 @@
     --teal-8: oklch(from var(--teal) l c h / 0.9);
     --teal-9: var(--teal);
 
+    /* Teal opaque scale */
+    --teal-opaque-1: color-mix(in oklab, var(--teal), var(--bg) 90%);
+    --teal-opaque-2: color-mix(in oklab, var(--teal), var(--bg) 80%);
+    --teal-opaque-3: color-mix(in oklab, var(--teal), var(--bg) 65%);
+    --teal-opaque-4: color-mix(in oklab, var(--teal), var(--bg) 40%);
+    --teal-opaque-5: var(--teal);
+    --teal-opaque-6: color-mix(in oklab, var(--teal), var(--fg) 30%);
+    --teal-opaque-7: color-mix(in oklab, var(--teal), var(--fg) 50%);
+    --teal-opaque-8: color-mix(in oklab, var(--teal), var(--fg) 70%);
+    --teal-opaque-9: color-mix(in oklab, var(--teal), var(--fg) 90%);
+
     /* Blue scale */
     --blue-1: oklch(from var(--blue) l c h / 0.1);
     --blue-2: oklch(from var(--blue) l c h / 0.2);
@@ -251,6 +394,17 @@
     --blue-7: oklch(from var(--blue) l c h / 0.75);
     --blue-8: oklch(from var(--blue) l c h / 0.9);
     --blue-9: var(--blue);
+
+    /* Blue opaque scale */
+    --blue-opaque-1: color-mix(in oklab, var(--blue), var(--bg) 90%);
+    --blue-opaque-2: color-mix(in oklab, var(--blue), var(--bg) 80%);
+    --blue-opaque-3: color-mix(in oklab, var(--blue), var(--bg) 65%);
+    --blue-opaque-4: color-mix(in oklab, var(--blue), var(--bg) 40%);
+    --blue-opaque-5: var(--blue);
+    --blue-opaque-6: color-mix(in oklab, var(--blue), var(--fg) 30%);
+    --blue-opaque-7: color-mix(in oklab, var(--blue), var(--fg) 50%);
+    --blue-opaque-8: color-mix(in oklab, var(--blue), var(--fg) 70%);
+    --blue-opaque-9: color-mix(in oklab, var(--blue), var(--fg) 90%);
 
     /* Neutral gray scale */
     --gray: oklch(0.5 0.02 270);
@@ -265,6 +419,17 @@
     --gray-8: oklch(from var(--gray) l c h / 0.9);
     --gray-9: var(--gray);
 
+    /* Gray opaque scale */
+    --gray-opaque-1: color-mix(in oklab, var(--gray), var(--bg) 90%);
+    --gray-opaque-2: color-mix(in oklab, var(--gray), var(--bg) 80%);
+    --gray-opaque-3: color-mix(in oklab, var(--gray), var(--bg) 65%);
+    --gray-opaque-4: color-mix(in oklab, var(--gray), var(--bg) 40%);
+    --gray-opaque-5: var(--gray);
+    --gray-opaque-6: color-mix(in oklab, var(--gray), var(--fg) 30%);
+    --gray-opaque-7: color-mix(in oklab, var(--gray), var(--fg) 50%);
+    --gray-opaque-8: color-mix(in oklab, var(--gray), var(--fg) 70%);
+    --gray-opaque-9: color-mix(in oklab, var(--gray), var(--fg) 90%);
+
     /* Slate scale */
     --slate-1: oklch(from var(--slate) l c h / 0.1);
     --slate-2: oklch(from var(--slate) l c h / 0.2);
@@ -275,6 +440,17 @@
     --slate-7: oklch(from var(--slate) l c h / 0.75);
     --slate-8: oklch(from var(--slate) l c h / 0.9);
     --slate-9: var(--slate);
+
+    /* Slate opaque scale */
+    --slate-opaque-1: color-mix(in oklab, var(--slate), var(--bg) 90%);
+    --slate-opaque-2: color-mix(in oklab, var(--slate), var(--bg) 80%);
+    --slate-opaque-3: color-mix(in oklab, var(--slate), var(--bg) 65%);
+    --slate-opaque-4: color-mix(in oklab, var(--slate), var(--bg) 40%);
+    --slate-opaque-5: var(--slate);
+    --slate-opaque-6: color-mix(in oklab, var(--slate), var(--fg) 30%);
+    --slate-opaque-7: color-mix(in oklab, var(--slate), var(--fg) 50%);
+    --slate-opaque-8: color-mix(in oklab, var(--slate), var(--fg) 70%);
+    --slate-opaque-9: color-mix(in oklab, var(--slate), var(--fg) 90%);
 
     /* White - Static color (does not change with light/dark mode) */
     --white: oklch(1 0 0);
@@ -289,6 +465,17 @@
     --white-8: oklch(from var(--white) l c h / 0.9);
     --white-9: var(--white);
 
+    /* White opaque scale */
+    --white-opaque-1: color-mix(in oklab, var(--white), var(--bg) 90%);
+    --white-opaque-2: color-mix(in oklab, var(--white), var(--bg) 80%);
+    --white-opaque-3: color-mix(in oklab, var(--white), var(--bg) 65%);
+    --white-opaque-4: color-mix(in oklab, var(--white), var(--bg) 40%);
+    --white-opaque-5: var(--white);
+    --white-opaque-6: color-mix(in oklab, var(--white), var(--fg) 30%);
+    --white-opaque-7: color-mix(in oklab, var(--white), var(--fg) 50%);
+    --white-opaque-8: color-mix(in oklab, var(--white), var(--fg) 70%);
+    --white-opaque-9: color-mix(in oklab, var(--white), var(--fg) 90%);
+
     /* Black - Static color (does not change with light/dark mode) */
     --black: oklch(0 0 0);
     --black-05: oklch(from var(--black) l c h / 0.05);
@@ -301,6 +488,17 @@
     --black-7: oklch(from var(--black) l c h / 0.75);
     --black-8: oklch(from var(--black) l c h / 0.9);
     --black-9: var(--black);
+
+    /* Black opaque scale */
+    --black-opaque-1: color-mix(in oklab, var(--black), var(--bg) 90%);
+    --black-opaque-2: color-mix(in oklab, var(--black), var(--bg) 80%);
+    --black-opaque-3: color-mix(in oklab, var(--black), var(--bg) 65%);
+    --black-opaque-4: color-mix(in oklab, var(--black), var(--bg) 40%);
+    --black-opaque-5: var(--black);
+    --black-opaque-6: color-mix(in oklab, var(--black), var(--fg) 30%);
+    --black-opaque-7: color-mix(in oklab, var(--black), var(--fg) 50%);
+    --black-opaque-8: color-mix(in oklab, var(--black), var(--fg) 70%);
+    --black-opaque-9: color-mix(in oklab, var(--black), var(--fg) 90%);
 
     /* Foreground / background literals */
     --fg-light: #050505;
@@ -377,6 +575,17 @@
     --fg-8: oklch(from var(--fg) l c h / 0.9);
     --fg-9: var(--fg);
 
+    /* Fg opaque scale */
+    --fg-opaque-1: color-mix(in oklab, var(--fg), var(--bg) 90%);
+    --fg-opaque-2: color-mix(in oklab, var(--fg), var(--bg) 80%);
+    --fg-opaque-3: color-mix(in oklab, var(--fg), var(--bg) 65%);
+    --fg-opaque-4: color-mix(in oklab, var(--fg), var(--bg) 40%);
+    --fg-opaque-5: var(--fg);
+    --fg-opaque-6: color-mix(in oklab, var(--fg), var(--fg) 30%);
+    --fg-opaque-7: color-mix(in oklab, var(--fg), var(--fg) 50%);
+    --fg-opaque-8: color-mix(in oklab, var(--fg), var(--fg) 70%);
+    --fg-opaque-9: color-mix(in oklab, var(--fg), var(--fg) 90%);
+
     --bg: light-dark(var(--bg-light), var(--bg-dark));
     --bg-05: oklch(from var(--bg) l c h / 0.05);
     --bg-1: oklch(from var(--bg) l c h / 0.1);
@@ -388,6 +597,17 @@
     --bg-7: oklch(from var(--bg) l c h / 0.75);
     --bg-8: oklch(from var(--bg) l c h / 0.9);
     --bg-9: var(--bg);
+
+    /* Bg opaque scale */
+    --bg-opaque-1: color-mix(in oklab, var(--bg), var(--bg) 90%);
+    --bg-opaque-2: color-mix(in oklab, var(--bg), var(--bg) 80%);
+    --bg-opaque-3: color-mix(in oklab, var(--bg), var(--bg) 65%);
+    --bg-opaque-4: color-mix(in oklab, var(--bg), var(--bg) 40%);
+    --bg-opaque-5: var(--bg);
+    --bg-opaque-6: color-mix(in oklab, var(--bg), var(--fg) 30%);
+    --bg-opaque-7: color-mix(in oklab, var(--bg), var(--fg) 50%);
+    --bg-opaque-8: color-mix(in oklab, var(--bg), var(--fg) 70%);
+    --bg-opaque-9: color-mix(in oklab, var(--bg), var(--fg) 90%);
 
     /* Status colors */
     --primary: var(--blue);
@@ -407,6 +627,17 @@
     --primary-8: oklch(from var(--primary) l c h / 0.9);
     --primary-9: var(--primary);
 
+    /* Primary opaque scale */
+    --primary-opaque-1: color-mix(in oklab, var(--primary), var(--bg) 90%);
+    --primary-opaque-2: color-mix(in oklab, var(--primary), var(--bg) 80%);
+    --primary-opaque-3: color-mix(in oklab, var(--primary), var(--bg) 65%);
+    --primary-opaque-4: color-mix(in oklab, var(--primary), var(--bg) 40%);
+    --primary-opaque-5: var(--primary);
+    --primary-opaque-6: color-mix(in oklab, var(--primary), var(--fg) 30%);
+    --primary-opaque-7: color-mix(in oklab, var(--primary), var(--fg) 50%);
+    --primary-opaque-8: color-mix(in oklab, var(--primary), var(--fg) 70%);
+    --primary-opaque-9: color-mix(in oklab, var(--primary), var(--fg) 90%);
+
     /* Error scale */
     --error-1: oklch(from var(--error) l c h / 0.1);
     --error-2: oklch(from var(--error) l c h / 0.2);
@@ -417,6 +648,17 @@
     --error-7: oklch(from var(--error) l c h / 0.75);
     --error-8: oklch(from var(--error) l c h / 0.9);
     --error-9: var(--error);
+
+    /* Error opaque scale */
+    --error-opaque-1: color-mix(in oklab, var(--error), var(--bg) 90%);
+    --error-opaque-2: color-mix(in oklab, var(--error), var(--bg) 80%);
+    --error-opaque-3: color-mix(in oklab, var(--error), var(--bg) 65%);
+    --error-opaque-4: color-mix(in oklab, var(--error), var(--bg) 40%);
+    --error-opaque-5: var(--error);
+    --error-opaque-6: color-mix(in oklab, var(--error), var(--fg) 30%);
+    --error-opaque-7: color-mix(in oklab, var(--error), var(--fg) 50%);
+    --error-opaque-8: color-mix(in oklab, var(--error), var(--fg) 70%);
+    --error-opaque-9: color-mix(in oklab, var(--error), var(--fg) 90%);
 
     /* Warning scale */
     --warning-1: oklch(from var(--warning) l c h / 0.1);
@@ -429,6 +671,17 @@
     --warning-8: oklch(from var(--warning) l c h / 0.9);
     --warning-9: var(--warning);
 
+    /* Warning opaque scale */
+    --warning-opaque-1: color-mix(in oklab, var(--warning), var(--bg) 90%);
+    --warning-opaque-2: color-mix(in oklab, var(--warning), var(--bg) 80%);
+    --warning-opaque-3: color-mix(in oklab, var(--warning), var(--bg) 65%);
+    --warning-opaque-4: color-mix(in oklab, var(--warning), var(--bg) 40%);
+    --warning-opaque-5: var(--warning);
+    --warning-opaque-6: color-mix(in oklab, var(--warning), var(--fg) 30%);
+    --warning-opaque-7: color-mix(in oklab, var(--warning), var(--fg) 50%);
+    --warning-opaque-8: color-mix(in oklab, var(--warning), var(--fg) 70%);
+    --warning-opaque-9: color-mix(in oklab, var(--warning), var(--fg) 90%);
+
     /* Success scale */
     --success-1: oklch(from var(--success) l c h / 0.1);
     --success-2: oklch(from var(--success) l c h / 0.2);
@@ -439,6 +692,17 @@
     --success-7: oklch(from var(--success) l c h / 0.75);
     --success-8: oklch(from var(--success) l c h / 0.9);
     --success-9: var(--success);
+
+    /* Success opaque scale */
+    --success-opaque-1: color-mix(in oklab, var(--success), var(--bg) 90%);
+    --success-opaque-2: color-mix(in oklab, var(--success), var(--bg) 80%);
+    --success-opaque-3: color-mix(in oklab, var(--success), var(--bg) 65%);
+    --success-opaque-4: color-mix(in oklab, var(--success), var(--bg) 40%);
+    --success-opaque-5: var(--success);
+    --success-opaque-6: color-mix(in oklab, var(--success), var(--fg) 30%);
+    --success-opaque-7: color-mix(in oklab, var(--success), var(--fg) 50%);
+    --success-opaque-8: color-mix(in oklab, var(--success), var(--fg) 70%);
+    --success-opaque-9: color-mix(in oklab, var(--success), var(--fg) 90%);
 
     /* UI primitives */
     /* Shadows */
@@ -514,6 +778,8 @@
      `:where()` keeps specificity at 0 so consumer overrides still win. */
   :where([class*="theme-"]) {
     --fg: light-dark(var(--fg-light), var(--fg-dark));
+    --bg: light-dark(var(--bg-light), var(--bg-dark));
+    --fg-05: oklch(from var(--fg) l c h / 0.05);
     --fg-1: oklch(from var(--fg) l c h / 0.1);
     --fg-2: oklch(from var(--fg) l c h / 0.2);
     --fg-3: oklch(from var(--fg) l c h / 0.3);
@@ -523,6 +789,17 @@
     --fg-7: oklch(from var(--fg) l c h / 0.75);
     --fg-8: oklch(from var(--fg) l c h / 0.9);
     --fg-9: var(--fg);
+
+    --bg-05: oklch(from var(--bg) l c h / 0.05);
+    --bg-1: oklch(from var(--bg) l c h / 0.1);
+    --bg-2: oklch(from var(--bg) l c h / 0.2);
+    --bg-3: oklch(from var(--bg) l c h / 0.3);
+    --bg-4: oklch(from var(--bg) l c h / 0.4);
+    --bg-5: oklch(from var(--bg) l c h / 0.5);
+    --bg-6: oklch(from var(--bg) l c h / 0.6);
+    --bg-7: oklch(from var(--bg) l c h / 0.75);
+    --bg-8: oklch(from var(--bg) l c h / 0.9);
+    --bg-9: var(--bg);
 
     --primary-1: oklch(from var(--primary) l c h / 0.1);
     --primary-2: oklch(from var(--primary) l c h / 0.2);
@@ -543,6 +820,290 @@
     --error-7: oklch(from var(--error) l c h / 0.75);
     --error-8: oklch(from var(--error) l c h / 0.9);
     --error-9: var(--error);
+
+    --warning-1: oklch(from var(--warning) l c h / 0.1);
+    --warning-2: oklch(from var(--warning) l c h / 0.2);
+    --warning-3: oklch(from var(--warning) l c h / 0.3);
+    --warning-4: oklch(from var(--warning) l c h / 0.4);
+    --warning-5: oklch(from var(--warning) l c h / 0.5);
+    --warning-6: oklch(from var(--warning) l c h / 0.6);
+    --warning-7: oklch(from var(--warning) l c h / 0.75);
+    --warning-8: oklch(from var(--warning) l c h / 0.9);
+    --warning-9: var(--warning);
+
+    --success-1: oklch(from var(--success) l c h / 0.1);
+    --success-2: oklch(from var(--success) l c h / 0.2);
+    --success-3: oklch(from var(--success) l c h / 0.3);
+    --success-4: oklch(from var(--success) l c h / 0.4);
+    --success-5: oklch(from var(--success) l c h / 0.5);
+    --success-6: oklch(from var(--success) l c h / 0.6);
+    --success-7: oklch(from var(--success) l c h / 0.75);
+    --success-8: oklch(from var(--success) l c h / 0.9);
+    --success-9: var(--success);
+
+    /* Yellow opaque scale */
+    --yellow-opaque-1: color-mix(in oklab, var(--yellow), var(--bg) 90%);
+    --yellow-opaque-2: color-mix(in oklab, var(--yellow), var(--bg) 80%);
+    --yellow-opaque-3: color-mix(in oklab, var(--yellow), var(--bg) 65%);
+    --yellow-opaque-4: color-mix(in oklab, var(--yellow), var(--bg) 40%);
+    --yellow-opaque-5: var(--yellow);
+    --yellow-opaque-6: color-mix(in oklab, var(--yellow), var(--fg) 30%);
+    --yellow-opaque-7: color-mix(in oklab, var(--yellow), var(--fg) 50%);
+    --yellow-opaque-8: color-mix(in oklab, var(--yellow), var(--fg) 70%);
+    --yellow-opaque-9: color-mix(in oklab, var(--yellow), var(--fg) 90%);
+
+    /* Amber opaque scale */
+    --amber-opaque-1: color-mix(in oklab, var(--amber), var(--bg) 90%);
+    --amber-opaque-2: color-mix(in oklab, var(--amber), var(--bg) 80%);
+    --amber-opaque-3: color-mix(in oklab, var(--amber), var(--bg) 65%);
+    --amber-opaque-4: color-mix(in oklab, var(--amber), var(--bg) 40%);
+    --amber-opaque-5: var(--amber);
+    --amber-opaque-6: color-mix(in oklab, var(--amber), var(--fg) 30%);
+    --amber-opaque-7: color-mix(in oklab, var(--amber), var(--fg) 50%);
+    --amber-opaque-8: color-mix(in oklab, var(--amber), var(--fg) 70%);
+    --amber-opaque-9: color-mix(in oklab, var(--amber), var(--fg) 90%);
+
+    /* Orange opaque scale */
+    --orange-opaque-1: color-mix(in oklab, var(--orange), var(--bg) 90%);
+    --orange-opaque-2: color-mix(in oklab, var(--orange), var(--bg) 80%);
+    --orange-opaque-3: color-mix(in oklab, var(--orange), var(--bg) 65%);
+    --orange-opaque-4: color-mix(in oklab, var(--orange), var(--bg) 40%);
+    --orange-opaque-5: var(--orange);
+    --orange-opaque-6: color-mix(in oklab, var(--orange), var(--fg) 30%);
+    --orange-opaque-7: color-mix(in oklab, var(--orange), var(--fg) 50%);
+    --orange-opaque-8: color-mix(in oklab, var(--orange), var(--fg) 70%);
+    --orange-opaque-9: color-mix(in oklab, var(--orange), var(--fg) 90%);
+
+    /* Red opaque scale */
+    --red-opaque-1: color-mix(in oklab, var(--red), var(--bg) 90%);
+    --red-opaque-2: color-mix(in oklab, var(--red), var(--bg) 80%);
+    --red-opaque-3: color-mix(in oklab, var(--red), var(--bg) 65%);
+    --red-opaque-4: color-mix(in oklab, var(--red), var(--bg) 40%);
+    --red-opaque-5: var(--red);
+    --red-opaque-6: color-mix(in oklab, var(--red), var(--fg) 30%);
+    --red-opaque-7: color-mix(in oklab, var(--red), var(--fg) 50%);
+    --red-opaque-8: color-mix(in oklab, var(--red), var(--fg) 70%);
+    --red-opaque-9: color-mix(in oklab, var(--red), var(--fg) 90%);
+
+    /* Pink opaque scale */
+    --pink-opaque-1: color-mix(in oklab, var(--pink), var(--bg) 90%);
+    --pink-opaque-2: color-mix(in oklab, var(--pink), var(--bg) 80%);
+    --pink-opaque-3: color-mix(in oklab, var(--pink), var(--bg) 65%);
+    --pink-opaque-4: color-mix(in oklab, var(--pink), var(--bg) 40%);
+    --pink-opaque-5: var(--pink);
+    --pink-opaque-6: color-mix(in oklab, var(--pink), var(--fg) 30%);
+    --pink-opaque-7: color-mix(in oklab, var(--pink), var(--fg) 50%);
+    --pink-opaque-8: color-mix(in oklab, var(--pink), var(--fg) 70%);
+    --pink-opaque-9: color-mix(in oklab, var(--pink), var(--fg) 90%);
+
+    /* Purple opaque scale */
+    --purple-opaque-1: color-mix(in oklab, var(--purple), var(--bg) 90%);
+    --purple-opaque-2: color-mix(in oklab, var(--purple), var(--bg) 80%);
+    --purple-opaque-3: color-mix(in oklab, var(--purple), var(--bg) 65%);
+    --purple-opaque-4: color-mix(in oklab, var(--purple), var(--bg) 40%);
+    --purple-opaque-5: var(--purple);
+    --purple-opaque-6: color-mix(in oklab, var(--purple), var(--fg) 30%);
+    --purple-opaque-7: color-mix(in oklab, var(--purple), var(--fg) 50%);
+    --purple-opaque-8: color-mix(in oklab, var(--purple), var(--fg) 70%);
+    --purple-opaque-9: color-mix(in oklab, var(--purple), var(--fg) 90%);
+
+    /* Purple Deep opaque scale */
+    --purple-deep-opaque-1: color-mix(in oklab, var(--purple-deep), var(--bg) 90%);
+    --purple-deep-opaque-2: color-mix(in oklab, var(--purple-deep), var(--bg) 80%);
+    --purple-deep-opaque-3: color-mix(in oklab, var(--purple-deep), var(--bg) 65%);
+    --purple-deep-opaque-4: color-mix(in oklab, var(--purple-deep), var(--bg) 40%);
+    --purple-deep-opaque-5: var(--purple-deep);
+    --purple-deep-opaque-6: color-mix(in oklab, var(--purple-deep), var(--fg) 30%);
+    --purple-deep-opaque-7: color-mix(in oklab, var(--purple-deep), var(--fg) 50%);
+    --purple-deep-opaque-8: color-mix(in oklab, var(--purple-deep), var(--fg) 70%);
+    --purple-deep-opaque-9: color-mix(in oklab, var(--purple-deep), var(--fg) 90%);
+
+    /* Indigo opaque scale */
+    --indigo-opaque-1: color-mix(in oklab, var(--indigo), var(--bg) 90%);
+    --indigo-opaque-2: color-mix(in oklab, var(--indigo), var(--bg) 80%);
+    --indigo-opaque-3: color-mix(in oklab, var(--indigo), var(--bg) 65%);
+    --indigo-opaque-4: color-mix(in oklab, var(--indigo), var(--bg) 40%);
+    --indigo-opaque-5: var(--indigo);
+    --indigo-opaque-6: color-mix(in oklab, var(--indigo), var(--fg) 30%);
+    --indigo-opaque-7: color-mix(in oklab, var(--indigo), var(--fg) 50%);
+    --indigo-opaque-8: color-mix(in oklab, var(--indigo), var(--fg) 70%);
+    --indigo-opaque-9: color-mix(in oklab, var(--indigo), var(--fg) 90%);
+
+    /* Green opaque scale */
+    --green-opaque-1: color-mix(in oklab, var(--green), var(--bg) 90%);
+    --green-opaque-2: color-mix(in oklab, var(--green), var(--bg) 80%);
+    --green-opaque-3: color-mix(in oklab, var(--green), var(--bg) 65%);
+    --green-opaque-4: color-mix(in oklab, var(--green), var(--bg) 40%);
+    --green-opaque-5: var(--green);
+    --green-opaque-6: color-mix(in oklab, var(--green), var(--fg) 30%);
+    --green-opaque-7: color-mix(in oklab, var(--green), var(--fg) 50%);
+    --green-opaque-8: color-mix(in oklab, var(--green), var(--fg) 70%);
+    --green-opaque-9: color-mix(in oklab, var(--green), var(--fg) 90%);
+
+    /* Lime opaque scale */
+    --lime-opaque-1: color-mix(in oklab, var(--lime), var(--bg) 90%);
+    --lime-opaque-2: color-mix(in oklab, var(--lime), var(--bg) 80%);
+    --lime-opaque-3: color-mix(in oklab, var(--lime), var(--bg) 65%);
+    --lime-opaque-4: color-mix(in oklab, var(--lime), var(--bg) 40%);
+    --lime-opaque-5: var(--lime);
+    --lime-opaque-6: color-mix(in oklab, var(--lime), var(--fg) 30%);
+    --lime-opaque-7: color-mix(in oklab, var(--lime), var(--fg) 50%);
+    --lime-opaque-8: color-mix(in oklab, var(--lime), var(--fg) 70%);
+    --lime-opaque-9: color-mix(in oklab, var(--lime), var(--fg) 90%);
+
+    /* Highlighter opaque scale */
+    --highlighter-opaque-1: color-mix(in oklab, var(--highlighter), var(--bg) 90%);
+    --highlighter-opaque-2: color-mix(in oklab, var(--highlighter), var(--bg) 80%);
+    --highlighter-opaque-3: color-mix(in oklab, var(--highlighter), var(--bg) 65%);
+    --highlighter-opaque-4: color-mix(in oklab, var(--highlighter), var(--bg) 40%);
+    --highlighter-opaque-5: var(--highlighter);
+    --highlighter-opaque-6: color-mix(in oklab, var(--highlighter), var(--fg) 30%);
+    --highlighter-opaque-7: color-mix(in oklab, var(--highlighter), var(--fg) 50%);
+    --highlighter-opaque-8: color-mix(in oklab, var(--highlighter), var(--fg) 70%);
+    --highlighter-opaque-9: color-mix(in oklab, var(--highlighter), var(--fg) 90%);
+
+    /* Brown opaque scale */
+    --brown-opaque-1: color-mix(in oklab, var(--brown), var(--bg) 90%);
+    --brown-opaque-2: color-mix(in oklab, var(--brown), var(--bg) 80%);
+    --brown-opaque-3: color-mix(in oklab, var(--brown), var(--bg) 65%);
+    --brown-opaque-4: color-mix(in oklab, var(--brown), var(--bg) 40%);
+    --brown-opaque-5: var(--brown);
+    --brown-opaque-6: color-mix(in oklab, var(--brown), var(--fg) 30%);
+    --brown-opaque-7: color-mix(in oklab, var(--brown), var(--fg) 50%);
+    --brown-opaque-8: color-mix(in oklab, var(--brown), var(--fg) 70%);
+    --brown-opaque-9: color-mix(in oklab, var(--brown), var(--fg) 90%);
+
+    /* Teal opaque scale */
+    --teal-opaque-1: color-mix(in oklab, var(--teal), var(--bg) 90%);
+    --teal-opaque-2: color-mix(in oklab, var(--teal), var(--bg) 80%);
+    --teal-opaque-3: color-mix(in oklab, var(--teal), var(--bg) 65%);
+    --teal-opaque-4: color-mix(in oklab, var(--teal), var(--bg) 40%);
+    --teal-opaque-5: var(--teal);
+    --teal-opaque-6: color-mix(in oklab, var(--teal), var(--fg) 30%);
+    --teal-opaque-7: color-mix(in oklab, var(--teal), var(--fg) 50%);
+    --teal-opaque-8: color-mix(in oklab, var(--teal), var(--fg) 70%);
+    --teal-opaque-9: color-mix(in oklab, var(--teal), var(--fg) 90%);
+
+    /* Blue opaque scale */
+    --blue-opaque-1: color-mix(in oklab, var(--blue), var(--bg) 90%);
+    --blue-opaque-2: color-mix(in oklab, var(--blue), var(--bg) 80%);
+    --blue-opaque-3: color-mix(in oklab, var(--blue), var(--bg) 65%);
+    --blue-opaque-4: color-mix(in oklab, var(--blue), var(--bg) 40%);
+    --blue-opaque-5: var(--blue);
+    --blue-opaque-6: color-mix(in oklab, var(--blue), var(--fg) 30%);
+    --blue-opaque-7: color-mix(in oklab, var(--blue), var(--fg) 50%);
+    --blue-opaque-8: color-mix(in oklab, var(--blue), var(--fg) 70%);
+    --blue-opaque-9: color-mix(in oklab, var(--blue), var(--fg) 90%);
+
+    /* Gray opaque scale */
+    --gray-opaque-1: color-mix(in oklab, var(--gray), var(--bg) 90%);
+    --gray-opaque-2: color-mix(in oklab, var(--gray), var(--bg) 80%);
+    --gray-opaque-3: color-mix(in oklab, var(--gray), var(--bg) 65%);
+    --gray-opaque-4: color-mix(in oklab, var(--gray), var(--bg) 40%);
+    --gray-opaque-5: var(--gray);
+    --gray-opaque-6: color-mix(in oklab, var(--gray), var(--fg) 30%);
+    --gray-opaque-7: color-mix(in oklab, var(--gray), var(--fg) 50%);
+    --gray-opaque-8: color-mix(in oklab, var(--gray), var(--fg) 70%);
+    --gray-opaque-9: color-mix(in oklab, var(--gray), var(--fg) 90%);
+
+    /* Slate opaque scale */
+    --slate-opaque-1: color-mix(in oklab, var(--slate), var(--bg) 90%);
+    --slate-opaque-2: color-mix(in oklab, var(--slate), var(--bg) 80%);
+    --slate-opaque-3: color-mix(in oklab, var(--slate), var(--bg) 65%);
+    --slate-opaque-4: color-mix(in oklab, var(--slate), var(--bg) 40%);
+    --slate-opaque-5: var(--slate);
+    --slate-opaque-6: color-mix(in oklab, var(--slate), var(--fg) 30%);
+    --slate-opaque-7: color-mix(in oklab, var(--slate), var(--fg) 50%);
+    --slate-opaque-8: color-mix(in oklab, var(--slate), var(--fg) 70%);
+    --slate-opaque-9: color-mix(in oklab, var(--slate), var(--fg) 90%);
+
+    /* White opaque scale */
+    --white-opaque-1: color-mix(in oklab, var(--white), var(--bg) 90%);
+    --white-opaque-2: color-mix(in oklab, var(--white), var(--bg) 80%);
+    --white-opaque-3: color-mix(in oklab, var(--white), var(--bg) 65%);
+    --white-opaque-4: color-mix(in oklab, var(--white), var(--bg) 40%);
+    --white-opaque-5: var(--white);
+    --white-opaque-6: color-mix(in oklab, var(--white), var(--fg) 30%);
+    --white-opaque-7: color-mix(in oklab, var(--white), var(--fg) 50%);
+    --white-opaque-8: color-mix(in oklab, var(--white), var(--fg) 70%);
+    --white-opaque-9: color-mix(in oklab, var(--white), var(--fg) 90%);
+
+    /* Black opaque scale */
+    --black-opaque-1: color-mix(in oklab, var(--black), var(--bg) 90%);
+    --black-opaque-2: color-mix(in oklab, var(--black), var(--bg) 80%);
+    --black-opaque-3: color-mix(in oklab, var(--black), var(--bg) 65%);
+    --black-opaque-4: color-mix(in oklab, var(--black), var(--bg) 40%);
+    --black-opaque-5: var(--black);
+    --black-opaque-6: color-mix(in oklab, var(--black), var(--fg) 30%);
+    --black-opaque-7: color-mix(in oklab, var(--black), var(--fg) 50%);
+    --black-opaque-8: color-mix(in oklab, var(--black), var(--fg) 70%);
+    --black-opaque-9: color-mix(in oklab, var(--black), var(--fg) 90%);
+
+    /* Fg opaque scale */
+    --fg-opaque-1: color-mix(in oklab, var(--fg), var(--bg) 90%);
+    --fg-opaque-2: color-mix(in oklab, var(--fg), var(--bg) 80%);
+    --fg-opaque-3: color-mix(in oklab, var(--fg), var(--bg) 65%);
+    --fg-opaque-4: color-mix(in oklab, var(--fg), var(--bg) 40%);
+    --fg-opaque-5: var(--fg);
+    --fg-opaque-6: color-mix(in oklab, var(--fg), var(--fg) 30%);
+    --fg-opaque-7: color-mix(in oklab, var(--fg), var(--fg) 50%);
+    --fg-opaque-8: color-mix(in oklab, var(--fg), var(--fg) 70%);
+    --fg-opaque-9: color-mix(in oklab, var(--fg), var(--fg) 90%);
+
+    /* Bg opaque scale */
+    --bg-opaque-1: color-mix(in oklab, var(--bg), var(--bg) 90%);
+    --bg-opaque-2: color-mix(in oklab, var(--bg), var(--bg) 80%);
+    --bg-opaque-3: color-mix(in oklab, var(--bg), var(--bg) 65%);
+    --bg-opaque-4: color-mix(in oklab, var(--bg), var(--bg) 40%);
+    --bg-opaque-5: var(--bg);
+    --bg-opaque-6: color-mix(in oklab, var(--bg), var(--fg) 30%);
+    --bg-opaque-7: color-mix(in oklab, var(--bg), var(--fg) 50%);
+    --bg-opaque-8: color-mix(in oklab, var(--bg), var(--fg) 70%);
+    --bg-opaque-9: color-mix(in oklab, var(--bg), var(--fg) 90%);
+
+    /* Primary opaque scale */
+    --primary-opaque-1: color-mix(in oklab, var(--primary), var(--bg) 90%);
+    --primary-opaque-2: color-mix(in oklab, var(--primary), var(--bg) 80%);
+    --primary-opaque-3: color-mix(in oklab, var(--primary), var(--bg) 65%);
+    --primary-opaque-4: color-mix(in oklab, var(--primary), var(--bg) 40%);
+    --primary-opaque-5: var(--primary);
+    --primary-opaque-6: color-mix(in oklab, var(--primary), var(--fg) 30%);
+    --primary-opaque-7: color-mix(in oklab, var(--primary), var(--fg) 50%);
+    --primary-opaque-8: color-mix(in oklab, var(--primary), var(--fg) 70%);
+    --primary-opaque-9: color-mix(in oklab, var(--primary), var(--fg) 90%);
+
+    /* Error opaque scale */
+    --error-opaque-1: color-mix(in oklab, var(--error), var(--bg) 90%);
+    --error-opaque-2: color-mix(in oklab, var(--error), var(--bg) 80%);
+    --error-opaque-3: color-mix(in oklab, var(--error), var(--bg) 65%);
+    --error-opaque-4: color-mix(in oklab, var(--error), var(--bg) 40%);
+    --error-opaque-5: var(--error);
+    --error-opaque-6: color-mix(in oklab, var(--error), var(--fg) 30%);
+    --error-opaque-7: color-mix(in oklab, var(--error), var(--fg) 50%);
+    --error-opaque-8: color-mix(in oklab, var(--error), var(--fg) 70%);
+    --error-opaque-9: color-mix(in oklab, var(--error), var(--fg) 90%);
+
+    /* Warning opaque scale */
+    --warning-opaque-1: color-mix(in oklab, var(--warning), var(--bg) 90%);
+    --warning-opaque-2: color-mix(in oklab, var(--warning), var(--bg) 80%);
+    --warning-opaque-3: color-mix(in oklab, var(--warning), var(--bg) 65%);
+    --warning-opaque-4: color-mix(in oklab, var(--warning), var(--bg) 40%);
+    --warning-opaque-5: var(--warning);
+    --warning-opaque-6: color-mix(in oklab, var(--warning), var(--fg) 30%);
+    --warning-opaque-7: color-mix(in oklab, var(--warning), var(--fg) 50%);
+    --warning-opaque-8: color-mix(in oklab, var(--warning), var(--fg) 70%);
+    --warning-opaque-9: color-mix(in oklab, var(--warning), var(--fg) 90%);
+
+    /* Success opaque scale */
+    --success-opaque-1: color-mix(in oklab, var(--success), var(--bg) 90%);
+    --success-opaque-2: color-mix(in oklab, var(--success), var(--bg) 80%);
+    --success-opaque-3: color-mix(in oklab, var(--success), var(--bg) 65%);
+    --success-opaque-4: color-mix(in oklab, var(--success), var(--bg) 40%);
+    --success-opaque-5: var(--success);
+    --success-opaque-6: color-mix(in oklab, var(--success), var(--fg) 30%);
+    --success-opaque-7: color-mix(in oklab, var(--success), var(--fg) 50%);
+    --success-opaque-8: color-mix(in oklab, var(--success), var(--fg) 70%);
+    --success-opaque-9: color-mix(in oklab, var(--success), var(--fg) 90%);
   }
 
   html {

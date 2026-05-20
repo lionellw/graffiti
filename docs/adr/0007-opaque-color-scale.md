@@ -4,7 +4,7 @@ Graffiti adds a parallel opaque color scale `--{base}-opaque-1..9` for every bas
 
 The motivating failure cases for an opaque counterpart are: photo and non-flat backdrops where alpha tints bleed through; stacked transparency where compounding alphas no longer mean "N% strength"; print fidelity where alpha resolves to paper; text contrast on tinted surfaces. The first three are tint-direction problems; the fourth is a shade-direction problem. A single symmetric scale covers both with one mental model.
 
-The surface ships for every base that already has an alpha scale (17 static colors plus 6 derived semantic bases: `fg`, `bg`, `primary`, `error`, `warning`, `success`). That is 23 × 9 = ~207 new tokens. The width is a deliberate choice: ad-hoc opaque mixing inside framework or consumer code becomes a token reference rather than a fresh `color-mix` expression, and AI agents using the framework do not have to learn which bases are blessed for opaque use.
+The surface ships for every base that already has an alpha scale: 18 static colors (the named hues plus `gray`/`slate`/`white`/`black`/`purple-deep`) plus 6 derived semantic bases (`fg`, `bg`, `primary`, `error`, `warning`, `success`). That is 24 × 9 = 216 new tokens. The width is a deliberate choice: ad-hoc opaque mixing inside framework or consumer code becomes a token reference rather than a fresh `color-mix` expression, and AI agents using the framework do not have to learn which bases are blessed for opaque use. (An earlier revision of this ADR cited 17 static bases — `purple-deep` was added after the count was written and inherits the same alpha-scale shape, so it gets an opaque scale on the same rule.)
 
 Step distribution (concrete percentages tuned during implementation, but the shape is fixed):
 
@@ -22,7 +22,7 @@ Step distribution (concrete percentages tuned during implementation, but the sha
 }
 ```
 
-The opaque scale joins the alpha scale in the theme-scope re-derivation block defined by [ADR-0006](./0006-theme-scope-derived-scale-rederivation.md). For derived semantic bases, overriding the base on a theme scope re-derives the full opaque scale on that scope. For static bases (`--red`, `--blue`, etc.), the static color does not change, but `--bg`/`--fg` overrides inside a scope cause the static base's opaque scale to re-derive — so the re-derivation block re-declares every opaque scale, not just the derived-base ones.
+The opaque scale joins the alpha scale in the theme-scope re-derivation block defined by [ADR-0006](./0006-theme-scope-derived-scale-rederivation.md). For derived semantic bases, overriding the base on a theme scope re-derives the full opaque scale on that scope. For static bases (`--red`, `--blue`, etc.), the static color does not change, but `--bg`/`--fg` overrides inside a scope cause the static base's opaque scale to re-derive — so the re-derivation block re-declares every opaque scale, not just the derived-base ones. Implementing this ADR is what forced `--bg` to be re-declared alongside `--fg` in the theme-scope block: every `color-mix(..., var(--bg) N%)` substitutes `var(--bg)` at the scope, and without a scope-level `--bg: light-dark(var(--bg-light), var(--bg-dark))` declaration, `--bg-light`/`--bg-dark` overrides would silently fail to propagate.
 
 ## Considered options
 
