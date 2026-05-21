@@ -1,5 +1,18 @@
 # @drop-in/graffiti
 
+## 4.25.1
+
+### Patch Changes
+
+- Aesthetic preset system iteration: rebuilt the demo fixture against canonical Graffiti patterns (the previous version used `<dialog open>` with override CSS, `.card` for a single non-record demo unit, and a made-up `.form-row` class), reworked five preset aesthetics with stronger references, and fixed a framework-level gap that was preventing preset `--fg`/`--font-sans` from reaching descendants.
+  - **Framework fix:** the `:where([class*="theme-"])` re-derivation block now re-applies `color`, `background`, `font-family`, and `line-height` from the local tokens. Without this, descendants inherit `body`'s already-resolved values and the preset's `--fg`/`--font-sans` overrides reach nothing — every preset was silently rendering in system sans + default ink despite tokens being correctly overridden.
+  - **Fixture rewrite:** `<dialog>` now uses the canonical `commandfor` / `command` API with `<button class="close">`. Card uses `<article class="card">` with proper `header` (h4 + tag) / `.card-body.stack` / `footer.cluster` structure. Forms use `.row` + `.input-group` + `.form-option-row` + `.form-actions` from canonical templates.
+  - **`theme-soft-consumer`:** dropped the pink-tinted box-shadow stack — soft elevation now uses neutral cool-dark layered shadows. Listed first in the preset catalog as the most defensible v1 design.
+  - **`theme-editorial`:** type ratio dropped from 1.25–1.333 to 1.2–1.25 (less wallpaper-loud). Drop cap reduced from 3.4em to 2.6em and stripped of the terracotta tint (now current-color). Brick red primary deepened.
+  - **`theme-paper`:** olive primary replaced with ink blue (`#1e3a8a`, Penguin Classics convention). Type ratio locked at 1.2.
+  - **`theme-brutalist`:** dropped highlighter yellow and Big Shoulders Display headlines entirely. Workhorse Inter at extreme weights for hierarchy; one saturated red accent (`#c8102e`, printer's-ink red) instead of an attempt at full monochrome (which broke `color-mix()` resolution in the button gradient and produced unreadable near-white primary buttons).
+  - **`theme-neon-arcade`:** concept reframed away from generic synthwave. New direction: classic vintage arcade marquee — black background in both color schemes, cream/wheat foreground, ruby + amber palette, hard offset shadows in primary/accent (extruded marquee letter effect). Dropped magenta + cyan, dropped text-shadow glow, dropped Big Shoulders. **Still needs further refinement; flagged as known-weak.**
+
 ## 4.25.0
 
 ### Minor Changes

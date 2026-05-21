@@ -1,34 +1,33 @@
 /**
- * .theme-editorial — magazine / long-form serif
+ * .theme-editorial — long-form serif, restrained
  *
- * Ivory paper, deep ink charcoal, terracotta accent. Fraunces variable serif at
- * larger ratios with generous line-height. Hairline borders, no shadows, gentle
- * radii. Drop-cap opener on first paragraphs. Designed for editorial reading
- * experiences (essays, articles, book-style content).
+ * Cream paper, warm ink, deep brick-red accent. Fraunces serif at a *modest*
+ * type ratio with generous line-height — editorial-restrained, not display-
+ * loud. Hairline borders, no shadows. Small drop-cap on prose openers
+ * (current-color, no decorative tint). The voice is "essay", not "magazine
+ * cover".
  *
- * Stress-tests: typography surface (opentype features, ::first-letter, serif
- * letter-spacing override), color warmth in light + dark.
+ * References: The New Yorker article pages, Apple Newsroom, Pelican Books.
  */
 
 :root.theme-editorial,
 .theme-editorial {
-  /* Type — serif, generous */
-  --font-sans: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-ratio-min: 1.25;
-  --font-ratio-max: 1.333;
+  --font-sans: "Fraunces", Charter, Georgia, serif;
+  --font-ratio-min: 1.2;
+  --font-ratio-max: 1.25;
   --lh: 1.65;
-  --lh-l: 1.8;
-  --fw-bold: 800;
+  --lh-l: 1.85;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
 
-  /* Color — warm ivory / deep ink, terracotta primary */
-  --bg-light: #f9f5ed;
-  --bg-dark: #1a1612;
-  --fg-light: #2a221c;
-  --fg-dark: #ede6d8;
-  --primary: #8b3a1e;
+  --bg-light: #faf6ee;
+  --bg-dark: #1a1814;
+  --fg-light: #1a1814;
+  --fg-dark: #ede6d6;
+  --primary: #94352b;
   --accent: var(--primary);
 
-  /* Surfaces — hairline, no shadow, soft radii */
   --br-xs: 1px;
   --br-s: 2px;
   --br-m: 3px;
@@ -38,15 +37,12 @@
 
   --shadow-1: none;
   --shadow-2: none;
-  --shadow-3: 0 1px 2px rgb(42 34 28 / 0.06);
-  --shadow-4: 0 2px 4px rgb(42 34 28 / 0.08);
-  --shadow-5: 0 4px 8px rgb(42 34 28 / 0.1);
-  --shadow-6: 0 8px 16px rgb(42 34 28 / 0.12);
+  --shadow-3: 0 1px 2px rgb(26 24 20 / 0.06);
+  --shadow-4: 0 2px 4px rgb(26 24 20 / 0.08);
+  --shadow-5: 0 4px 8px rgb(26 24 20 / 0.1);
+  --shadow-6: 0 8px 16px rgb(26 24 20 / 0.12);
 }
 
-/* Character treatments — ADR-0003 selector-rule escape hatch.
-   Resets sans-only negative letter-spacing on headings (audit oe1jrsub) and
-   adds editorial typographic conventions. */
 @layer themes {
   .theme-editorial {
     font-feature-settings: "kern", "liga", "onum", "pnum";
@@ -55,16 +51,17 @@
   .theme-editorial :is(h1, h2, h3, h4, h5, h6) {
     letter-spacing: normal;
     font-feature-settings: "kern", "liga", "lnum";
+    font-weight: 600;
   }
 
+  /* Small drop cap on prose openers — current-color, modest size. */
   .theme-editorial .prose > p:first-of-type::first-letter {
-    font-size: 3.4em;
-    font-weight: 800;
+    font-size: 2.6em;
+    font-weight: 700;
     float: inline-start;
-    line-height: 0.85;
-    margin-block-start: 0.1em;
-    margin-inline-end: 0.08em;
-    color: var(--primary);
+    line-height: 0.9;
+    margin-block-start: 0.08em;
+    margin-inline-end: 0.06em;
   }
 
   .theme-editorial a {

@@ -1,35 +1,45 @@
 /**
- * .theme-brutalist — raw, high-contrast, structural
+ * .theme-brutalist — monochrome, raw, structural
  *
- * Pure black + pure white. Highlighter-yellow primary. Chunky borders.
- * Zero radii. Hard offset shadows (Memphis-style, no blur). Uppercase
- * headings with tight tracking and Big Shoulders display face. Loud
- * selection. Designed to look like a manifesto poster, not a SaaS app.
+ * Pure black + pure white, no accent color (--primary inherits --fg).
+ * Workhorse sans-serif at extreme weights for hierarchy; no display face.
+ * Chunky borders. Hard offset shadows (no blur, opaque, fg-colored). Sharp
+ * edges. Semantic status colors (error/warning/success) preserved because
+ * real brutalist sites still need them. The voice is "site built by an
+ * engineer", not "designer's idea of brutalism".
  *
- * Stress-tests: thick border tokens (uses 3px+, exceeding --border-1/2's
- * 1/2px), no-blur offset-shadow pattern (currently only blurred shadows
- * exist in framework).
+ * References: early Bloomberg.com, Yale Architecture School site, the old
+ * Craigslist aesthetic, ugly utilitarian functional sites.
+ *
+ * Stress-tests: no-color-accent baseline (most presets define a primary
+ * color), thick border tokens (overrides --border-1/2 to 3px/5px), no-blur
+ * offset-shadow pattern.
  */
 
 :root.theme-brutalist,
 .theme-brutalist {
-  /* Type — clean sans body, condensed display for headings via selector */
-  --font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
-  --font-ratio-min: 1.25;
-  --font-ratio-max: 1.5;
-  --fw-medium: 600;
-  --fw-semibold: 800;
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-ratio-min: 1.2;
+  --font-ratio-max: 1.414;
+  --fw-medium: 500;
+  --fw-semibold: 700;
   --fw-bold: 900;
 
-  /* Color — pure contrast + highlighter accent */
   --bg-light: #ffffff;
   --bg-dark: #000000;
   --fg-light: #000000;
   --fg-dark: #ffffff;
-  --primary: #ffec00;
+
+  /* One saturated accent — deep printer's-ink red. Stable across light and
+     dark (var(--fg) for primary breaks color-mix in the button gradient
+     because light-dark() nested inside color-mix() doesn't resolve per-mode
+     reliably; the resulting near-white surface invalidates the white
+     --button-text and produces an unreadable button. A fixed saturated
+     color avoids the failure mode and keeps the brutalist aesthetic
+     credible without reaching for the AI-default highlighter yellow.) */
+  --primary: #c8102e;
   --accent: var(--primary);
 
-  /* Surfaces — zero radii, hard offset shadows */
   --br-xs: 0;
   --br-s: 0;
   --br-m: 0;
@@ -37,32 +47,29 @@
   --br-xl: 0;
   --br-xxl: 0;
 
-  --border-1: solid 3px var(--fg);
-  --border-2: solid 5px var(--fg);
+  --border-1: solid 2px var(--fg);
+  --border-2: solid 4px var(--fg);
 
-  --shadow-1: 3px 3px 0 0 var(--fg);
-  --shadow-2: 5px 5px 0 0 var(--fg);
+  --shadow-1: 4px 4px 0 0 var(--fg);
+  --shadow-2: 6px 6px 0 0 var(--fg);
   --shadow-3: 8px 8px 0 0 var(--fg);
-  --shadow-4: 10px 10px 0 0 var(--fg);
-  --shadow-5: 12px 12px 0 0 var(--fg);
-  --shadow-6: 16px 16px 0 0 var(--fg);
+  --shadow-4: 12px 12px 0 0 var(--fg);
+  --shadow-5: 16px 16px 0 0 var(--fg);
+  --shadow-6: 20px 20px 0 0 var(--fg);
 
-  --focus-ring: 4px solid var(--primary);
+  --focus-ring: 3px solid var(--fg);
   --focus-ring-offset: 0;
 }
 
-/* Character treatments — display face for headings, loud selection. */
 @layer themes {
-  .theme-brutalist :is(h1, h2, h3) {
-    font-family: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
+  .theme-brutalist :is(h1, h2, h3, h4, h5, h6) {
     font-weight: 900;
-    line-height: 0.95;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
   }
 
   .theme-brutalist ::selection {
-    background: var(--primary);
+    background: var(--fg);
     color: var(--bg);
   }
 

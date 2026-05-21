@@ -1159,6 +1159,15 @@
     --success-opaque-8: color-mix(in oklab, var(--success), var(--fg) 70%);
     --success-opaque-9: color-mix(in oklab, var(--success), var(--fg) 90%);
     /* /derive:mirror */
+
+    /* Re-apply inherited properties so a preset's --fg/--bg/--font-sans
+       overrides actually reach descendants. Without this, body's resolved
+       color/background/font-family is inherited into the scope unchanged,
+       and the preset's tokens render nowhere. */
+    color: var(--fg);
+    background: var(--bg);
+    font-family: var(--font-sans);
+    line-height: var(--lh);
   }
 
   html {

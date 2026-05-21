@@ -1,75 +1,66 @@
 /**
- * .theme-neon-arcade — synthwave / cyberpunk
+ * .theme-neon-arcade — vintage arcade marquee
  *
- * Dark magenta-tinted surfaces in both color schemes (the theme is dark by
- * nature — no light-mode variant would feel right). Neon magenta primary,
- * cyan accent. Big Shoulders Display headlines, tight tracking. Glow
- * shadows replace the framework's physical drop-shadow scale. Slight radii
- * for sharpness. Designed to feel like an arcade marquee.
+ * NOT synthwave. NOT magenta-and-cyan. Reframed as classic vintage arcade
+ * cabinet art: black background, ruby red + amber-gold palette, big chunky
+ * type, hard extruded shadows (offset, no blur — like marquee letters
+ * casting on the cabinet). Sharp edges. No text-shadow glow. The voice is
+ * "Pac-Man cabinet side art", not "Tron sequel poster".
  *
- * Stress-tests: glow-shadow pattern (currently no --glow-* tokens in
- * framework), dark-only aesthetic (the framework's light-dark() assumes
- * both schemes are first-class), accent + primary as paired neons.
+ * References: classic SEGA arcade marquees, pinball machine art, Pac-Man /
+ * Galaga cabinet illustrations, 80s movie title cards.
+ *
+ * Stress-tests: dark-default theme (light mode is still dark, matching the
+ * arcade-cabinet aesthetic), hard offset shadows in a chromatic palette.
  */
 
 :root.theme-neon-arcade,
 .theme-neon-arcade {
-  /* Type — clean sans body, display-condensed for headings via selector */
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-ratio-min: 1.25;
   --font-ratio-max: 1.414;
   --fw-bold: 800;
 
-  /* Color — dark in both modes, neon primary + cyan accent */
-  --bg-light: #1a0d24;
-  --bg-dark: #0c0612;
-  --fg-light: #f4e8ff;
-  --fg-dark: #f4e8ff;
-  --primary: #ff00d4;
-  --accent: #00f0ff;
-  --error: #ff3355;
-  --success: #00ff88;
+  /* Dark in both color schemes — arcade cabinets are dark. */
+  --bg-light: #0a0908;
+  --bg-dark: #0a0908;
+  --fg-light: #f5efd8;
+  --fg-dark: #f5efd8;
 
-  /* Surfaces — sharp radii, glow shadows */
+  --primary: #b91c1c;
+  --accent: #d97706;
+  --error: #dc2626;
+  --warning: #d97706;
+  --success: #ca8a04;
+
   --br-xs: 0;
-  --br-s: 2px;
-  --br-m: 2px;
-  --br-l: 4px;
-  --br-xl: 4px;
-  --br-xxl: 6px;
+  --br-s: 0;
+  --br-m: 0;
+  --br-l: 2px;
+  --br-xl: 2px;
+  --br-xxl: 2px;
 
-  --shadow-1: 0 0 8px oklch(from var(--primary) l c h / 0.5);
-  --shadow-2:
-    0 0 12px oklch(from var(--primary) l c h / 0.6),
-    0 0 24px oklch(from var(--primary) l c h / 0.3);
-  --shadow-3:
-    0 0 16px oklch(from var(--primary) l c h / 0.7),
-    0 0 32px oklch(from var(--primary) l c h / 0.4);
-  --shadow-4:
-    0 0 20px oklch(from var(--accent) l c h / 0.7),
-    0 0 40px oklch(from var(--accent) l c h / 0.4);
-  --shadow-5:
-    0 0 24px oklch(from var(--primary) l c h / 0.8),
-    0 0 48px oklch(from var(--accent) l c h / 0.5);
-  --shadow-6:
-    0 0 32px oklch(from var(--primary) l c h / 0.9),
-    0 0 64px oklch(from var(--accent) l c h / 0.5);
+  /* Hard offset shadows in the primary color — extruded marquee lettering. */
+  --shadow-1: 3px 3px 0 0 var(--primary);
+  --shadow-2: 4px 4px 0 0 var(--primary);
+  --shadow-3: 6px 6px 0 0 var(--primary);
+  --shadow-4: 8px 8px 0 0 var(--accent);
+  --shadow-5: 10px 10px 0 0 var(--accent);
+  --shadow-6: 12px 12px 0 0 var(--accent);
 
   --focus-ring: 2px solid var(--accent);
 }
 
-/* Character treatments — display headlines, neon selection, glow on links. */
 @layer themes {
   .theme-neon-arcade :is(h1, h2, h3, h4, h5, h6) {
-    font-family: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
-    letter-spacing: -0.01em;
     font-weight: 800;
+    letter-spacing: -0.01em;
     line-height: 1.05;
-    text-shadow: 0 0 12px oklch(from var(--primary) l c h / 0.6);
+    text-transform: uppercase;
   }
 
   .theme-neon-arcade ::selection {
-    background: var(--primary);
+    background: var(--accent);
     color: var(--bg);
   }
 
@@ -77,6 +68,5 @@
     color: var(--accent);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
-    text-shadow: 0 0 6px oklch(from var(--accent) l c h / 0.5);
   }
 }

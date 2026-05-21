@@ -1,116 +1,142 @@
 <!--
-  CanonicalFixture — the six surface types every aesthetic preset gets
-  rendered against on /themes. Keep markup minimal and class-first; the
-  point is identical structure across presets so token + selector-rule
-  differences read as visual deltas, not markup deltas.
+  CanonicalFixture — every preset renders against this same surface stack,
+  built strictly from documented Graffiti patterns so visual deltas read as
+  preset choices, not markup choices.
+
+  References:
+  - src/docs/demos/Card.svelte    (.card structure)
+  - src/docs/demos/Dialog.svelte  (native <dialog> + commandfor)
+  - src/docs/demos/Callout.svelte (.callout variants)
+  - src/routes/templates/settings/+page.svelte (.row form fields, .form-actions)
 -->
-<section class="canonical-fixture stack">
-  <!-- Button cluster -->
+
+<script>
+  let { id } = $props();
+</script>
+
+<div class="stack" style="--gap: var(--vs-l);">
+  <!-- Button variants -->
   <div class="cluster">
     <button class="primary">Primary</button>
     <button>Default</button>
     <button class="ghost">Ghost</button>
+    <button class="minimal">Minimal</button>
     <button disabled>Disabled</button>
   </div>
 
-  <!-- Card with action -->
+  <!-- Card (record-like, with the canonical structure) -->
   <article class="card">
     <header>
-      <h3>Card title</h3>
+      <h4>Launch checklist</h4>
+      <span class="tag info">In review</span>
     </header>
-    <p>
-      A short body of card content that establishes baseline body type,
-      paragraph spacing, and how the surface responds to the active preset.
-    </p>
-    <footer>
-      <button class="primary">Action</button>
+    <div class="card-body stack">
+      <p>Finalize the launch brief, confirm asset handoff, and schedule the team announcement.</p>
+      <p>Next review: <strong>Thursday, 2:00 PM</strong>.</p>
+    </div>
+    <footer class="cluster">
+      <button class="primary">Open brief</button>
+      <button class="ghost">Snooze</button>
     </footer>
   </article>
 
-  <!-- Form -->
-  <form class="stack" onsubmit={(e) => e.preventDefault()}>
-    <label class="form-row">
-      <span>Email</span>
-      <input type="email" placeholder="you@example.com" />
-    </label>
-    <label class="form-row">
-      <span>Plan</span>
-      <select>
+  <!-- Callouts demonstrate status colors against the preset's bg -->
+  <div class="callout">
+    <p>A neutral note about how the preset reads on a callout surface.</p>
+  </div>
+  <div class="callout success">
+    <p>Success callout — token <code>--success</code> on a tinted surface.</p>
+  </div>
+
+  <!-- Form using canonical .row + .form-actions -->
+  <form class="stack" style="--gap: var(--vs-m);" onsubmit={(e) => e.preventDefault()}>
+    <div class="row">
+      <label for="cf-{id}-email">Email address</label>
+      <input type="email" id="cf-{id}-email" placeholder="you@example.com" />
+      <small class="text-faint">Used for account updates and receipts.</small>
+    </div>
+
+    <div class="row">
+      <label for="cf-{id}-plan">Plan</label>
+      <select id="cf-{id}-plan">
         <option>Free</option>
         <option>Pro</option>
         <option>Team</option>
       </select>
-    </label>
+    </div>
+
+    <div class="row">
+      <label for="cf-{id}-invite">Invite teammate</label>
+      <div class="input-group stack-mobile">
+        <input type="email" id="cf-{id}-invite" placeholder="teammate@company.com" />
+        <button type="button">Send invite</button>
+      </div>
+    </div>
+
     <label class="form-option-row">
       <input type="checkbox" />
-      <span>I agree to the terms</span>
+      <span>Subscribe to product updates</span>
     </label>
+
     <div class="form-actions">
-      <button type="submit" class="primary">Submit</button>
-      <button type="button" class="ghost">Cancel</button>
+      <button class="primary" type="submit">Save changes</button>
+      <button class="ghost" type="button">Cancel</button>
     </div>
   </form>
 
-  <!-- Inline dialog open so it always renders in the fixture -->
-  <dialog open>
-    <h4>Dialog title</h4>
-    <p>A brief dialog body explaining what action is about to happen.</p>
-    <div class="form-actions">
-      <button class="primary">Confirm</button>
-      <button class="ghost">Cancel</button>
+  <!-- Dialog — native, opens via commandfor (the canonical pattern). -->
+  <div class="cluster">
+    <button commandfor="cf-{id}-dialog" command="show-modal">Open dialog</button>
+    <button commandfor="cf-{id}-confirm" command="show-modal">Open confirm</button>
+  </div>
+
+  <dialog id="cf-{id}-dialog">
+    <button class="close" commandfor="cf-{id}-dialog" command="close" aria-label="Close">×</button>
+    <div class="stack" style="--gap: var(--vs-m);">
+      <p class="h4">A dialog in this preset</p>
+      <p>Native &lt;dialog&gt; opens in the browser's top layer, so the preset's modal treatment shows here.</p>
+      <div class="cluster" style="justify-content: flex-end;">
+        <button commandfor="cf-{id}-dialog" command="close">Close</button>
+      </div>
     </div>
   </dialog>
 
-  <!-- Blog excerpt — h1, h2, paragraph long enough for ::first-letter
-       to be a visible test, and a blockquote. -->
+  <dialog id="cf-{id}-confirm">
+    <button class="close" commandfor="cf-{id}-confirm" command="close" aria-label="Close">×</button>
+    <div class="stack" style="--gap: var(--vs-m);">
+      <p class="h4">Confirm action</p>
+      <p>Are you sure you want to proceed? This cannot be undone.</p>
+      <div class="cluster" style="justify-content: flex-end;">
+        <button commandfor="cf-{id}-confirm" command="close">Cancel</button>
+        <button class="primary" commandfor="cf-{id}-confirm" command="close">Confirm</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Prose: long-form typography surface. h1+h2+long paragraph (for ::first-letter)+blockquote. -->
   <article class="prose stack">
     <h1>The Quiet Geometry of Type</h1>
     <h2>Notes on rhythm, contrast, and the page</h2>
     <p>
-      Typography is the negotiation between author and reader, mediated
-      by every choice the designer makes about rhythm and contrast. A page
-      that breathes is a page that has been edited — not only the words,
-      but the spaces between them, the weight of the headings, and the
-      restraint at the corners. Good type asks nothing of you and earns
-      attention anyway, which is what makes it so easy to overlook and so
-      hard to do well.
+      Typography is the negotiation between author and reader, mediated by every choice
+      the designer makes about rhythm and contrast. A page that breathes is a page that
+      has been edited — not only the words, but the spaces between them, the weight of
+      the headings, and the restraint at the corners. Good type asks nothing of you and
+      earns attention anyway, which is what makes it so easy to overlook and so hard to
+      do well.
     </p>
     <blockquote>
-      The reader will not thank you for shouting, but a whisper too soft
-      to hear is worse than a shout you can ignore.
+      The reader will not thank you for shouting, but a whisper too soft to hear is
+      worse than a shout you can ignore.
     </blockquote>
-    <p>
-      Every preset on this page is asked to render the same paragraph;
-      what changes is the voice it speaks in.
-    </p>
+    <p>Every preset on this page is asked to render the same paragraph; what changes is the voice it speaks in.</p>
   </article>
 
-  <!-- Tag / chip cluster -->
+  <!-- Tags / chips for status colors at small sizes -->
   <div class="cluster">
     <span class="tag success">Success</span>
     <span class="tag warning">Warning</span>
     <span class="tag info">Info</span>
     <span class="tag">Neutral</span>
   </div>
-</section>
-
-<style>
-  .canonical-fixture {
-    container-type: inline-size;
-  }
-  /* Inline the open dialog inside the fixture so each preset's dialog
-     surface renders in flow rather than the browser-default top-layer
-     position. Visual demo only — real consumers use showModal(). */
-  .canonical-fixture :global(dialog[open]) {
-    position: static;
-    margin: 0;
-    inset: auto;
-    max-width: 100%;
-    background: var(--bg);
-    color: var(--fg);
-    border: 1px solid var(--fg-2);
-    border-radius: var(--br-m);
-    box-shadow: var(--shadow-3);
-    padding: var(--pad-l);
-  }
-</style>
+</div>

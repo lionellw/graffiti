@@ -33,7 +33,7 @@ import "@drop-in/graffiti/decks";
 // Optionally import aesthetic presets (apply as a class on any container)
 import "@drop-in/graffiti/themes"; // all five presets
 // or tree-shake to a single preset
-import "@drop-in/graffiti/themes/editorial"; // also: paper, brutalist, neon-arcade, soft-consumer
+import "@drop-in/graffiti/themes/soft-consumer"; // also: editorial, paper, brutalist, neon-arcade
 ```
 
 Apply a preset via class on `:root`, `html`, or any container element:

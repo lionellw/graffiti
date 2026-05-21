@@ -12,8 +12,8 @@
  *   <html class="theme-editorial">  ...  </html>
  *   <section class="theme-brutalist">  ...  </section>
  */
+@import "./soft-consumer.css";
 @import "./editorial.css";
 @import "./paper.css";
 @import "./brutalist.css";
 @import "./neon-arcade.css";
-@import "./soft-consumer.css";

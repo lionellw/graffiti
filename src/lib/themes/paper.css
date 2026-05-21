@@ -1,33 +1,30 @@
 /**
- * .theme-paper — printable document, manuscript feel
+ * .theme-paper — printed-document feel
  *
- * Warm off-white paper in light mode, dark sepia in dark mode. Serif body for
- * document fidelity. Modest type scale. No shadows. Hard edges (no radii).
- * Printed-style link underlines. Designed for memos, reports, documentation
- * that should feel page-like.
+ * Warm cream paper, ink-blue-black body, deep ink-blue primary (Penguin /
+ * old-print convention, not olive). Fraunces serif at a strict modest ratio.
+ * Zero radii. Zero shadows. Underlined links. The voice is "manuscript page"
+ * or "annual report", not "magazine".
  *
- * Stress-tests: shadow restraint (every --shadow-* set to none), zero-radius
- * edge case, serif typography in dark mode.
+ * References: Penguin Classics, Edward Tufte books, Berkshire Hathaway
+ * annual reports.
  */
 
 :root.theme-paper,
 .theme-paper {
-  /* Type — serif, modest */
-  --font-sans: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Fraunces", Charter, Georgia, "Times New Roman", serif;
   --font-ratio-min: 1.2;
-  --font-ratio-max: 1.25;
+  --font-ratio-max: 1.2;
   --lh: 1.55;
   --lh-l: 1.7;
 
-  /* Color — warm paper / dark sepia, deep olive primary */
-  --bg-light: #fdfaf2;
-  --bg-dark: #26221a;
-  --fg-light: #1f1a14;
-  --fg-dark: #e8e0cc;
-  --primary: #3a4a1c;
+  --bg-light: #fbf8f0;
+  --bg-dark: #1e1c18;
+  --fg-light: #1a1a24;
+  --fg-dark: #e8e4d8;
+  --primary: #1e3a8a;
   --accent: var(--primary);
 
-  /* Surfaces — hard edges, no shadow */
   --br-xs: 0;
   --br-s: 0;
   --br-m: 0;
@@ -43,7 +40,6 @@
   --shadow-6: none;
 }
 
-/* Character treatments — print conventions and serif-friendly headings. */
 @layer themes {
   .theme-paper {
     font-feature-settings: "kern", "liga", "onum", "pnum";
@@ -52,6 +48,7 @@
   .theme-paper :is(h1, h2, h3, h4, h5, h6) {
     letter-spacing: normal;
     font-feature-settings: "kern", "liga", "lnum";
+    font-weight: 600;
   }
 
   .theme-paper a {
@@ -60,7 +57,6 @@
     text-underline-offset: 0.2em;
   }
 
-  /* Printed-document quote treatment */
   .theme-paper blockquote {
     border-inline-start: 2px solid var(--fg-3);
     padding-inline-start: var(--pad-l);

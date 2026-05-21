@@ -1,25 +1,23 @@
 /**
  * .theme-soft-consumer — modern friendly SaaS
  *
- * Soft lavender-white surfaces, warm purple primary, pink accent. DM Sans
- * for a friendly rounded geometric feel. Large radii throughout. Gentle
- * layered shadows. Slightly slower default motion. Designed to feel
- * approachable and warm — think Linear, Stripe Atlas, or a wellness app.
+ * Soft lavender-white / warm dark, indigo primary, pink accent. DM Sans
+ * for a friendly geometric feel. Generous radii throughout. Gentle layered
+ * shadows in *neutral* dark (the previous version tinted shadows pink,
+ * which read tacky — shadows are not the place to put a brand color).
+ * Slightly slowed default motion. The voice is "Linear, Stripe Atlas".
  *
- * Stress-tests: large radii (uses values up to 24px, near the top of the
- * existing scale), soft layered drop shadows (lower-opacity, multi-layer
- * pattern), slowed default duration.
+ * Stress-tests: large radii (uses up to 24px), layered low-opacity neutral
+ * shadows, slowed default duration.
  */
 
 :root.theme-soft-consumer,
 .theme-soft-consumer {
-  /* Type — friendly geometric sans, modest scale */
   --font-sans: "DM Sans", "Inter", system-ui, sans-serif;
   --font-ratio-min: 1.2;
   --font-ratio-max: 1.25;
   --lh: 1.55;
 
-  /* Color — soft warm purple-white / warm dark, modern indigo primary */
   --bg-light: #fbf9fd;
   --bg-dark: #18141f;
   --fg-light: #2a2438;
@@ -27,7 +25,6 @@
   --primary: #6855ff;
   --accent: #ff5e9c;
 
-  /* Surfaces — generous radii, soft layered shadows */
   --br-xs: 4px;
   --br-s: 8px;
   --br-m: 12px;
@@ -35,26 +32,25 @@
   --br-xl: 20px;
   --br-xxl: 24px;
 
+  /* Neutral cool-dark shadows — no brand tint. Layered pairs (sharp + diffuse)
+     read as soft elevation without coloring the surface. */
   --shadow-1:
-    0 1px 2px rgb(42 36 56 / 0.04), 0 1px 3px rgb(42 36 56 / 0.06);
+    0 1px 2px rgb(0 0 0 / 0.04), 0 1px 3px rgb(0 0 0 / 0.06);
   --shadow-2:
-    0 2px 4px rgb(42 36 56 / 0.04), 0 3px 6px rgb(42 36 56 / 0.06);
+    0 2px 4px rgb(0 0 0 / 0.04), 0 3px 6px rgb(0 0 0 / 0.07);
   --shadow-3:
-    0 4px 8px rgb(42 36 56 / 0.04), 0 6px 12px rgb(42 36 56 / 0.06);
+    0 4px 8px rgb(0 0 0 / 0.05), 0 6px 12px rgb(0 0 0 / 0.08);
   --shadow-4:
-    0 6px 12px rgb(42 36 56 / 0.04), 0 10px 20px rgb(42 36 56 / 0.07);
+    0 6px 12px rgb(0 0 0 / 0.06), 0 10px 20px rgb(0 0 0 / 0.09);
   --shadow-5:
-    0 8px 16px rgb(42 36 56 / 0.05), 0 16px 32px rgb(42 36 56 / 0.08);
+    0 8px 16px rgb(0 0 0 / 0.07), 0 16px 32px rgb(0 0 0 / 0.1);
   --shadow-6:
-    0 12px 24px rgb(42 36 56 / 0.06), 0 24px 48px rgb(42 36 56 / 0.1);
+    0 12px 24px rgb(0 0 0 / 0.08), 0 24px 48px rgb(0 0 0 / 0.12);
 
-  /* Motion — slightly slower default for soft feel */
   --d-base: 0.25s;
   --d-slow: 0.35s;
 }
 
-/* Character treatments — slightly warmer heading weight, no selector-heavy
-   character. The aesthetic comes almost entirely from token choices. */
 @layer themes {
   .theme-soft-consumer :is(h1, h2, h3) {
     font-weight: 700;

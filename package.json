@@ -51,7 +51,7 @@
     "package": "node scripts/derive-mirror.mjs && svelte-kit sync && svelte-package && node build-modules.js"
   },
   "type": "module",
-  "version": "4.25.0",
+  "version": "4.25.1",
   "publishConfig": {
     "access": "public",
     "directory": "."
