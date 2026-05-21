@@ -63,8 +63,8 @@ npx -y @zeeg/dex list --all
 **Create new tasks:**
 
 ```bash
-npx -y @zeeg/dex create -d "Title" --context "Full context..."
-npx -y @zeeg/dex create -d "Subtask" --context "Details" --parent <task-id>
+npx -y @zeeg/dex create "Title" --description "Full context..."
+npx -y @zeeg/dex create "Subtask" --description "Details" --parent <task-id>
 ```
 
 **Complete work:**

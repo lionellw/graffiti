@@ -3416,7 +3416,8 @@
 
   /* Timeline */
 
-  .timeline {
+  .timeline,
+  .steps {
     --timeline-marker-size: 2.5rem;
     --timeline-marker-color: var(--fg);
     --timeline-marker-bg: color-mix(
@@ -4664,7 +4665,8 @@
     }
   }
 
-  [popover].drawer.end {
+  [popover].drawer.end,
+  [popover].drawer.right {
     inset-inline-start: auto;
     inset-inline-end: 0;
     border-inline-end: none;
@@ -4674,6 +4676,48 @@
     &:popover-open {
       @starting-style {
         translate: 100% 0;
+      }
+    }
+  }
+
+  [popover].drawer.top {
+    inset-block-start: 0;
+    inset-block-end: auto;
+    inset-inline: 0;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    block-size: auto;
+    max-block-size: 85dvh;
+    border-inline-end: none;
+    border-block-end: var(--drawer-border, var(--border-1));
+    translate: 0 -100%;
+
+    &:popover-open {
+      translate: 0;
+
+      @starting-style {
+        translate: 0 -100%;
+      }
+    }
+  }
+
+  [popover].drawer.bottom {
+    inset-block-start: auto;
+    inset-block-end: 0;
+    inset-inline: 0;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    block-size: auto;
+    max-block-size: 85dvh;
+    border-inline-end: none;
+    border-block-start: var(--drawer-border, var(--border-1));
+    translate: 0 100%;
+
+    &:popover-open {
+      translate: 0;
+
+      @starting-style {
+        translate: 0 100%;
       }
     }
   }

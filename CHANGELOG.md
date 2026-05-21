@@ -1,5 +1,11 @@
 # @drop-in/graffiti
 
+## 4.27.0
+
+### Minor Changes
+
+- Add `.steps` as an alias for `.timeline`, and `.drawer.right`, `.drawer.top`, `.drawer.bottom` direction modifiers. Drawers can now be anchored to any edge — `.top`/`.bottom` slide vertically and cap at `85dvh`.
+
 ## 4.26.0
 
 ### Minor Changes
