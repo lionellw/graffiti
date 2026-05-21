@@ -27,7 +27,7 @@ const THEMES_DIST = join(DIST, "themes");
 const THEME_NAMES = [
   "editorial",
   "paper",
-  "brutalist",
+  "system",
   "neon-arcade",
   "soft-consumer",
 ];

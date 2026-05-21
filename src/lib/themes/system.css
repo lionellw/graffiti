@@ -1,0 +1,88 @@
+/**
+ * .theme-system — system / dashboard / data-forward
+ *
+ * Pure black + pure white. Workhorse Inter sans at modest weights. Blue
+ * functional accent. Hairline 1px borders. Dense spacing throughout.
+ * Tabular numerics for data legibility. Subtle paper-stack drop shadows
+ * (framework defaults — no Memphis-style hard offsets). The voice is
+ * "financial terminal / Vercel-dashboard / Bloomberg-modern", not "punk zine".
+ *
+ * References: Vercel analytics dashboards, Bloomberg.com modern,
+ * Linear-but-dense, financial trading screens.
+ */
+
+:root.theme-system,
+.theme-system {
+  /* Type — workhorse sans, modest scale, tighter line-height */
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-ratio-min: 1.2;
+  --font-ratio-max: 1.25;
+  --lh: 1.45;
+  --lh-s: 1.15;
+  --lh-l: 1.6;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Color — pure B/W + blue functional accent */
+  --bg-light: #ffffff;
+  --bg-dark: #000000;
+  --fg-light: #000000;
+  --fg-dark: #ffffff;
+  --primary: #0066ff;
+  --accent: var(--primary);
+
+  /* Surfaces — sharp corners, 2px primary border, subtle drop shadows */
+  --br-xs: 0;
+  --br-s: 0;
+  --br-m: 0;
+  --br-l: 0;
+  --br-xl: 0;
+  --br-xxl: 0;
+
+  --border-1: solid 1px var(--fg);
+  --border-2: solid 1px var(--fg);
+
+  /* Paper-stack shadows — small directional offset, low opacity. Not Memphis. */
+  --shadow-1: 1px 2px 2px rgb(0 0 0 / 0.06);
+  --shadow-2: 2px 3px 4px rgb(0 0 0 / 0.08);
+  --shadow-3: 2px 4px 6px rgb(0 0 0 / 0.1);
+  --shadow-4: 3px 6px 10px rgb(0 0 0 / 0.12);
+  --shadow-5: 4px 8px 14px rgb(0 0 0 / 0.14);
+  --shadow-6: 6px 12px 20px rgb(0 0 0 / 0.16);
+
+  /* Density — tighter than default spacing/padding */
+  --vs-xs: 0.2rem;
+  --vs-s: 0.4rem;
+  --vs-base: 0.75rem;
+  --vs-m: 1rem;
+  --vs-l: 1.5rem;
+  --pad-xs: 0.2rem;
+  --pad-s: 0.4rem;
+  --pad-m: 0.6rem;
+  --pad-l: 0.75rem;
+  --pad-xl: 1rem;
+}
+
+@layer themes {
+  .theme-system {
+    /* Tabular numerics — data feels. Inter ships these features. */
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "kern", "liga", "calt", "ss01";
+  }
+
+  .theme-system :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  .theme-system :is(td, th, .stat-card, .data) {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .theme-system ::selection {
+    background: var(--fg);
+    color: var(--bg);
+  }
+}

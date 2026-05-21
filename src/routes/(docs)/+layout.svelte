@@ -10,6 +10,17 @@
   import type { FontSettings, ThemeValues, BorderRadiusSettings } from "$lib/types";
   import ThemeControls from "../../docs/ThemeControls.svelte";
 
+  // Preset CSS files are pulled in here so the Aesthetic selector in
+  // ThemeControls can apply a `.theme-*` class on <html> and the styles
+  // are already available. Selector rules live in @layer themes and only
+  // match when the class is present, so importing all five is a no-op
+  // unless one is actually selected.
+  import "$lib/themes/soft-consumer.css";
+  import "$lib/themes/editorial.css";
+  import "$lib/themes/paper.css";
+  import "$lib/themes/system.css";
+  import "$lib/themes/neon-arcade.css";
+
   const { children } = $props();
 
   let theme_values: ThemeValues = $state({

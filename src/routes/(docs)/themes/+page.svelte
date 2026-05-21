@@ -6,14 +6,14 @@
   import "$lib/themes/soft-consumer.css";
   import "$lib/themes/editorial.css";
   import "$lib/themes/paper.css";
-  import "$lib/themes/brutalist.css";
+  import "$lib/themes/system.css";
   import "$lib/themes/neon-arcade.css";
 
   const presets = [
     { name: "soft-consumer", label: ".theme-soft-consumer" },
     { name: "editorial", label: ".theme-editorial" },
     { name: "paper", label: ".theme-paper" },
-    { name: "brutalist", label: ".theme-brutalist" },
+    { name: "system", label: ".theme-system" },
     { name: "neon-arcade", label: ".theme-neon-arcade" },
   ];
 </script>

@@ -1,72 +1,93 @@
 /**
- * .theme-neon-arcade — vintage arcade marquee
+ * .theme-neon-arcade — coin-op arcade cabinet
  *
- * NOT synthwave. NOT magenta-and-cyan. Reframed as classic vintage arcade
- * cabinet art: black background, ruby red + amber-gold palette, big chunky
- * type, hard extruded shadows (offset, no blur — like marquee letters
- * casting on the cabinet). Sharp edges. No text-shadow glow. The voice is
- * "Pac-Man cabinet side art", not "Tron sequel poster".
+ * Restraint, not bloom. Pitch-black ground, warm cream foreground, with
+ * cyan and a warm cabinet-red as confident chromatic punctuation on
+ * headings, links, and primary actions. Big Shoulders Display display
+ * type on the top headings only — body and sub-headings stay quiet so
+ * the marquee actually reads as a marquee. No text-shadow, no blurred
+ * halos, no Memphis offsets. Color and type do all the work.
  *
- * References: classic SEGA arcade marquees, pinball machine art, Pac-Man /
- * Galaga cabinet illustrations, 80s movie title cards.
+ * References: Pentagram nightlife identity work, A24 poster discipline,
+ * vintage arcade marquee typography, Berghain wayfinding signage.
  *
- * Stress-tests: dark-default theme (light mode is still dark, matching the
- * arcade-cabinet aesthetic), hard offset shadows in a chromatic palette.
+ * Stress-tests: dark-default theme (light mode is dark), shadow-free
+ * elevation, Big Shoulders Display as the chromatic accent.
  */
 
 :root.theme-neon-arcade,
 .theme-neon-arcade {
-  --font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
+  /* Display sans for marquee headings; clean sans for body. */
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Big Shoulders Display", "Inter", sans-serif;
   --font-ratio-min: 1.25;
-  --font-ratio-max: 1.414;
+  --font-ratio-max: 1.5;
   --fw-bold: 800;
 
-  /* Dark in both color schemes — arcade cabinets are dark. */
-  --bg-light: #0a0908;
-  --bg-dark: #0a0908;
-  --fg-light: #f5efd8;
-  --fg-dark: #f5efd8;
+  /* Dark in both color schemes — cabinets are always dark. */
+  --bg-light: #000000;
+  --bg-dark: #000000;
+  --fg-light: #f5f1e6;
+  --fg-dark: #f5f1e6;
 
-  --primary: #b91c1c;
-  --accent: #d97706;
-  --error: #dc2626;
-  --warning: #d97706;
-  --success: #ca8a04;
+  /* Cyan hero, warm cabinet-red accent — chromatic punctuation only. */
+  --primary: #14e8d4;
+  --accent: #ff5a3c;
+  --error: #ff4444;
+  --warning: #ffb020;
+  --success: #80ff80;
 
+  /* Flat panels — cabinet bezels were sharp. */
   --br-xs: 0;
   --br-s: 0;
   --br-m: 0;
-  --br-l: 2px;
-  --br-xl: 2px;
-  --br-xxl: 2px;
+  --br-l: 0;
+  --br-xl: 0;
+  --br-xxl: 0;
 
-  /* Hard offset shadows in the primary color — extruded marquee lettering. */
-  --shadow-1: 3px 3px 0 0 var(--primary);
-  --shadow-2: 4px 4px 0 0 var(--primary);
-  --shadow-3: 6px 6px 0 0 var(--primary);
-  --shadow-4: 8px 8px 0 0 var(--accent);
-  --shadow-5: 10px 10px 0 0 var(--accent);
-  --shadow-6: 12px 12px 0 0 var(--accent);
+  /* Quiet hairline structure in fg, not in primary — color is reserved
+     for chromatic accents on type and actions. */
+  --border-1: solid 1px var(--fg);
+  --border-2: solid 1px var(--fg);
 
-  --focus-ring: 2px solid var(--accent);
+  /* No elevation shadows. Structure comes from borders, hierarchy from type. */
+  --shadow-1: none;
+  --shadow-2: none;
+  --shadow-3: none;
+  --shadow-4: none;
+  --shadow-5: none;
+  --shadow-6: none;
+
+  --focus-ring: 2px solid var(--primary);
 }
 
 @layer themes {
-  .theme-neon-arcade :is(h1, h2, h3, h4, h5, h6) {
+  /* Marquee lettering — Big Shoulders Display, uppercase, in primary cyan.
+     The color carries the "neon" feeling. No text-shadow needed. */
+  .theme-neon-arcade :is(h1, h2) {
+    font-family: var(--font-display);
     font-weight: 800;
-    letter-spacing: -0.01em;
-    line-height: 1.05;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
     text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* Sub-headings stay quiet — Inter, no color shift, no uppercase. */
+  .theme-neon-arcade :is(h3, h4, h5, h6) {
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    line-height: 1.2;
   }
 
   .theme-neon-arcade ::selection {
-    background: var(--accent);
-    color: var(--bg);
+    background: var(--primary);
+    color: #000;
   }
 
   .theme-neon-arcade a {
     color: var(--accent);
     text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
+    text-underline-offset: 0.25em;
   }
 }

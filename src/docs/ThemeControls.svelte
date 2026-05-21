@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { slide } from "svelte/transition";
   import type {
     ThemeValues,
@@ -15,6 +16,40 @@
     font_settings: FontSettings;
     border_radius: BorderRadiusSettings;
   } = $props();
+
+  // Framework defaults — used when the user picks "None" so the layout's
+  // $effect pushes these back to documentElement.style and clears any
+  // hydrated-from-preset inline-style overrides. Must match the layout
+  // init values so "None" is a true reset.
+  const DEFAULT_THEME_VALUES: ThemeValues = {
+    fg_light: "#111111",
+    fg_dark: "#ffffff",
+    bg_light: "#ffffff",
+    bg_dark: "#111111",
+    primary: "#0066ff",
+  };
+  const DEFAULT_FONT_AXES = {
+    min_ratio: 1.2,
+    max_ratio: 1.25,
+    min_font_size: 16,
+    max_font_size: 18,
+    min_viewport: 320,
+    max_viewport: 1500,
+  };
+  const DEFAULT_FONT_FAMILY =
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif";
+  const DEFAULT_BORDER_RADIUS: BorderRadiusSettings = {
+    br_xs: "2px",
+    br_s: "4px",
+    br_m: "8px",
+    br_l: "16px",
+    br_xl: "24px",
+    br_xxl: "32px",
+  };
+
+  // localStorage key for the preset choice. Only the choice is persisted —
+  // the orthogonal axis controls hydrate from the preset on restore.
+  const STORAGE_KEY = "graffiti-preset";
 
   const themes: { name: string; values: ThemeValues }[] = [
     {
@@ -160,8 +195,238 @@
   ];
 
   let selected_theme = $state("Default");
+  let selected_aesthetic = $state("None");
   let copied = $state(false);
   let show_export = $state(false);
+
+  // Aesthetic presets — each entry's `values` hydrate the orthogonal axes
+  // (color / type / radius / font-family) with the preset's nominal choices.
+  // The `class_name` is applied on <html> so the preset's selector rules
+  // (drop caps, opentype features, character treatments) take effect.
+  // See CONTEXT.md "ThemeControls UX when a preset is selected".
+  type AestheticPreset = {
+    name: string;
+    class_name: string;
+    theme_values: ThemeValues;
+    font_family: string;
+    type_scale: Omit<FontSettings, "font_family">;
+    border_radius: BorderRadiusSettings;
+  };
+
+  const aesthetics: AestheticPreset[] = [
+    {
+      name: "Soft Consumer",
+      class_name: "theme-soft-consumer",
+      theme_values: {
+        fg_light: "#2a2438",
+        fg_dark: "#ebe6f0",
+        bg_light: "#fbf9fd",
+        bg_dark: "#18141f",
+        primary: "#6855ff",
+      },
+      font_family: "'DM Sans', 'Inter', system-ui, sans-serif",
+      type_scale: {
+        min_ratio: 1.2,
+        max_ratio: 1.25,
+        min_font_size: 16,
+        max_font_size: 18,
+        min_viewport: 320,
+        max_viewport: 1500,
+      },
+      border_radius: {
+        br_xs: "4px",
+        br_s: "8px",
+        br_m: "12px",
+        br_l: "16px",
+        br_xl: "20px",
+        br_xxl: "24px",
+      },
+    },
+    {
+      name: "Editorial",
+      class_name: "theme-editorial",
+      theme_values: {
+        fg_light: "#1a1814",
+        fg_dark: "#ede6d6",
+        bg_light: "#faf6ee",
+        bg_dark: "#1a1814",
+        primary: "#94352b",
+      },
+      font_family: "'Fraunces', Charter, Georgia, serif",
+      type_scale: {
+        min_ratio: 1.2,
+        max_ratio: 1.25,
+        min_font_size: 16,
+        max_font_size: 18,
+        min_viewport: 320,
+        max_viewport: 1500,
+      },
+      border_radius: {
+        br_xs: "1px",
+        br_s: "2px",
+        br_m: "3px",
+        br_l: "4px",
+        br_xl: "6px",
+        br_xxl: "8px",
+      },
+    },
+    {
+      name: "Paper",
+      class_name: "theme-paper",
+      theme_values: {
+        fg_light: "#1a1a24",
+        fg_dark: "#e8e4d8",
+        bg_light: "#fbf8f0",
+        bg_dark: "#1e1c18",
+        primary: "#1e3a8a",
+      },
+      font_family: "'Fraunces', Charter, Georgia, 'Times New Roman', serif",
+      type_scale: {
+        min_ratio: 1.2,
+        max_ratio: 1.2,
+        min_font_size: 16,
+        max_font_size: 18,
+        min_viewport: 320,
+        max_viewport: 1500,
+      },
+      border_radius: {
+        br_xs: "0",
+        br_s: "0",
+        br_m: "0",
+        br_l: "0",
+        br_xl: "0",
+        br_xxl: "0",
+      },
+    },
+    {
+      name: "System",
+      class_name: "theme-system",
+      theme_values: {
+        fg_light: "#000000",
+        fg_dark: "#ffffff",
+        bg_light: "#ffffff",
+        bg_dark: "#000000",
+        primary: "#0066ff",
+      },
+      font_family: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      type_scale: {
+        min_ratio: 1.2,
+        max_ratio: 1.25,
+        min_font_size: 16,
+        max_font_size: 18,
+        min_viewport: 320,
+        max_viewport: 1500,
+      },
+      border_radius: {
+        br_xs: "0",
+        br_s: "0",
+        br_m: "0",
+        br_l: "0",
+        br_xl: "0",
+        br_xxl: "0",
+      },
+    },
+    {
+      name: "Neon Arcade",
+      class_name: "theme-neon-arcade",
+      theme_values: {
+        fg_light: "#f5efd8",
+        fg_dark: "#f5efd8",
+        bg_light: "#0a0908",
+        bg_dark: "#0a0908",
+        primary: "#b91c1c",
+      },
+      font_family: "'Space Grotesk', 'Inter', system-ui, sans-serif",
+      type_scale: {
+        min_ratio: 1.25,
+        max_ratio: 1.414,
+        min_font_size: 16,
+        max_font_size: 18,
+        min_viewport: 320,
+        max_viewport: 1500,
+      },
+      border_radius: {
+        br_xs: "0",
+        br_s: "0",
+        br_m: "0",
+        br_l: "2px",
+        br_xl: "2px",
+        br_xxl: "2px",
+      },
+    },
+  ];
+
+  // Core preset-application logic — separated from the DOM event so it can
+  // be called on mount (from localStorage) and from the dropdown change.
+  function apply_aesthetic_by_name(name: string) {
+    selected_aesthetic = name;
+
+    // Clear every known preset class — never leave two on at once.
+    const html = document.documentElement;
+    for (const a of aesthetics) {
+      html.classList.remove(a.class_name);
+    }
+
+    if (name === "None") {
+      // True reset: push framework defaults back through the bindable props.
+      // The layout's $effect re-runs and clears the inline-style overrides
+      // that any previously-active preset hydrated. Without this, "None"
+      // only removes the class — the colors/font/radii stay frozen at the
+      // last preset's values until refresh.
+      theme_values = { ...DEFAULT_THEME_VALUES };
+      Object.assign(font_settings, DEFAULT_FONT_AXES);
+      font_settings.font_family = DEFAULT_FONT_FAMILY;
+      Object.assign(border_radius, DEFAULT_BORDER_RADIUS);
+      selected_theme = "Default";
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* localStorage may be unavailable (privacy mode, SSR) */
+      }
+      return;
+    }
+
+    const preset = aesthetics.find((a) => a.name === name);
+    if (!preset) return;
+
+    html.classList.add(preset.class_name);
+
+    // Hydrate the orthogonal-axis controls so the user sees what the preset
+    // picked. The layout's $effect pushes these into inline styles, which
+    // beats the preset class. That is the "layer" half of hydrate-then-layer:
+    // any future tweak the user makes continues to win.
+    theme_values = { ...preset.theme_values };
+    Object.assign(font_settings, preset.type_scale);
+    font_settings.font_family = preset.font_family;
+    Object.assign(border_radius, preset.border_radius);
+
+    try {
+      localStorage.setItem(STORAGE_KEY, name);
+    } catch {
+      /* localStorage may be unavailable */
+    }
+  }
+
+  function apply_aesthetic(e: Event) {
+    const select = e.target as HTMLSelectElement;
+    apply_aesthetic_by_name(select.value);
+  }
+
+  // Restore the previously-selected preset on mount. This is what keeps the
+  // preset surviving SvelteKit layout swaps — each layout has its own
+  // ThemeControls instance whose state initializes to defaults; reading the
+  // saved choice here re-hydrates the layout's bindable state so the
+  // preset's tokens (not just its class on <html>) carry through navigation.
+  onMount(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && saved !== "None") {
+        apply_aesthetic_by_name(saved);
+      }
+    } catch {
+      /* localStorage may be unavailable */
+    }
+  });
 
   type TypeScale = Omit<FontSettings, "font_family">;
 
@@ -327,6 +592,25 @@
   function generate_export(): string {
     const parts: string[] = [];
 
+    // Aesthetic preset: emit both the import path and the class application
+    // instruction so the snippet captures the preset's class-level rules
+    // (drop caps, opentype features, character treatments) — not just the
+    // hydrated token values, which on their own would be a partial export.
+    const preset =
+      selected_aesthetic !== "None"
+        ? aesthetics.find((a) => a.name === selected_aesthetic)
+        : null;
+    if (preset) {
+      parts.push("<!-- Aesthetic preset -->");
+      parts.push(
+        `<!-- Import: @drop-in/graffiti/themes/${preset.class_name.replace(/^theme-/, "")} -->`,
+      );
+      parts.push(
+        `<!-- Apply class "${preset.class_name}" on <html> (or any container for scoped theming) -->`,
+      );
+      parts.push("");
+    }
+
     // Google Fonts link
     const font_link = get_google_font_link();
     if (font_link) {
@@ -490,27 +774,19 @@
 
   <div id="theme-controls-popover" class="settings-popover" popover="auto">
     <div class="settings">
-      <div class="theme-header">
-        <div class="theme-select">
-          <label for="theme-preset">Theme</label>
-          <select id="theme-preset" onchange={apply_theme}>
-            {#each themes as theme (theme.name)}
-              <option value={theme.name}>{theme.name}</option>
-            {/each}
-            <option value="Custom">Custom</option>
-          </select>
-        </div>
-        <div class="theme-header-actions">
+      <header class="tc-header">
+        <h2 class="tc-title">Customize</h2>
+        <div class="tc-actions">
           <button
-            class="export-toggle"
+            class="ghost mini"
             onclick={() => {
               show_export = !show_export;
             }}
           >
-            Export Theme
+            {show_export ? "Hide export" : "Export"}
           </button>
           <button
-            class="close-popover"
+            class="mini"
             aria-label="Close theme controls"
             popovertarget="theme-controls-popover"
             popovertargetaction="hide"
@@ -518,36 +794,29 @@
             Close
           </button>
         </div>
+      </header>
+
+      <div class="tc-control tc-control-wide">
+        <label for="aesthetic-preset">Preset</label>
+        <select id="aesthetic-preset" onchange={apply_aesthetic} value={selected_aesthetic}>
+          <option value="None">None</option>
+          {#each aesthetics as a (a.name)}
+            <option value={a.name}>{a.name}</option>
+          {/each}
+        </select>
       </div>
 
-      {#if show_export}
-        <div transition:slide class="export-panel">
-          <pre><code>{generate_export()}</code></pre>
-          <div class="export-actions">
-            <button onclick={copy_theme}
-              >{copied ? "Copied!" : "Copy CSS"}</button
-            >
-            <button onclick={download_theme}>Download</button>
-          </div>
+      <div class="tc-grid">
+        <div class="tc-control">
+          <label for="theme-preset">Colors</label>
+          <select id="theme-preset" onchange={apply_theme}>
+            {#each themes as theme (theme.name)}
+              <option value={theme.name}>{theme.name}</option>
+            {/each}
+            <option value="Custom">Custom</option>
+          </select>
         </div>
-      {/if}
-
-      {#if selected_theme === "Custom"}
-        <div class="cluster" transition:slide>
-          {#each Object.keys(theme_values) as key (key)}
-            <label>
-              {key.replace("_", "-")}:
-              <input
-                type="color"
-                bind:value={theme_values[key as keyof ThemeValues]}
-              />
-            </label>
-          {/each}
-        </div>
-      {/if}
-
-      <div class="controls">
-        <div class="control-row">
+        <div class="tc-control">
           <label for="font-family">Font</label>
           <select
             name="font-family"
@@ -559,7 +828,24 @@
             {/each}
           </select>
         </div>
-        <div class="control-row">
+      </div>
+
+      {#if selected_theme === "Custom"}
+        <div class="tc-color-pickers" transition:slide>
+          {#each Object.keys(theme_values) as key (key)}
+            <label class="tc-color-picker">
+              <span>{key.replace("_", "-")}</span>
+              <input
+                type="color"
+                bind:value={theme_values[key as keyof ThemeValues]}
+              />
+            </label>
+          {/each}
+        </div>
+      {/if}
+
+      <div class="tc-grid">
+        <div class="tc-control">
           <label for="type-scale">Type Scale</label>
           <select id="type-scale" onchange={apply_type_scale}>
             {#each typeScales as scale (scale.name)}
@@ -569,7 +855,7 @@
             {/each}
           </select>
         </div>
-        <div class="control-row">
+        <div class="tc-control">
           <label for="border-radius">Corners</label>
           <select id="border-radius" onchange={apply_border_radius}>
             {#each borderRadiusPresets as preset (preset.name)}
@@ -580,6 +866,18 @@
           </select>
         </div>
       </div>
+
+      {#if show_export}
+        <div transition:slide class="tc-export-panel">
+          <pre><code>{generate_export()}</code></pre>
+          <div class="tc-export-actions">
+            <button class="primary mini" onclick={copy_theme}
+              >{copied ? "Copied!" : "Copy CSS"}</button
+            >
+            <button class="mini" onclick={download_theme}>Download</button>
+          </div>
+        </div>
+      {/if}
     </div>
   </div>
 </div>
@@ -612,8 +910,8 @@
     border: none;
     background: transparent;
     inset: auto auto calc(var(--vs-base) + 3.75rem) var(--vs-base);
-    width: min(44rem, calc(100vw - (var(--vs-base) * 2)));
-    max-height: min(80vh, 42rem);
+    inline-size: min(28rem, calc(100vw - (var(--vs-base) * 2)));
+    max-block-size: min(80vh, 42rem);
     overflow: auto;
   }
 
@@ -622,93 +920,108 @@
   }
 
   .settings {
-    padding: var(--pad-m) var(--vs-l);
+    display: grid;
+    gap: var(--vs-m);
+    padding: var(--pad-l);
     border: var(--border-1);
     border-radius: var(--br-l);
     background: var(--bg);
     box-shadow: var(--shadow-5);
   }
 
-  .theme-header {
+  .tc-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--vs-base);
-    margin-bottom: var(--vs-base);
+    padding-block-end: var(--pad-m);
+    border-block-end: var(--border-1);
   }
 
-  .theme-header-actions {
+  .tc-title {
+    --fl: 1;
+    margin: 0;
+    font-weight: var(--fw-semibold);
+  }
+
+  .tc-actions {
     display: flex;
     gap: var(--vs-s);
   }
 
-  .theme-select {
-    display: flex;
-    align-items: center;
-    gap: var(--vs-s);
+  /* Each control: label stacked above the select for consistent alignment
+     across the grid. width:100% on the select keeps cell widths even. */
+  .tc-control {
+    display: grid;
+    gap: var(--vs-xs);
+    min-inline-size: 0;
     label {
       margin: 0;
-      white-space: nowrap;
+      font-size: var(--fs-xs, 0.875rem);
+      color: var(--fg-7);
+      font-weight: var(--fw-medium);
     }
     select {
       margin: 0;
-      width: auto;
+      inline-size: 100%;
     }
   }
 
-  .export-toggle {
-    width: auto;
+  .tc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--vs-base);
   }
 
-  .close-popover {
-    width: auto;
+  .tc-color-pickers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--vs-s) var(--vs-base);
+    padding: var(--pad-m);
+    border: var(--border-1);
+    border-radius: var(--br-s);
+    background: var(--fg-05);
   }
 
-  .export-panel {
-    margin-bottom: var(--vs-base);
+  .tc-color-picker {
+    display: flex;
+    align-items: center;
+    gap: var(--vs-s);
+    margin: 0;
+    font-size: var(--fs-xs, 0.875rem);
+    color: var(--fg-7);
+    span {
+      flex: 1;
+      white-space: nowrap;
+    }
+    input {
+      margin: 0;
+      inline-size: 2.5rem;
+      block-size: 1.75rem;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+  }
+
+  .tc-export-panel {
+    display: grid;
+    gap: var(--vs-s);
+    padding-block-start: var(--pad-m);
+    border-block-start: var(--border-1);
     pre {
-      margin: 0 0 var(--vs-s);
+      margin: 0;
       padding: var(--pad-s) var(--pad-m);
       background: var(--fg-05);
       border-radius: var(--br-s);
       overflow-x: auto;
+      max-block-size: 16rem;
     }
   }
 
-  .export-actions {
+  .tc-export-actions {
     display: flex;
     gap: var(--vs-s);
-    button {
-      width: auto;
-    }
-  }
-
-  .cluster {
-    align-items: center;
-    margin-bottom: var(--vs-base);
-    input {
-      margin-bottom: 0;
-    }
-  }
-
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--vs-base);
-  }
-
-  .control-row {
-    display: flex;
-    align-items: center;
-    gap: var(--vs-s);
-    label {
-      margin: 0;
-      white-space: nowrap;
-    }
-    select {
-      margin: 0;
-      width: auto;
-    }
   }
 
   @media (max-width: 40rem) {
@@ -719,17 +1032,16 @@
 
     .settings-popover {
       inset: auto var(--vs-s) calc(var(--vs-s) + 3.5rem) var(--vs-s);
-      width: auto;
-      max-height: min(75vh, 34rem);
+      inline-size: auto;
+      max-block-size: min(75vh, 34rem);
     }
 
     .settings {
       padding: var(--pad-m);
     }
 
-    .theme-header {
-      align-items: flex-start;
-      flex-direction: column;
+    .tc-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
