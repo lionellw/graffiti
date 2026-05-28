@@ -42,12 +42,12 @@
   "name": "@drop-in/graffiti",
   "scripts": {
     "dev": "vite dev",
-    "test": "npm run test:contracts",
+    "test": "npm run lint:graffiti:check && npm run test:contracts",
     "test:contracts": "vitest run --config vitest.contracts.config.ts",
     "test:visual": "playwright test --config playwright.config.ts",
     "test:visual:update": "playwright test --config playwright.config.ts --update-snapshots",
-    "test:ci": "npm run build && npm run test:contracts && playwright test --config playwright.config.ts --project=desktop-chromium tests/visual/docs.spec.ts tests/visual/templates.spec.ts",
-    "test:ci:full": "npm run build && npm run test:contracts && npm run test:visual",
+    "test:ci": "npm run lint:graffiti:check && npm run build && npm run test:contracts && playwright test --config playwright.config.ts --project=desktop-chromium tests/visual/docs.spec.ts tests/visual/templates.spec.ts",
+    "test:ci:full": "npm run lint:graffiti:check && npm run build && npm run test:contracts && npm run test:visual",
     "build": "node scripts/derive-mirror.mjs && vite build && node build-modules.js",
     "build:modules": "node scripts/derive-mirror.mjs && node build-modules.js",
     "check:docs-content": "node scripts/check-docs-content.mjs",
@@ -63,6 +63,9 @@
   "publishConfig": {
     "access": "public",
     "directory": "."
+  },
+  "simple-git-hooks": {
+    "pre-commit": "node scripts/graffiti-lint.mjs --check"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
@@ -81,6 +84,7 @@
     "globals": "^16.4.0",
     "prettier": "^3.6.2",
     "prettier-plugin-svelte": "^3.4.0",
+    "simple-git-hooks": "^2.13.1",
     "svelte": "^5.41.0",
     "svelte-check": "^4.3.3",
     "svelte-highlight": "^7.9.0",
