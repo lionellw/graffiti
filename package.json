@@ -2,12 +2,14 @@
   "author": "Scott Tolinski",
   "bin": {
     "graffiti": "bin.js",
-    "graffiti-lookup": "scripts/graffiti-lookup.mjs"
+    "graffiti-lookup": "dist/graffiti-lookup.mjs"
   },
   "description": "A dope package to theme @drop-in",
   "exports": {
     ".": "./dist/index.css",
     "./graffiti.css": "./dist/index.css",
+    "./registry": "./dist/registry.json",
+    "./registry.json": "./dist/registry.json",
     "./core": "./dist/core.css",
     "./utilities": "./dist/utilities.css",
     "./layouts": "./dist/layouts.css",
@@ -49,8 +51,8 @@
     "test:visual:update": "playwright test --config playwright.config.ts --update-snapshots",
     "test:ci": "npm run lint:graffiti:check && npm run build && npm run test:contracts && playwright test --config playwright.config.ts --project=desktop-chromium tests/visual/docs.spec.ts tests/visual/templates.spec.ts",
     "test:ci:full": "npm run lint:graffiti:check && npm run build && npm run test:contracts && npm run test:visual",
-    "build": "node scripts/derive-mirror.mjs && vite build && node build-modules.js",
-    "build:modules": "node scripts/derive-mirror.mjs && node build-modules.js",
+    "build": "node scripts/derive-mirror.mjs && vite build && node scripts/graffiti-lint.mjs && node build-modules.js",
+    "build:modules": "node scripts/derive-mirror.mjs && node scripts/graffiti-lint.mjs && node build-modules.js",
     "check:docs-content": "node scripts/check-docs-content.mjs",
     "check:agent-docs": "node scripts/check-agent-docs.mjs",
     "report:agent-docs": "node scripts/report-agent-docs-coverage.mjs",
@@ -58,7 +60,7 @@
     "lint:graffiti": "node scripts/graffiti-lint.mjs",
     "lint:graffiti:check": "node scripts/graffiti-lint.mjs --check",
     "lookup": "node scripts/graffiti-lookup.mjs",
-    "package": "node scripts/derive-mirror.mjs && svelte-kit sync && svelte-package && node build-modules.js"
+    "package": "node scripts/derive-mirror.mjs && svelte-kit sync && svelte-package && node scripts/graffiti-lint.mjs && node build-modules.js"
   },
   "type": "module",
   "version": "4.30.0",

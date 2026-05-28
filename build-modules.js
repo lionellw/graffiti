@@ -22,6 +22,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "dist");
 const SOURCE = join(__dirname, "src", "lib", "drop-in.css");
 const DECKS_SOURCE = join(__dirname, "src", "lib", "decks.css");
+const REGISTRY_SOURCE = join(__dirname, "src", "lib", "registry.json");
+const LOOKUP_SOURCE = join(__dirname, "scripts", "graffiti-lookup.mjs");
 const THEMES_SOURCE = join(__dirname, "src", "lib", "themes");
 const THEMES_DIST = join(DIST, "themes");
 const THEME_NAMES = [
@@ -322,6 +324,27 @@ if (existsSync(themesIndexSource)) {
     readFileSync(themesIndexSource, "utf-8"),
   );
   console.log("  dist/themes/index.css");
+}
+
+// registry.json - Copy the canonical catalogue so it ships with the package
+// (consumed by `graffiti-lookup` and the `./registry` export).
+if (existsSync(REGISTRY_SOURCE)) {
+  writeFileSync(join(DIST, "registry.json"), readFileSync(REGISTRY_SOURCE, "utf-8"));
+  console.log("  dist/registry.json");
+} else {
+  console.warn(
+    "  Warning: src/lib/registry.json not found, skipping. Run `node scripts/graffiti-lint.mjs` first.",
+  );
+}
+
+// graffiti-lookup.mjs - Ship the lookup CLI standalone (node builtins only,
+// no runtime deps). bin.graffiti-lookup points at this dist copy; it resolves
+// the sibling dist/registry.json.
+if (existsSync(LOOKUP_SOURCE)) {
+  writeFileSync(join(DIST, "graffiti-lookup.mjs"), readFileSync(LOOKUP_SOURCE, "utf-8"));
+  console.log("  dist/graffiti-lookup.mjs");
+} else {
+  console.warn("  Warning: scripts/graffiti-lookup.mjs not found, skipping");
 }
 
 console.log("\nBuild complete!");

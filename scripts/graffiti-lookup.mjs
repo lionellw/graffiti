@@ -22,25 +22,35 @@ import { fileURLToPath } from "node:url";
 
 const filePath = fileURLToPath(import.meta.url);
 const scriptDir = path.dirname(filePath);
-const repoRoot = path.resolve(scriptDir, "..");
-const DEFAULT_REGISTRY = path.join(repoRoot, "src/lib/registry.json");
+
+// The script runs from two locations:
+//   - dev/repo:   scripts/graffiti-lookup.mjs  → registry at ../src/lib/registry.json
+//   - published:  dist/graffiti-lookup.mjs     → registry at ./registry.json (sibling)
+// Try the published location first (it's the common case for `npx`), then
+// fall back to the source-of-truth location for in-repo runs.
+const REGISTRY_CANDIDATES = [
+  path.join(scriptDir, "registry.json"),
+  path.join(scriptDir, "..", "src", "lib", "registry.json"),
+];
 
 /* ------------------------------------------------------------------ *
  * Registry loading
  * ------------------------------------------------------------------ */
 
-async function loadRegistry(p = DEFAULT_REGISTRY) {
-  try {
-    const text = await readFile(p, "utf8");
-    return JSON.parse(text);
-  } catch (err) {
-    if (err.code === "ENOENT") {
-      throw new Error(
-        `Registry not found at ${path.relative(process.cwd(), p)}. Run \`pnpm lint:graffiti\` to generate it.`,
-      );
+async function loadRegistry(candidates = REGISTRY_CANDIDATES) {
+  for (const candidate of candidates) {
+    try {
+      return JSON.parse(await readFile(candidate, "utf8"));
+    } catch (err) {
+      if (err.code === "ENOENT") continue;
+      throw err;
     }
-    throw err;
   }
+  throw new Error(
+    `Registry not found (looked in: ${candidates
+      .map((c) => path.relative(process.cwd(), c))
+      .join(", ")}). Run \`pnpm lint:graffiti\` to generate it.`,
+  );
 }
 
 /* ------------------------------------------------------------------ *
