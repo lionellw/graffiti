@@ -45,7 +45,22 @@ if (!existsSync(THEMES_DIST)) {
   mkdirSync(THEMES_DIST, { recursive: true });
 }
 
-const source = readFileSync(SOURCE, "utf-8");
+/**
+ * Strip JSDoc-style annotation blocks (`/** ... *​/`) from CSS.
+ *
+ * These `@pattern`/`@token` annotations are build-time metadata for source
+ * readers, agents, and the registry — they should not ship in the CSS payload
+ * (~40KB of comments on the full bundle). Regular `/* ... *​/` comments,
+ * including the `} /* END @layer ... *​/` markers the layer extractor relies on,
+ * are left untouched.
+ */
+function stripAnnotations(css) {
+  return css
+    .replace(/^[ \t]*\/\*\*[\s\S]*?\*\/\n?/gm, "")
+    .replace(/\n{3,}/g, "\n\n");
+}
+
+const source = stripAnnotations(readFileSync(SOURCE, "utf-8"));
 
 // ── Helpers ──────────────────────────────────────────────────────────
 

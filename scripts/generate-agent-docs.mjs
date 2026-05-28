@@ -7,6 +7,7 @@ import {
   renderAgentIndexMarkdown,
   renderAgentSectionMarkdown,
   renderRouteGuideMarkdown,
+  renderPatternCatalogMarkdown,
 } from "../src/docs/agent/markdown.js";
 
 const filePath = fileURLToPath(import.meta.url);
@@ -18,6 +19,7 @@ await mkdir(outputDir, { recursive: true });
 
 const outputs = [
   ["index.md", renderAgentIndexMarkdown()],
+  ["patterns.md", renderPatternCatalogMarkdown()],
   ...agentSections.map((section) => [
     `${section.slug}.md`,
     renderAgentSectionMarkdown(section),

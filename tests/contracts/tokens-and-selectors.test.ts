@@ -51,16 +51,23 @@ describe("css token contracts", () => {
 });
 
 describe("css safety guardrails", () => {
-  it("keeps !important usage within bundle budgets", async () => {
+  it("keeps !important usage within bundle ceilings", async () => {
+    // Ceilings, not exact counts: this guards against `!important` creep while
+    // allowing reductions. Bump a ceiling deliberately if a new `!important` is
+    // genuinely warranted (e.g. a print/accessibility override). Current actual
+    // counts: index 3 (all in the unlayered base/a11y/print blocks), all layer
+    // bundles 0.
     const indexCss = await readDistCss(DIST_FILES.index);
     const componentsCss = await readDistCss(DIST_FILES.components);
     const utilitiesCss = await readDistCss(DIST_FILES.utilities);
     const layoutsCss = await readDistCss(DIST_FILES.layouts);
 
-    expect(indexCss.match(/!important/g) ?? []).toHaveLength(14);
-    expect(componentsCss.match(/!important/g) ?? []).toHaveLength(0);
-    expect(utilitiesCss.match(/!important/g) ?? []).toHaveLength(0);
-    expect(layoutsCss.match(/!important/g) ?? []).toHaveLength(4);
+    const count = (css: string) => (css.match(/!important/g) ?? []).length;
+
+    expect(count(indexCss)).toBeLessThanOrEqual(6);
+    expect(count(componentsCss)).toBeLessThanOrEqual(0);
+    expect(count(utilitiesCss)).toBeLessThanOrEqual(0);
+    expect(count(layoutsCss)).toBeLessThanOrEqual(4);
   });
 
   it("avoids id selectors in component and utility selectors", async () => {

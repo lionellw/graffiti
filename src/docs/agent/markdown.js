@@ -5,6 +5,8 @@ import {
   templatePages,
 } from "./manifest.js";
 import { getTopicsForRoute } from "$docs/content/runtime.js";
+import registry from "$lib/registry.json";
+import { renderRegistryCatalogMarkdown } from "./registry-doc.js";
 
 /**
  * @typedef {Object} AgentTopic
@@ -322,6 +324,14 @@ ${classes}
 `;
 }
 
+/**
+ * Render the complete registry-derived catalogue, wired to the live registry
+ * and site URL. Served at /patterns for `Accept: text/markdown` requests.
+ */
+export function renderPatternCatalogMarkdown() {
+  return renderRegistryCatalogMarkdown(registry, { siteUrl });
+}
+
 export function renderAgentIndexMarkdown() {
   const frontmatter = markdownFrontmatter({
     title: "Graffiti CSS Framework",
@@ -374,6 +384,10 @@ import '@drop-in/graffiti/standard'
 ${sectionLinks}
 
 ${guideLinks.length > 0 ? `## Guides\n\n${guideLinks}` : ""}
+
+## Full Catalogue
+
+- [Pattern & Token Catalogue](${toAbsolute("/patterns")}) - Complete machine-generated reference: every class and token with role and example. Start here to pick the canonical class for a job.
 
 ## Philosophy
 
@@ -435,6 +449,10 @@ export function getAgentMarkdownForPath(pathname) {
 
   if (normalizedPath === "/templates") {
     return renderTemplatesIndexMarkdown();
+  }
+
+  if (normalizedPath === "/patterns") {
+    return renderPatternCatalogMarkdown();
   }
 
   const template = templateByPath.get(normalizedPath);
