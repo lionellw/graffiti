@@ -16,8 +16,6 @@
     "./components": "./dist/components.css",
     "./minimal": "./dist/minimal.css",
     "./standard": "./dist/standard.css",
-    "./decks": "./dist/decks.css",
-    "./decks.css": "./dist/decks.css",
     "./themes": "./dist/themes/index.css",
     "./themes/editorial": "./dist/themes/editorial.css",
     "./themes/paper": "./dist/themes/paper.css",

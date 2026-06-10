@@ -27,9 +27,6 @@ import "@drop-in/graffiti/utilities"; // helper classes
 import "@drop-in/graffiti/layouts"; // page layouts
 import "@drop-in/graffiti/components"; // UI components
 
-// Optionally import decks component styles separately
-import "@drop-in/graffiti/decks";
-
 // Optionally import aesthetic presets (apply as a class on any container)
 import "@drop-in/graffiti/themes"; // all five presets
 // or tree-shake to a single preset
@@ -72,7 +69,6 @@ This copies `drop-in.css` to your `src/` folder.
 - **Design Tokens**: Comprehensive spacing, shadows, colors, line heights, and easing functions
 - **Logical Properties**: Full RTL/LTR support throughout
 - **Minimal & Composable**: Small footprint, mix and match classes
-- **Modular Architecture**: Optional separate import for `@drop-in/decks` component styles
 
 ## Browser Support
 

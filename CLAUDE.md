@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Build the package (generates raw.js and decks-raw.js)
+# Build the package (generates raw.js)
 npm run build
 
 # Alternative build command
@@ -29,17 +29,15 @@ node bin.js
 ### Core Files
 
 - **drop-in.css**: Main CSS framework - contains base styles, utilities, layouts, and typography
-- **decks.css**: Optional component styles for `@drop-in/decks` library (accordion, dialog, drawer, menu, toast)
-- **build.js**: Reads CSS files and generates JavaScript modules (`raw.js` and `decks-raw.js`)
+- **build.js**: Reads CSS files and generates JavaScript modules (`raw.js`)
 - **bin.js**: CLI entry point that copies `drop-in.css` to user's project at `src/drop-in.css`
 - **raw.js**: Auto-generated from `drop-in.css` (do not edit manually)
-- **decks-raw.js**: Auto-generated from `decks.css` (do not edit manually)
 
 ### Build Pipeline
 
-1. `drop-in.css` and `decks.css` are the source files that should be edited for CSS changes
-2. Running `npm run build` converts both to JavaScript modules for imports
-3. The package exports both raw CSS files and JS modules
+1. `drop-in.css` is the source file that should be edited for CSS changes
+2. Running `npm run build` converts it to a JavaScript module for imports
+3. The package exports both the raw CSS file and the JS module
 
 ## CSS System Architecture
 
@@ -62,23 +60,13 @@ Uses a custom CSS variable system based on `--fl` (fluid level) values:
 - `color-mix()` for tint/shade calculations
 - Custom properties for spacing (`--vs-*`), border radius (`--br-*`), padding (`--pad-*`), shadows (`--s-*`)
 
-### Component Styles
-Component styles for `@drop-in/decks` are separated into `decks.css` (prefixed with `.di-`):
-- Accordion (`.di-accordion`)
-- Dialog/Drawer (`.di-dialog`, `.di-drawer`)
-- Menu (`.di-menu`)
-- Toast (`.di-toast-slice`)
-
 ## Package Exports
 
 ```json
 {
   ".": "./drop-in.css",              // Default: main CSS framework
   "./drop-in.css": "./drop-in.css",  // Explicit main CSS import
-  "./raw": "./raw.js",               // Main CSS as JS module
-  "./decks": "./decks.css",          // Decks component styles
-  "./decks.css": "./decks.css",      // Explicit decks CSS import
-  "./decks/raw": "./decks-raw.js"    // Decks CSS as JS module
+  "./raw": "./raw.js"                // Main CSS as JS module
 }
 ```
 
@@ -90,8 +78,8 @@ Every primary class definition (rules with selector exactly `.classname` inside 
 
 ## Development Workflow
 
-1. Edit `drop-in.css` for framework changes or `decks.css` for component changes
-2. Run `npm run build` to regenerate `raw.js` and `decks-raw.js`
+1. Edit `drop-in.css` for framework changes
+2. Run `npm run build` to regenerate `raw.js`
 3. Test locally by opening `index.html` in browser
 4. For CLI testing, run `node bin.js` from package directory
 
@@ -100,14 +88,9 @@ Every primary class definition (rules with selector exactly `.classname` inside 
 Users can import the framework in several ways:
 
 ```js
-// Option 1: Import just the base framework
+// Option 1: Import the base framework
 import '@drop-in/graffiti'
 
-// Option 2: Import base framework + decks components
-import '@drop-in/graffiti'
-import '@drop-in/graffiti/decks'
-
-// Option 3: Import as JavaScript modules
+// Option 2: Import as a JavaScript module
 import css from '@drop-in/graffiti/raw'
-import decksCss from '@drop-in/graffiti/decks/raw'
 ```

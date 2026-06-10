@@ -18,7 +18,6 @@ async function buildCssModule(inputFile, outputFile) {
 
 async function buildAll() {
   await buildCssModule("src/lib/drop-in.css", "raw.js");
-  await buildCssModule("src/lib/decks.css", "decks-raw.js");
 }
 
 buildAll();

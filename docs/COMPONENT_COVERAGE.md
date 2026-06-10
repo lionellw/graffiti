@@ -6,15 +6,15 @@ This is not a class-selection guide — for that, see [`skills/graffiti-best-pra
 
 ## Status legend
 
-- ✅ **Shipped** — exists in `drop-in.css` or `decks.css` today
+- ✅ **Shipped** — exists in `drop-in.css` today
 - 🟢 **Planned** — designed in an ADR / has an open Dex task
 - 🟡 **Partial** — primitives exist but no canonical pattern, or only one use case is covered
 - 🔴 **Missing** — real gap, HTML+CSS-only feasible
-- ⚫ **Out of scope** — requires JS state (belongs in Decks) or is template-level composition
+- ⚫ **Out of scope** — requires JS state or is template-level composition
 
 ## Scope rubric
 
-In scope for Graffiti: anything that works with semantic HTML + native browser controls + CSS (including `popover`, anchor positioning, `:has()`, `<dialog>`, view transitions, container queries). Anything requiring JS state management belongs in Decks.
+In scope for Graffiti: anything that works with semantic HTML + native browser controls + CSS (including `popover`, anchor positioning, `:has()`, `<dialog>`, view transitions, container queries). Anything requiring JS state management is out of scope.
 
 ## Methodology
 
@@ -53,8 +53,8 @@ Cross-referenced against shadcn/ui (Radix-based, modern baseline), Radix Themes 
 | TOC | ✅ | `.toc` |
 | Header | ✅ | `.header` + `.border`, `.sticky` modifiers |
 | Footer | ✅ | `.footer` |
-| Menubar (top-level menus) | ⚫ | Keyboard nav is JS — Decks territory |
-| Command palette (⌘K) | ⚫ | JS — Decks territory |
+| Menubar (top-level menus) | ⚫ | Keyboard nav is JS — out of scope |
+| Command palette (⌘K) | ⚫ | JS — out of scope |
 | Navigation drawer | ✅ | `.drawer` + `.drawer-toggle` via popover |
 
 ## Forms & inputs
@@ -102,10 +102,10 @@ Cross-referenced against shadcn/ui (Radix-based, modern baseline), Radix Themes 
 |---|---|---|
 | Tooltip | ✅ | `.tip` (`attr(aria-label)` via `::after`) for icon-button labels; `.tooltip` wrapper + child `.tip` for rich content |
 | Hover card (interactive tooltip) | 🔴 | Similar shape to tooltip but persists on hover, can contain links. Pure CSS feasible |
-| Toast | ⚫ | Decks `.di-toast-slice` |
-| Modal / dialog | ✅ | Native `<dialog>` styled in `@layer components`; plus Decks `.di-dialog` |
+| Toast | ⚫ | Requires JS for timing/dismissal — out of scope |
+| Modal / dialog | ✅ | Native `<dialog>` styled in `@layer components` |
 | Confirm dialog | ✅ | Native `<dialog>` + `<form method="dialog">` |
-| Drawer / side sheet | ✅ | `.drawer` via popover; plus Decks `.di-drawer` |
+| Drawer / side sheet | ✅ | `.drawer` via popover |
 | Popover | ✅ | Native `popover` + anchor positioning patterns used by `.dropdown-menu` |
 | Spinner | 🟢 | Dex `hwitb7hy` (ADR 0005) |
 | Progress bar | 🟢 | Dex `hwitb7hy` (native `<progress>`) |
@@ -123,7 +123,7 @@ Cross-referenced against shadcn/ui (Radix-based, modern baseline), Radix Themes 
 | Stepper / wizard nav | ✅ | Same primitive as `.timeline` — naming polysemy noted in meta-system grill (Dex `elztgg8o`) |
 | List (ordered, definition) | ✅ | `<ol>`, `<ul>`, `<dl>` element-default styling |
 | Tree view | 🟡 | Nested `<details>` works structurally; no `.tree` class for indentation rhythm |
-| Accordion | ✅ | Native `<details>`/`<summary>` styled; Decks `.di-accordion` |
+| Accordion | ✅ | Native `<details>`/`<summary>` styled |
 | Carousel | ✅ | `.carousel`, `.reel`, `.swipe` |
 | Chat thread | ✅ | `.chat-thread`, `.chat-row`, `.chat-message`, `.chat-composer`, `.bubble`; `.bubble.thinking` / `.bubble.streaming` for in-flight states; `.chat-thread.flowing` for editorial reading |
 | Composer (multi-line + toolbar) | ✅ | `.composer` — supersedes `.chat-composer` when model/tool/attach controls are needed alongside the input |
@@ -200,7 +200,7 @@ Cross-referenced against shadcn/ui (Radix-based, modern baseline), Radix Themes 
 | 🟢 Planned (Dex/ADR) | 11 patterns | Already designed in this grilling cycle |
 | 🟡 Partial | 13 patterns | Primitives exist; canonical pattern missing |
 | 🔴 Missing (real gap, HTML+CSS feasible) | 6 patterns | Hover card, floating-label inputs, figure/figcaption, rating stars, `<mark>` styling, master-detail layout |
-| ⚫ Out of scope | ~17 patterns | JS-required (Decks) or template-level composition |
+| ⚫ Out of scope | ~17 patterns | JS-required or template-level composition |
 
 ## Triage of the 6 real remaining gaps
 

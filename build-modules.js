@@ -11,7 +11,6 @@
  *   dist/utilities.css   - Core vars preamble + @layer utilities block
  *   dist/minimal.css     - Core + @layer utilities
  *   dist/standard.css    - Core + @layer utilities + @layer layouts
- *   dist/decks.css       - Copy of src/lib/decks.css
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
@@ -21,7 +20,6 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "dist");
 const SOURCE = join(__dirname, "src", "lib", "drop-in.css");
-const DECKS_SOURCE = join(__dirname, "src", "lib", "decks.css");
 const REGISTRY_SOURCE = join(__dirname, "src", "lib", "registry.json");
 const LOOKUP_SOURCE = join(__dirname, "scripts", "graffiti-lookup.mjs");
 const THEMES_SOURCE = join(__dirname, "src", "lib", "themes");
@@ -308,14 +306,6 @@ writeFileSync(
     "\n",
 );
 console.log("  dist/standard.css");
-
-// decks.css - Copy from source
-if (existsSync(DECKS_SOURCE)) {
-  writeFileSync(join(DIST, "decks.css"), readFileSync(DECKS_SOURCE, "utf-8"));
-  console.log("  dist/decks.css");
-} else {
-  console.warn("  Warning: src/lib/decks.css not found, skipping decks.css");
-}
 
 // themes/* - Copy each preset and the index, plus emit raw JS modules.
 for (const name of THEME_NAMES) {

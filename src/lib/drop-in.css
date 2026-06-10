@@ -6832,7 +6832,7 @@
   /* Bottom Sheet - Drawer from bottom */
   /**
    * @pattern bottom-sheet
-   * @role Mobile-style bottom-anchored sheet panel; pseudo-element renders the grip handle, safe-area inset baked into the bottom padding. For full popover/transition behavior compose with `.drawer` (decks)
+   * @role Mobile-style bottom-anchored sheet panel; pseudo-element renders the grip handle, safe-area inset baked into the bottom padding. For full popover/transition behavior compose with `.drawer`
    * @example
    *   <div class="bottom-sheet">
    *     <h3>Share</h3>

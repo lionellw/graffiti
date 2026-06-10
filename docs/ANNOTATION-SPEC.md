@@ -9,7 +9,7 @@ Lint is enforced by `npm run lint:graffiti` (also runs pre-commit). A missing or
 
 ## Scope
 
-The lint and registry consider **only** `src/lib/drop-in.css`. The legacy `decks.css` (`.di-*` classes) and `src/lib/themes/*` are out of scope.
+The lint and registry consider **only** `src/lib/drop-in.css`. `src/lib/themes/*` is out of scope.
 
 ## What requires annotation
 

@@ -12,7 +12,6 @@ export const DIST_FILES = {
   components: "components.css",
   minimal: "minimal.css",
   standard: "standard.css",
-  decks: "decks.css",
 } as const;
 
 export const resolveDistFile = (fileName: string) =>
