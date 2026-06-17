@@ -84,7 +84,6 @@
     return (
       state.aesthetic === DEFAULT_STORAGE.aesthetic &&
       state.scheme_settings === DEFAULT_STORAGE.scheme_settings &&
-      state.color_theme === DEFAULT_STORAGE.color_theme &&
       JSON.stringify(state.theme_values) ===
         JSON.stringify(DEFAULT_STORAGE.theme_values) &&
       JSON.stringify(state.font_settings) ===
@@ -343,9 +342,8 @@
   let copied = $state(false);
   let show_export = $state(false);
 
-  // Aesthetic presets — each entry's values hydrate the orthogonal axes
-  // (color / type / radius / font-family) with the preset's nominal choices.
-  // The `class_name` is applied on <html> so the preset's selector rules
+  // Aesthetic presets — apply `class_name` on <html>, the preset font family,
+  // and palette; type scale, corners, and color scheme reset to defaults.
   // (drop caps, opentype features, character treatments) take effect.
   // See CONTEXT.md "ThemeControls UX when a preset is selected".
   type AestheticPreset = {
@@ -623,17 +621,16 @@
     const preset = aesthetics.find((a) => a.name === name);
     if (!preset) return;
 
-    // Hydrate the orthogonal-axis controls so the user sees what the preset
-    // picked. The layout's $effect pushes these into inline styles, which
-    // beats the preset class. That is the "layer" half of hydrate-then-layer:
-    // any future tweak the user makes continues to win.
+    // Apply the preset class, font family, and palette; reset other axes to
+    // framework defaults so users start from a clean slate on each preset.
+    scheme_settings = DEFAULT_STORAGE.scheme_settings;
     theme_values = { ...preset.theme_values };
-    Object.assign(font_settings, preset.type_scale);
+    Object.assign(font_settings, DEFAULT_FONT_AXES);
     font_settings.font_family = preset.font_family;
-    Object.assign(border_radius, preset.border_radius);
-    selected_theme = find_color_theme_name(preset.theme_values);
-    selected_type_scale = find_type_scale_name(font_settings);
-    selected_border_radius = find_border_radius_name(border_radius);
+    Object.assign(border_radius, DEFAULT_BORDER_RADIUS);
+    selected_theme = "Default";
+    selected_type_scale = "Default";
+    selected_border_radius = "Default";
 
     persist_storage();
   }
