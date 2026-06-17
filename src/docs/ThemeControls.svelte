@@ -1098,7 +1098,7 @@
           </select>
         </div>
         <div class="tc-control">
-          <label for="mode-settings">Color Scheme</label>
+          <label for="scheme-settings">Color Scheme</label>
           <select
             id="scheme-settings"
             onchange={apply_scheme_settings}
