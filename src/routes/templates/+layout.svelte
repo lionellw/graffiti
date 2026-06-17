@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { FontSettings, ThemeValues, BorderRadiusSettings } from "$lib/types";
+	import type { FontSettings, ThemeValues, BorderRadiusSettings, ColorSchemeSettings } from "$lib/types";
 	import ThemeControls from "$docs/ThemeControls.svelte";
+    import { COLOR_SCHEME } from "$docs/theme-controls";
 
 	// Preset CSS files for the Aesthetic selector. Selector rules only match
 	// when the corresponding `.theme-*` class is on <html>, so importing all
@@ -15,6 +16,8 @@
 	import "$lib/themes/lumen.css";
 
 	let { children } = $props();
+
+	let scheme_settings: ColorSchemeSettings = $state("system");
 
 	let theme_values: ThemeValues = $state({
 		fg_light: "#111111",
@@ -62,9 +65,15 @@
 			style.setProperty(`--${key.replace(/_/g, "-")}`, value);
 		}
 	});
+	$effect(() => {
+		document.documentElement.style.setProperty(
+			"color-scheme",
+			COLOR_SCHEME[scheme_settings],
+		);
+	});
 </script>
 
-<ThemeControls bind:theme_values bind:font_settings bind:border_radius />
+<ThemeControls bind:theme_values bind:font_settings bind:border_radius bind:scheme_settings />
 
 <div
 	style:--fg-light={theme_values.fg_light}
